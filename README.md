@@ -8,7 +8,7 @@ Alex Estrada wuz hurr
 
 Josh can be real mean -Jess
 
-Michael Were hure
+Michael Were hure (Maybe?)
 
 RUT RO RAGGY!
 
