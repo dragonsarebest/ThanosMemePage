@@ -8,7 +8,7 @@ Alex Estrada wuz hurr
 
 Josh can be real mean -Jess
 
-Michael Were hure
+Michael Were hure (Maybe?)
 
 Jefferey Schlueter Hah
 
@@ -17,3 +17,5 @@ RUT RO RAGGY!
 Brady was here
 
 Bash was here
+
+Chase was here
