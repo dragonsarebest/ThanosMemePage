@@ -6,7 +6,7 @@ because he is immortal, Mallboy
 
 Alex Estrada wuz hurr
 
-Jess was here
+Josh can be very mean -Jess
 
 Michael Were hure
 
