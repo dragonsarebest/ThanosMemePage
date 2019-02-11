@@ -1,0 +1,10 @@
+Table: User
+
+	ID:	primary key, int
+	Email: string
+	Name: string
+	isAdmin: bool
+	PassHash: byte[]
+	ProfilePic:	blob
+	
+Alex & Bash
