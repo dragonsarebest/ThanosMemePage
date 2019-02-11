@@ -1,0 +1,4 @@
+Brady Carrel
+Table: Tag 
+	Id: foreign key int
+	Content: string
