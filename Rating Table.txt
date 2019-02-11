@@ -1,0 +1,4 @@
+Rating:
+	UserID:	Foreign Key
+	PostID:	Foreign Key
+	Rating:	Int ( 1 - 5 )
