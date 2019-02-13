@@ -17,18 +17,18 @@ namespace sqlitetest
 
                 //creation of our 6 tables
                 "create table users (uid integer primary key, email text, name text, password blob, profilePic blob, isAdmin integer);",
-                "create table Tag (uid integer primary key,  content text);",
+                "create table tag (uid integer primary key,  content text);",
                 "create table comment (uid integer, postid integer, currentid integer primary key, parentid integer, date integer, comment text);",
-                "create table rating (uid integer foreign key, postid integer foreign key, rating integer);",
-                "create table view (ip text, userid integer foreign key, postid integer foreign key, date integer);",
+                "create table rating (uid integer, postid integer, rating integer);",
+                "create table view (ip text, userid integer, postid integer, date integer);",
                 "create table posts (creatorID integer, postID integer primary key, isWorldVisible integer, postDate integer, content blob);",
 
 
                 //testing the 6 tables
                 "insert into users (uid, email, name, isAdmin) values (0, 'Alex@example.com', 'Alex', 1)",
-                "insert into Tag (key,content) values(0, 'fresh')",
+                "insert into tag (uid,content) values(0, 'fresh')",
                 "insert into comment (uid, postid, currentid, parentid, date, comment) values (0, 0, 0, NULL, date('now'), 'Test to see if we can comment!')",
-                "insert into rating (uid,postid,rate) values (100, 20, 5)",
+                "insert into rating (uid,postid,rating) values (100, 20, 5)",
                 "insert into view(ip, userid, postid, date) values('123.456.7.8', 0, 0, 20190213)",
                 "insert into posts (creatorID,postID,isWorldVisible,postDate,content) values (0,0,1,2019213,NULL)",
             };
@@ -41,7 +41,7 @@ namespace sqlitetest
                 cmd.ExecuteNonQuery();
             }
 
-            
+
             cmd = new SQLiteCommand("select name from users where uid = 0;", conn);
             SQLiteDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
