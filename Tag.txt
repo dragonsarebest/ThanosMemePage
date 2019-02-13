@@ -1,4 +1,4 @@
 Brady Carrel
 Table: Tag 
-	Id: foreign key int
+	Id: primary key int
 	Content: string
