@@ -43,10 +43,60 @@ namespace sqlitetest
 
 
             cmd = new SQLiteCommand("select name from users where uid = 0;", conn);
-            SQLiteDataReader rdr = cmd.ExecuteReader();
-            while (rdr.Read())
+            SQLiteDataReader a = cmd.ExecuteReader();
+            while (a.Read())
             {
-                Console.WriteLine("SELECT RESULT: " + rdr["name"]);
+                Console.WriteLine("SELECT RESULT: " + a["name"]);
+            }
+
+            Console.WriteLine("--------------------");
+
+
+            cmd = new SQLiteCommand("select content from tag where uid = 0;", conn);
+            SQLiteDataReader b = cmd.ExecuteReader();
+            while (b.Read())
+            {
+                Console.WriteLine("SELECT RESULT: " + b["content"]);
+            }
+
+            Console.WriteLine("--------------------");
+
+            
+            cmd = new SQLiteCommand("select comment from comment where uid = 0;", conn);
+            SQLiteDataReader ce = cmd.ExecuteReader();
+            while (ce.Read())
+            {
+                Console.WriteLine("SELECT RESULT: " + ce["comment"]);
+            }
+
+            Console.WriteLine("--------------------");
+            
+
+            cmd = new SQLiteCommand("select rating from rating where uid = 100;", conn);
+            SQLiteDataReader d = cmd.ExecuteReader();
+            while (d.Read())
+            {
+                Console.WriteLine("SELECT RESULT: " + d["rating"]);
+            }
+
+            Console.WriteLine("--------------------");
+            
+
+            cmd = new SQLiteCommand("select ip from view where userid = 0;", conn);
+            SQLiteDataReader e = cmd.ExecuteReader();
+            while (e.Read())
+            {
+                Console.WriteLine("SELECT RESULT: " + e["ip"]);
+            }
+
+            Console.WriteLine("--------------------");
+
+            
+            cmd = new SQLiteCommand("select postdate from posts where creatorID = 0;", conn);
+            SQLiteDataReader f = cmd.ExecuteReader();
+            while (f.Read())
+            {
+                Console.WriteLine("SELECT RESULT: " + f["postdate"]);
             }
 
             Console.WriteLine("--------------------");
