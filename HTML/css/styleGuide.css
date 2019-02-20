@@ -1,0 +1,38 @@
+header{
+	 border-bottom: 10px solid black;
+	 border-bottom-color: #B4A24C;
+	 text-align: center;
+	 background-color: #1B2B42;
+}
+
+.row input{
+	border: 5px solid black;
+	color: #D9C63C;
+	border-color: #B4A24C;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 200%;
+	background-color: #306493;
+}
+
+div #uploadImage{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	color: #D9C63C;
+}
+
+div #uploadPreview{
+	width: 500px;
+	height: 500px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #1B2B42;
+}
+
+body
+{
+	background-color: #6F3C89;
+}

@@ -5,25 +5,26 @@
 	<meta name="viewport"
 	content="width=device-width,initial-scale=1,shrink-to-fit=no">
 	<link href="bootstrap.min.css"rel="stylesheet">
-	<title>Upload a MeMe</title>
-</head>
-<body style = "background-color: #6F3C89;">
-
+	<link rel="stylesheet" type="text/css" href="css/styleGuide.css">
+	
 	<script src="jquery.min.js"></script>
 	<script src="bootstrap.bundle.min.js"></script>
 	
+	<title>Upload a MeMe</title>
+</head>
+<body>
 	<div class="container">
-		<header style='border-bottom: 10px solid black; border-bottom-color: #B4A24C; text-align: center; background-color: #1B2B42;'>
-			<font color="#A788A8" size = 20>Username</font> 
+		<header>
+			<font color = #A788A8 size = 20>Username</font> 
 		</header>
 		
 		<br>
 		
 		<div class="row">
-			<input type = "text", value = "tags will go here", style = "border: 5px solid black; color: #D9C63C; border-color: #B4A24C; display: block; margin-left: auto; margin-right: auto; width: 200%; background-color: #306493;">
+			<input type = "text" value = "tags will go here">
 		</div>
 		
-			<input id="uploadImage" type="file" name="myPhoto" onchange="PreviewImage();" style = "display: block; margin-left: auto; margin-right: auto; color: #D9C63C;" />
+			<input id="uploadImage" type="file" name="myPhoto" onchange="PreviewImage();"/>
 			<script type="text/javascript">
 
 				function PreviewImage() {
@@ -37,7 +38,7 @@
 
 			</script>
 		
-		<img id="uploadPreview" style="width: 500px; height: 500px; display: block; margin-left: auto; margin-right: auto; background-color: #1B2B42;" />
+		<img id="uploadPreview"/>
 		
 		</div>
 	
