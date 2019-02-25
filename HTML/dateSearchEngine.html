@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="jqueryui/jquery-ui.css"> 
   <script src="jqueryui/external/jquery/jquery.js"></script> 
   <script src="jqueryui/jquery-ui.js"></script>
+  <script src="forms.js"></script>
   <script>
   $( function() {
     $( "#datepicker" ).datepicker();
@@ -41,8 +42,10 @@ First Date: <input type="text" id="datepicker">
 		
 Second Date: <input type="text" id="datepicker2">
 <div  margin-left: 5%;'>
-<button style="height:30px;width:100px;">Search Now!</button>
+<button onclick='doFormSubmit()'>Search Now!</button>
 </div>	
+<div id='dates' class=dates>
+    </div>
 		
 		
 		
