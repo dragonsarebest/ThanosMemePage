@@ -2,6 +2,7 @@
 using System.Data.SQLite;
 using NUnit.Framework;
 using System.Net;
+using System.Reflection;
 
 namespace testerNamespace
 {
@@ -10,13 +11,11 @@ namespace testerNamespace
     {
 
         string serverUrl = "http://localhost:8888/";
-        bool hasSeen = false;
-
+        
         [OneTimeSetUp]
         public void setUpAllTheThings()
         {
             ourCodes.Program.Main();
-            hasSeen = true;
         }
 
         [Test]
