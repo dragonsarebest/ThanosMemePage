@@ -15,7 +15,15 @@ namespace testerNamespace
         [OneTimeSetUp]
         public void setUpAllTheThings()
         {
+            //sets up the server
             ourCodes.Program.Main();
+        }
+
+        [OneTimeTearDown]
+        public void tearDownAllTheThings()
+        {
+            //closes the server
+            ourCodes.Program.dispose();
         }
 
         [Test]
