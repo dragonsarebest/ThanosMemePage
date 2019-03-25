@@ -25,6 +25,18 @@ namespace tddtest
             else
                 return "FAILED";
         }
+
+        // TODO: byte[] doesn't work. Convert images to bytes
+        // https://www.codeproject.com/Articles/196618/C-SQLite-Storing-Images
+        // http://zetcode.com/db/sqlitecsharp/images/
+        [BlueberryPie.Expose]
+        public string doUploadMeme(byte[] memeData)
+        {
+            if (db.UploadMeme("posts", memeData))
+                return "UPLOADED";
+            else
+                return "FAILED TO UPLOAD";
+        }
     }
 
     class MainClass

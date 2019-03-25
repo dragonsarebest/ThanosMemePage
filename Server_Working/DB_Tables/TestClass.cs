@@ -79,5 +79,17 @@ namespace tddtest
             Console.WriteLine(s);
             Assert.AreEqual("FAILED", s);
         }
+
+        [Test]
+        public void testUploadMeme()
+        {
+            WebClient wc = new WebClient();
+            var nvc = new NameValueCollection();
+            nvc.Add("postdata", "../../../html/images/header.png");
+            byte[] resp = wc.UploadValues(serverurl + "doUploadMeme", nvc);
+            string s = System.Text.Encoding.UTF8.GetString(resp);
+            Console.WriteLine(s);
+            Assert.AreEqual("UPLOADED", s);
+        }
     }
 }

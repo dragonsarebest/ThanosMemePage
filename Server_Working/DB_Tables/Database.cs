@@ -33,7 +33,24 @@ namespace tddtest
             } catch(Exception e)
             {
             }
+            // TODO: change the way passwords are saved
             cmd = new SQLiteCommand("create table accounts (email text unique, password text, realname text, uid integer primary key)", conn);
+            cmd.ExecuteNonQuery();
+            cmd = new SQLiteCommand("create table posts (postid integer primary key, creatorid integer, worldvisible integer, postdata blob, jtagid integer, jcommentid integer)", conn);
+            cmd.ExecuteNonQuery();
+            // tag junction table
+            cmd = new SQLiteCommand("create table jtag (postid integer, tagid integer)", conn);
+            cmd.ExecuteNonQuery();
+            // comment junction table
+            cmd = new SQLiteCommand("create table jcomment (postid integer, commentid integer)", conn);
+            cmd.ExecuteNonQuery();
+            cmd = new SQLiteCommand("create table tags (tagid integer, content string)", conn);
+            cmd.ExecuteNonQuery();
+            cmd = new SQLiteCommand("create table rating (userid integer, postid integer, rating integer)", conn);
+            cmd.ExecuteNonQuery();
+            cmd = new SQLiteCommand("create table views (ip text, userid integer, postid integer, date integer)", conn);
+            cmd.ExecuteNonQuery();
+            cmd = new SQLiteCommand("create table comments (commentid integer, parentid integer, date integer, data text, postid integer, userid integer, jtagid integer)", conn);
             cmd.ExecuteNonQuery();
         }
 
@@ -50,6 +67,24 @@ namespace tddtest
                 cmd.ExecuteNonQuery();
                 return true;
             } catch(Exception e)
+            {
+                Console.WriteLine("SQL made a booboo");
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        public bool UploadMeme(string table, byte[] memeData)
+        {
+            var cmd = new SQLiteCommand(
+                "insert into " + table + " (postdata) values ($memeData)", conn);
+            cmd.Parameters.AddWithValue("$memeData", memeData);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception e)
             {
                 Console.WriteLine("SQL made a booboo");
                 Console.WriteLine(e);
