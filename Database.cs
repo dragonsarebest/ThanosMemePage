@@ -22,14 +22,42 @@ namespace Main
             {
                 cmd = new SQLiteCommand("drop table accounts;", conn);
                 cmd.ExecuteNonQuery();
+                cmd = new SQLiteCommand("drop table posts;", conn);
+                cmd.ExecuteNonQuery();
+                cmd = new SQLiteCommand("drop table jtag;", conn);
+                cmd.ExecuteNonQuery();
+                cmd = new SQLiteCommand("drop table jcomment;", conn);
+                cmd.ExecuteNonQuery();
+                cmd = new SQLiteCommand("drop table tags;", conn);
+                cmd.ExecuteNonQuery();
+                cmd = new SQLiteCommand("drop table rating;", conn);
+                cmd.ExecuteNonQuery();
+                cmd = new SQLiteCommand("drop table views;", conn);
+                cmd.ExecuteNonQuery();
+                cmd = new SQLiteCommand("drop table comments;", conn);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
             }
-
-            cmd = new SQLiteCommand(
-                          "create table accounts (email text unique, password text, username text, uid integer primary key)",
-                          conn);
+            // TODO: change the way passwords are saved
+            cmd = new SQLiteCommand("create table accounts (username text, email text unique, password text, uid integer primary key)", conn);
+            cmd.ExecuteNonQuery();
+            cmd = new SQLiteCommand("create table posts (postid integer primary key, creatorid integer, worldvisible integer, postdata blob, jtagid integer, jcommentid integer)", conn);
+            cmd.ExecuteNonQuery();
+            // tag junction table
+            cmd = new SQLiteCommand("create table jtag (postid integer, tagid integer)", conn);
+            cmd.ExecuteNonQuery();
+            // comment junction table
+            cmd = new SQLiteCommand("create table jcomment (postid integer, commentid integer)", conn);
+            cmd.ExecuteNonQuery();
+            cmd = new SQLiteCommand("create table tags (tagid integer, content string)", conn);
+            cmd.ExecuteNonQuery();
+            cmd = new SQLiteCommand("create table rating (userid integer, postid integer, rating integer)", conn);
+            cmd.ExecuteNonQuery();
+            cmd = new SQLiteCommand("create table views (ip text, userid integer, postid integer, date integer)", conn);
+            cmd.ExecuteNonQuery();
+            cmd = new SQLiteCommand("create table comments (commentid integer, parentid integer, date integer, data text, postid integer, userid integer, jtagid integer)", conn);
             cmd.ExecuteNonQuery();
 
             //make a dummy account for testing
