@@ -1,46 +1,43 @@
-﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
-using System.Linq;
+﻿using System;
+using NUnit.Framework;
 using System.Net;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Specialized;
 
 namespace tddtest
 {
     [TestFixture]
-    class TestClass
+    public class MyTests
     {
-        string serverurl = "http://localhost:8888/";
+        string serverurl = "http://localhost:9888/";
+
+        public MyTests()
+        {
+        }
 
         [OneTimeSetUp]
         public void setUpAllTheThings()
         {
-            MainClass.Main();
+            //Main.MainClass();
         }
 
         [OneTimeTearDown]
-        public void tearDownAllThetings()
+        public void tearDownAllTheThings()
         {
-            MainClass.Dispose();
+            //MainClass.Dispose();
         }
 
         [SetUp]
         public void testSetupEveryTime()
         {
-            Handler.initDatabase();
+            //Handler.InitializeDatabase();
         }
 
         [Test]
         public void testGetRegistrationPage()
         {
             WebClient wc = new WebClient();
-            string s = wc.DownloadString("http://localhost:8888/signup.html");
-            Console.WriteLine(s);
-            Assert.AreNotEqual(-1, s.IndexOf("Sign Up"));
+            string s = wc.DownloadString(serverurl + "signup.html");
+            Assert.AreNotEqual(-1, s.IndexOf("Register"));
         }
 
         [Test]
@@ -50,7 +47,7 @@ namespace tddtest
             var nvc = new NameValueCollection();
             nvc.Add("email", "bob@example.com");
             nvc.Add("password", "s3cr3t");
-            nvc.Add("realname", "bobbothy senior");
+            nvc.Add("realname", "Bob Bob A Rebob");
             byte[] resp = wc.UploadValues(serverurl + "doRegister", nvc);
             string s = System.Text.Encoding.UTF8.GetString(resp);
             Console.WriteLine(s);
@@ -64,32 +61,19 @@ namespace tddtest
             var nvc = new NameValueCollection();
             nvc.Add("email", "bob@example.com");
             nvc.Add("password", "s3cr3t");
-            nvc.Add("realname", "bobbothy senior");
+            nvc.Add("realname", "Bob Bob A Rebob");
             byte[] resp = wc.UploadValues(serverurl + "doRegister", nvc);
             string s = System.Text.Encoding.UTF8.GetString(resp);
-            Console.WriteLine(s);
             Assert.AreEqual("CREATED", s);
 
             nvc = new NameValueCollection();
             nvc.Add("email", "bob@example.com");
             nvc.Add("password", "s3cr3tiv3");
-            nvc.Add("realname", "bobbothy junior");
+            nvc.Add("realname", "Alice");
             resp = wc.UploadValues(serverurl + "doRegister", nvc);
             s = System.Text.Encoding.UTF8.GetString(resp);
-            Console.WriteLine(s);
             Assert.AreEqual("FAILED", s);
-        }
-
-        [Test]
-        public void testUploadMeme()
-        {
-            WebClient wc = new WebClient();
-            var nvc = new NameValueCollection();
-            nvc.Add("postdata", "../../../html/images/header.png");
-            byte[] resp = wc.UploadValues(serverurl + "doUploadMeme", nvc);
-            string s = System.Text.Encoding.UTF8.GetString(resp);
-            Console.WriteLine(s);
-            Assert.AreEqual("UPLOADED", s);
         }
     }
 }
+

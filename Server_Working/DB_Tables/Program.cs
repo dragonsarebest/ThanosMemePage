@@ -1,62 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace tddtest
+namespace Main
 {
     class Handler : BlueberryPie.Handler
     {
-        static Database db = new Database();
+        public static Database db = new Database();
+        // OUR CODE!!!!
 
-        public static void initDatabase()
-        {
-            db.Initilize();
-        }
-
+        //add new data to the account tables
         [BlueberryPie.Expose]
-        public string doRegister(string email, string password, string realname)
+        public string addRecord(string username, string email, string password)
         {
-            if (db.AddRecord("accounts", email, realname, password))
+            if (db.AddRecord(email, username, password))
+            {
+                Handler.db.printAccountTables();
                 return "CREATED";
-            else
-                return "FAILED";
-        }
-
-        // TODO: byte[] doesn't work. Convert images to bytes
-        // https://www.codeproject.com/Articles/196618/C-SQLite-Storing-Images
-        // http://zetcode.com/db/sqlitecsharp/images/
-        [BlueberryPie.Expose]
-        public string doUploadMeme(byte[] memeData)
-        {
-            if (db.UploadMeme("posts", memeData))
-                return "UPLOADED";
-            else
-                return "FAILED TO UPLOAD";
+            }
+            return "FAILED";
         }
     }
 
     class MainClass
     {
-        static BlueberryPie.Server<Handler> srv;
-
-        static public void Main()
+        public static void Main(string[] args)
         {
-            var str = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
-            if (str.StartsWith("file:"))
-                str = str.Substring(6);
-            Directory.SetCurrentDirectory(str);
-            srv = new BlueberryPie.Server<Handler>(port: 8888, staticFileDir: "../../../html");
-            srv.StartInBackground();
-            Console.WriteLine("Server Started");
-        }
+            //always clear the database on startup
+            Handler.db.Initialize();              //Only run this if you want to reset the database
+            Handler.db.printAccountTables();        //Print the users in the database inside the Accounts table
 
-        static public void Dispose()
-        {
-            srv.Dispose();
+
+            var srv = new BlueberryPie.Server<Handler>(port: 9888, staticFileDir: "..\\..\\..\\html");
+            srv.Start();
         }
     }
 }
+
