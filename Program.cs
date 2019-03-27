@@ -1,127 +1,113 @@
 ﻿using System;
-using System.Data.SQLite;
+using System.IO;
 
-namespace sqlitetest
+namespace Main
 {
+    class Handler : BlueberryPie.Handler
+    {
+        public static Database db = new Database();
+
+        //gets the user ID from the session database EXAMPLE CODE Does not really pull uid's
+        int getUid()
+        {
+            if (!Session.data.ContainsKey("uid"))
+                return -1;
+            return Session.data["uid"];
+        }
+
+        //set the profile picture EXAMPLE CODE
+        [BlueberryPie.Expose]
+        public string setMyProfilePic(Stream pic)
+        {
+            int uid = getUid();
+            if (uid == -1)
+            {
+                //can't set picture if not logged in
+                return "ERROR: Not logged in";
+            }
+            var sr = new BinaryReader(pic);
+            var data = sr.ReadBytes((int)pic.Length);
+            db.setBlob("pic", uid, data);
+            return "OK";
+        }
+
+
+        // Jims getMyProfilePic EXAMPLE CODE
+        [BlueberryPie.Expose(mimetype = "application/octet-stream")]
+        public byte[] getMyProfilePic(string junk)
+        {
+            int uid = getUid();
+            if (uid == -1)
+            {
+                //if the user isn't logged in, we use a question mark image
+                return getFile("questionmark.png");
+            }
+            var data = db.getBlob("pic", uid);
+            if (data == null)
+            {
+                //if the user doesn't have a profile picture, we use an exclamation point image
+                return getFile("exclamationpoint.png");
+            }
+            return data;
+        }
+
+        //uses canned username/password EXAMPLE CODE
+        [BlueberryPie.Expose]
+        public string doLogin()
+        {
+            Session.data["uid"] = db.getUid("test@example.com", "abc");
+            return "OK";
+        }
+
+        [BlueberryPie.Expose]
+        public string doLogout()
+        {
+            Session.data["uid"] = -1;
+            return "OK";
+        }
+
+        //utility function to read a file from the disk EXAMPLE CODE
+        byte[] getFile(string fname)
+        {
+            using (var fr = new FileStream(fname, FileMode.Open))
+            {
+                byte[] b = new byte[(int)fr.Length];
+                fr.Read(b, 0, b.Length);
+                return b;
+            }
+        }
+
+
+
+
+
+
+        // OUR CODE!!!!
+
+        //add new data to the account tables
+        [BlueberryPie.Expose]
+        public string addRecord(string username, string email, string password)
+        {
+            if (db.AddRecord(email, username, password))
+            {
+                Handler.db.printAccountTables();
+                return "CREATED";
+            }
+            return "FAILED";
+        }
+    }
+
     class MainClass
     {
         public static void Main(string[] args)
         {
-            string sqlfile = "someFilename.xyz";
-            System.IO.File.Delete(sqlfile);
-            SQLiteConnection conn = new SQLiteConnection("Data Source=" + sqlfile + ";New=False");
-            conn.Open();
+            //always clear the database on startup
+            //Handler.db.Initialize();              //Only run this if you want to reset the database
+            Handler.db.printAccountTables();        //Print the users in the database inside the Accounts table
 
 
-            string[] s = {
-
-                //creation of our 6 tables
-                "create table users (uid integer primary key, email text, name text, password blob, profilePic blob, isAdmin integer);",
-                "create table tag (uid integer primary key,  content text);",
-                "create table comment (uid integer, postid integer, currentid integer primary key, parentid integer, date integer, comment text);",
-                "create table rating (uid integer, postid integer, rating integer);",
-                "create table view (ip text, userid integer, postid integer, date integer);",
-                "create table posts (creatorID integer, postID integer primary key, isWorldVisible integer, postDate integer, content blob);",
-
-
-                //testing the 6 tables
-                "insert into users (uid, email, name, isAdmin) values (0, 'Alex@example.com', 'Alex', 1)",
-                "insert into tag (uid,content) values(0, 'fresh')",
-                "insert into comment (uid, postid, currentid, parentid, date, comment) values (0, 0, 0, NULL, date('now'), 'Test to see if we can comment!')",
-                "insert into rating (uid,postid,rating) values (100, 20, 5)",
-                "insert into view(ip, userid, postid, date) values('123.456.7.8', 0, 0, 20190213)",
-                "insert into posts (creatorID,postID,isWorldVisible,postDate,content) values (0,0,1,2019213,NULL)",
-            };
-
-            SQLiteCommand cmd;
-
-            foreach (string c in s)
-            {
-                cmd = new SQLiteCommand(c, conn);
-                cmd.ExecuteNonQuery();
-            }
-
-
-            cmd = new SQLiteCommand("select name from users where uid = 0;", conn);
-            SQLiteDataReader a = cmd.ExecuteReader();
-            while (a.Read())
-            {
-                Console.WriteLine("SELECT RESULT: " + a["name"]);
-            }
-
-            Console.WriteLine("--------------------");
-
-
-            cmd = new SQLiteCommand("select content from tag where uid = 0;", conn);
-            SQLiteDataReader b = cmd.ExecuteReader();
-            while (b.Read())
-            {
-                Console.WriteLine("SELECT RESULT: " + b["content"]);
-            }
-
-            Console.WriteLine("--------------------");
-
-            
-            cmd = new SQLiteCommand("select comment from comment where uid = 0;", conn);
-            SQLiteDataReader ce = cmd.ExecuteReader();
-            while (ce.Read())
-            {
-                Console.WriteLine("SELECT RESULT: " + ce["comment"]);
-            }
-
-            Console.WriteLine("--------------------");
-            
-
-            cmd = new SQLiteCommand("select rating from rating where uid = 100;", conn);
-            SQLiteDataReader d = cmd.ExecuteReader();
-            while (d.Read())
-            {
-                Console.WriteLine("SELECT RESULT: " + d["rating"]);
-            }
-
-            Console.WriteLine("--------------------");
-            
-
-            cmd = new SQLiteCommand("select ip from view where userid = 0;", conn);
-            SQLiteDataReader e = cmd.ExecuteReader();
-            while (e.Read())
-            {
-                Console.WriteLine("SELECT RESULT: " + e["ip"]);
-            }
-
-            Console.WriteLine("--------------------");
-
-            
-            cmd = new SQLiteCommand("select postdate from posts where creatorID = 0;", conn);
-            SQLiteDataReader f = cmd.ExecuteReader();
-            while (f.Read())
-            {
-                Console.WriteLine("SELECT RESULT: " + f["postdate"]);
-            }
-
-            Console.WriteLine("--------------------");
-            /*
-            cmd = new SQLiteCommand("select name,uid from users where name = $name;", conn);
-            cmd.Parameters.AddWithValue("$name", "alice");
-            rdr = cmd.ExecuteReader();
-            while (rdr.Read())
-            {
-                Console.WriteLine("SELECT RESULT 2: " + rdr["name"] + " " + rdr["uid"]);
-            }
-            Console.WriteLine("--------------------");
-
-            //assume n is some string
-            cmd = new SQLiteCommand("select users.name as BLAH, count(posts.id) as BOOM from users " +
-            "left outer join posts on users.uid=posts.uid group by users.name " +
-            "order by count(posts.id) desc;", conn);
-            rdr = cmd.ExecuteReader();
-            while (rdr.Read())
-            {
-                Console.WriteLine("OUTER JOIN RESULT: " + rdr["BLAH"] + " " + rdr["BOOM"]);
-            }
-            */
-            conn.Close();
-            Console.ReadLine();
+            var srv = new BlueberryPie.Server<Handler>(port: 9888, staticFileDir: "..\\..\\html");
+            srv.Start();
         }
     }
 }

@@ -1,7 +1,0 @@
-Table: View
-	IP: string
-	UserID: foreign key, int
-	PostID: foreign key, int
-	Date: int
-	
-Bash
