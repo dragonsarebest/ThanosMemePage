@@ -102,8 +102,8 @@
 	   source: availableTags,
 	   scroll: true,
 	   focus: function( event, ui ) {
-		  $(this).autocomplete("search", "");
-		  //$( "#candidate" ).val( ui.item.label );
+		  //$(this).autocomplete("search", "");
+		  $( "#candidate" ).val( ui.item.label );
 		 return false;
 	   },
 	   select: function( event, ui ) {
