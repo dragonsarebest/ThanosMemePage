@@ -17,6 +17,7 @@ header{
 div #uploadImage{
 	display: block;
 	color: #D9C63C;
+	width: 100%;
 }
 
 div #uploadPreview{
@@ -24,6 +25,10 @@ div #uploadPreview{
 	height: 500px;
 	display: block;
 	background-color: #1B2B42;
+}
+
+#fullImage{
+	display: none;
 }
 
 body
@@ -43,10 +48,23 @@ div.column{
 	padding-right: 5%;
 }
 
+div #subHeader{
+	position: relative;
+	text-align: center;
+	left: 220px;
+}
+
 .ui-autocomplete {
     overflow-y: scroll;   /* prevent horizontal scrollbar */
 	height:120px; 
 	cursor:pointer; 
+	position: absolute;
+}
+
+#listContainer{
+	z-index: 999;
+	position: relative;
+	top: 36px;
 }
 
 div.ScrollBox{
@@ -54,8 +72,8 @@ div.ScrollBox{
 	color: #D9C63C;
 	border-color: #B4A24C;
 	display: block;
-	width: 480%;
-	height: 95%;
+	width: 400%;
+	height: 90%;
 	background-color: #306493;
 	overflow: scroll;
 }

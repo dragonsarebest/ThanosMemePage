@@ -3,8 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport"
+	
 	content="width=device-width,initial-scale=1,shrink-to-fit=no">
+	
 	<link href="bootstrap.min.css"rel="stylesheet">
+	<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"rel = "stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/styleGuide.css">
 	
 	<script src="jquery.min.js"></script>
@@ -23,7 +26,9 @@
 		<br>
 		
 		<div class = "row">
-			<input type="text" id="candidate" placeholder="Tag" style="z-index:999;"/>
+			<div id = "listContainer"> </div>
+			<input type="text" id="candidate" placeholder="Tag"/>
+			<input type = "hidden" id = "candidate-id">
 			<button onclick="addItem()">add tag</button>
 		</div>
 		
@@ -34,7 +39,7 @@
 		<div class = "row">
 		
 			<div class = "column">
-				<input id="uploadImage" type="file" name="myPhoto" accept = "image/*" onchange="PreviewImage();"/>
+			<input id="uploadImage" type="file" name="myPhoto" accept = "image/*" onchange="PreviewImage();"/>
 				<script type="text/javascript">
 
 					function PreviewImage() {
@@ -43,15 +48,19 @@
 
 						oFReader.onload = function (oFREvent) {
 							document.getElementById("uploadPreview").src = oFREvent.target.result;
+							document.getElementById("fullImage").src = oFREvent.target.result;
 						};
 					};
 
 				</script>
 				<img id="uploadPreview"/>
+				<img id="fullImage">
 			</div>
 		
 		<div class = "column">
-			comment section
+			<div id = "subHeader">
+			<font color = #A788A8 size = 5>Comment Section</font> 
+			</div>
 			<div class="ScrollBox">
 			</div>
 			
@@ -61,50 +70,55 @@
 	
 </body>
 
-
 <script>
-var availableTags = [
-		  "ActionScript",
-		  "AppleScript",
-		  "Asp",
-		  "BASIC",
-		  "C",
-		  "C++",
-		  "Clojure",
-		  "COBOL",
-		  "ColdFusion",
-		  "Erlang",
-		  "Fortran",
-		  "Groovy",
-		  "Haskell",
-		  "Java",
-		  "JavaScript",
-		  "Lisp",
-		  "Perl",
-		  "PHP",
-		  "Python",
-		  "Ruby",
-		  "Scala",
-		  "Scheme"
-		];
-	$(document).ready(function() {
-		BindControls();
-	});
-
-	function BindControls() 
-	{
-		$('#candidate').autocomplete({
-			source: availableTags,
-			minLength: 0,
-			scroll: true,
-		}).focus(function() {
-			$(this).autocomplete("search", "");
-		});
+ $(function() {
+	var availableTags = [
+  "ActionScript",
+  "AppleScript",
+  "Asp",
+  "BASIC",
+  "C",
+  "C++",
+  "Clojure",
+  "COBOL",
+  "ColdFusion",
+  "Erlang",
+  "Fortran",
+  "Groovy",
+  "Haskell",
+  "Java",
+  "JavaScript",
+  "Lisp",
+  "Perl",
+  "PHP",
+  "Python",
+  "Ruby",
+  "Scala",
+  "Scheme"
+];
+	$( "#candidate" ).autocomplete({
+	   appendTo: "#listContainer",
+	   minLength: 0,
+	   source: availableTags,
+	   scroll: true,
+	   focus: function( event, ui ) {
+		  $(this).autocomplete("search", "");
+		  //$( "#candidate" ).val( ui.item.label );
+		 return false;
+	   },
+	   select: function( event, ui ) {
+		  $( "#candidate" ).val( ui.item.label );
+		  $( "#candidate-id" ).val( ui.item.value );
+		  return false;
+	   }
+	})
 		
-		$( "#candidate" ).autocomplete( "option", "position", { my: "center top", at: "center bottom"})
-		
-		//var widge = $( ".selector" ).autocomplete("widget");
-	}
+	.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+	   return $( "<li>" )
+	   .append( "<a>" + item.label + "<br>" + "</a>" )
+	   .appendTo( ul );
+	};
+ });
 </script>
 
 </html>
