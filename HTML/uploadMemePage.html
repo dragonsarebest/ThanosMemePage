@@ -8,11 +8,13 @@
 	<link rel="stylesheet" type="text/css" href="css/styleGuide.css">
 	
 	<script src="jquery.min.js"></script>
+	<script src="ourScripts.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
 	<script src="bootstrap.bundle.min.js"></script>
 	
 	<title>Upload a MeMe</title>
 </head>
-<body>
+<body onload = "setUp();">
 	<div class="container">
 		<header>
 			<font color = #A788A8 size = 20>Username</font> 
@@ -20,29 +22,89 @@
 		
 		<br>
 		
-		<div class="row">
-			<input type = "text" value = "tags will go here">
+		<div class = "row">
+			<input type="text" id="candidate" placeholder="Tag" style="z-index:999;"/>
+			<button onclick="addItem()">add tag</button>
 		</div>
 		
-			<input id="uploadImage" type="file" name="myPhoto" onchange="PreviewImage();"/>
-			<script type="text/javascript">
+		<div class = "row">
+			<ul id="myList" list-style = "none" display = "inline"></ul>
+		</div>
+		
+		<div class = "row">
+		
+			<div class = "column">
+				<input id="uploadImage" type="file" name="myPhoto" accept = "image/*" onchange="PreviewImage();"/>
+				<script type="text/javascript">
 
-				function PreviewImage() {
-					var oFReader = new FileReader();
-					oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+					function PreviewImage() {
+						var oFReader = new FileReader();
+						oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
 
-					oFReader.onload = function (oFREvent) {
-						document.getElementById("uploadPreview").src = oFREvent.target.result;
+						oFReader.onload = function (oFREvent) {
+							document.getElementById("uploadPreview").src = oFREvent.target.result;
+						};
 					};
-				};
 
-			</script>
+				</script>
+				<img id="uploadPreview"/>
+			</div>
 		
-		<img id="uploadPreview"/>
-		
+		<div class = "column">
+			comment section
+			<div class="ScrollBox">
+			</div>
+			
 		</div>
 	
     </div>
 	
 </body>
+
+
+<script>
+var availableTags = [
+		  "ActionScript",
+		  "AppleScript",
+		  "Asp",
+		  "BASIC",
+		  "C",
+		  "C++",
+		  "Clojure",
+		  "COBOL",
+		  "ColdFusion",
+		  "Erlang",
+		  "Fortran",
+		  "Groovy",
+		  "Haskell",
+		  "Java",
+		  "JavaScript",
+		  "Lisp",
+		  "Perl",
+		  "PHP",
+		  "Python",
+		  "Ruby",
+		  "Scala",
+		  "Scheme"
+		];
+	$(document).ready(function() {
+		BindControls();
+	});
+
+	function BindControls() 
+	{
+		$('#candidate').autocomplete({
+			source: availableTags,
+			minLength: 0,
+			scroll: true,
+		}).focus(function() {
+			$(this).autocomplete("search", "");
+		});
+		
+		$( "#candidate" ).autocomplete( "option", "position", { my: "center top", at: "center bottom"})
+		
+		//var widge = $( ".selector" ).autocomplete("widget");
+	}
+</script>
+
 </html>

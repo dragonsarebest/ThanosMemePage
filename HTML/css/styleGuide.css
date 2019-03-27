@@ -10,16 +10,12 @@ header{
 	color: #D9C63C;
 	border-color: #B4A24C;
 	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 200%;
+	width: 20%;
 	background-color: #306493;
 }
 
 div #uploadImage{
 	display: block;
-	margin-left: auto;
-	margin-right: auto;
 	color: #D9C63C;
 }
 
@@ -27,12 +23,39 @@ div #uploadPreview{
 	width: 500px;
 	height: 500px;
 	display: block;
-	margin-left: auto;
-	margin-right: auto;
 	background-color: #1B2B42;
 }
 
 body
 {
 	background-color: #6F3C89;
+}
+
+input 
+{
+  min-width:50px!important;
+  max-width:99.99%!important;
+  transition: width 0.25s;
+  text-align:center;
+}
+
+div.column{
+	padding-right: 5%;
+}
+
+.ui-autocomplete {
+    overflow-y: scroll;   /* prevent horizontal scrollbar */
+	height:120px; 
+	cursor:pointer; 
+}
+
+div.ScrollBox{
+	border: 5px solid black;
+	color: #D9C63C;
+	border-color: #B4A24C;
+	display: block;
+	width: 480%;
+	height: 95%;
+	background-color: #306493;
+	overflow: scroll;
 }
