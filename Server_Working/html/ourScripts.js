@@ -85,9 +85,24 @@ function addComment(){
 
 function clickedComment(inputBoy)
 {
-	console.log("onClick");
-	console.log(inputBoy.id);
+	//console.log("onClick");
+	//console.log(inputBoy.id);
+	//console.log(inputBoy);
+	//firefox inputBoy is li, chrome inputBoy is htmlcollection envolping a li
 	
+	if(HTMLCollection.prototype.isPrototypeOf(inputBoy))
+	{
+		//console.log("we in chrome");
+		//we need to get the li out of this HTMLCollection
+		inputBoy = inputBoy.item(0);
+		//console.log(inputBoy);
+	}
+	else
+	{
+		//console.log("we in firefox");
+		//code stays the same
+	}
+		
 	var ul = document.getElementById("commentList");
 	var list = ul.childNodes;
 	for(var i = 0; i < list.length; i++)
@@ -95,7 +110,7 @@ function clickedComment(inputBoy)
 		var temp = list[i].id;
 		if(temp != undefined)
 			temp = removeSpaces(temp);
-		console.log("checking vs: " + temp);
+		//console.log("checking vs: " + temp);
 		if(temp == inputBoy.id)
 		{
 			ul.removeChild(list[i]);
@@ -174,8 +189,18 @@ function addItem(){
 
 function clickedBoy(inputBoy)
 {
-	console.log("onClick");
-	console.log(inputBoy);
+	if(HTMLCollection.prototype.isPrototypeOf(inputBoy))
+	{
+		//console.log("we in chrome");
+		//we need to get the li out of this HTMLCollection
+		inputBoy = inputBoy.item(0);
+		//console.log(inputBoy);
+	}
+	else
+	{
+		//console.log("we in firefox");
+		//code stays the same
+	}
 	
 	var ul = document.getElementById("myList");
 	var list = ul.childNodes;
