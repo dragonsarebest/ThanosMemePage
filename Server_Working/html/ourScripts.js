@@ -61,18 +61,18 @@ function addComment(){
 	if(addMe)
 	{
 		//can only add a tag once s
-		var newValue = encodeHTML(candidate.value);
+		var newValue = removeSpecial(candidate.value);
+		newValue = removeSpaces(newValue);
 		
 		var li = document.createElement("li");
-		li.setAttribute('id',candidate.value);
+		li.setAttribute('id',newValue);
 		var b = document.createElement('button');
 				
 		b.setAttribute("value", newValue);
-		newValue = removeSpaces(newValue);
 		b.setAttribute("id", newValue);
 		b.setAttribute("style", "margin:5px;");
 		b.setAttribute("onClick", "clickedComment("+newValue+")");
-		b.appendChild(document.createTextNode(newValue));
+		b.appendChild(document.createTextNode(candidate.value));
 		
 		//console.log(b);
 		
@@ -85,7 +85,8 @@ function addComment(){
 
 function clickedComment(inputBoy)
 {
-	//console.log("inputtttt" + inputBoy);
+	console.log("onClick");
+	console.log(inputBoy.id);
 	
 	var ul = document.getElementById("commentList");
 	var list = ul.childNodes;
@@ -94,6 +95,7 @@ function clickedComment(inputBoy)
 		var temp = list[i].id;
 		if(temp != undefined)
 			temp = removeSpaces(temp);
+		console.log("checking vs: " + temp);
 		if(temp == inputBoy.id)
 		{
 			ul.removeChild(list[i]);
@@ -102,13 +104,13 @@ function clickedComment(inputBoy)
 }
 
 function encodeHTML(s) {
-    return s.replace('/&/g', '&amp;').replace('/</g', '&lt;').replace('/"/g', '&quot;').replace('/>/g', '&gt;').replace(/\./g, '');
+    return s.replace('/&/g', '&amp;').replace('/</g', '&lt;').replace('/"/g', '&quot;').replace('/>/g', '&gt;');
 }
 
 function removeSpecial(s)
 {
 	return s.replace(/[^a-zA-Z]/g, '');
-} 
+}
 
 function strip(html){
    var doc = new DOMParser().parseFromString(html, 'text/html');
