@@ -19,6 +19,30 @@ namespace Main
             }
             return "FAILED";
         }
+
+        //gets the user ID from the session database
+        int getUid()
+        {
+            if (!Session.data.ContainsKey("uid"))
+                return -1;
+            return Session.data["uid"];
+        }
+
+        //uses canned username/password
+        [BlueberryPie.Expose]
+        public string doLogin(string email, string password)
+        {
+            Session.data["uid"] = db.getUid(email, password);
+            //Console.WriteLine("BLAHHHH");
+            return "OK";
+        }
+
+        [BlueberryPie.Expose]
+        public string doLogout()
+        {
+            Session.data["uid"] = -1;
+            return "OK";
+        }
     }
 
     class MainClass

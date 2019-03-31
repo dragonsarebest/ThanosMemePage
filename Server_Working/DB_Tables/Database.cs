@@ -114,6 +114,22 @@ namespace Main
             }
         }
 
+        public int getUid(string email, string password)
+        {
+            var cmd = new SQLiteCommand("select uid from accounts where email=$e and password=$p", conn);
+            cmd.Parameters.AddWithValue("$e", email);
+            cmd.Parameters.AddWithValue("$p", password);
+            using (var R = cmd.ExecuteReader())
+            {
+                while (R.Read())
+                {
+                    long u = (long)R["uid"];
+                    return (int)u;
+                }
+            }
+            return -1;
+        }
+
         // Prints out the Account tables for bug testing!
         public void printAccountTables()
         {
