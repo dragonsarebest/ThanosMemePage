@@ -30,7 +30,7 @@ namespace Main
             Handler.db.printAccountTables();        //Print the users in the database inside the Accounts table
 
 
-            var srv = new BlueberryPie.Server<Handler>(port: 9888, staticFileDir: "..\\..\\..\\html");
+            var srv = new BlueberryPie.Server<Handler>(port: 8888, staticFileDir: "..\\..\\..\\html");
             srv.Start();
         }
     }
