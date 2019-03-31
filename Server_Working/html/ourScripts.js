@@ -60,7 +60,7 @@ function addComment(){
 		
 	if(addMe)
 	{
-		//can only add a tag once
+		//can only add a tag once s
 		var newValue = encodeHTML(candidate.value);
 		
 		var li = document.createElement("li");
