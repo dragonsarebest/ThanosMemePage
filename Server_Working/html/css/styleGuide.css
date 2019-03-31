@@ -21,8 +21,8 @@ div #uploadImage{
 }
 
 div #uploadPreview{
-	width: 500px;
-	height: 500px;
+	width: 450px;
+	height: 450px;
 	display: block;
 	background-color: #1B2B42;
 }
@@ -79,10 +79,7 @@ div.ScrollBox{
 }
 
 #myList{
-	border: 5px solid black;
 	color: #D9C63C;
-	border-color: #B4A24C;
-	background-color: #306493;
 	padding-left: 1%;
 	padding-right: 1%;
 }
