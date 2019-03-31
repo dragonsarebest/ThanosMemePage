@@ -1,5 +1,30 @@
 "use strict";
-		
+
+var availableTags = [
+  "ActionScript",
+  "AppleScript",
+  "Asp",
+  "BASIC",
+  "C",
+  "C++",
+  "Clojure",
+  "COBOL",
+  "ColdFusion",
+  "Erlang",
+  "Fortran",
+  "Groovy",
+  "Haskell",
+  "Java",
+  "JavaScript",
+  "Lisp",
+  "Perl",
+  "PHP",
+  "Python",
+  "Ruby",
+  "Scala",
+  "Scheme"
+];
+
 function setUp()
 {
 	console.log("setup");
@@ -146,3 +171,28 @@ function clickedBoy(inputBoy)
 		}
 	}	
 }
+
+ $(function() {
+	$( "#candidate" ).autocomplete({
+	   appendTo: "#listContainer",
+	   minLength: 0,
+	   source: availableTags,
+	   scroll: true,
+	   focus: function( event, ui ) {
+		  //$(this).autocomplete("search", "");
+		  $( "#candidate" ).val( ui.item.label );
+		 return false;
+	   },
+	   select: function( event, ui ) {
+		  $( "#candidate" ).val( ui.item.label );
+		  $( "#candidate-id" ).val( ui.item.value );
+		  return false;
+	   }
+	})
+		
+	.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+	   return $( "<li>" )
+	   .append( "<a>" + item.label + "<br>" + "</a>" )
+	   .appendTo( ul );
+	};
+ });
