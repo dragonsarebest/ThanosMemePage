@@ -61,11 +61,11 @@ function addComment(){
 	if(addMe)
 	{
 		//can only add a tag once
+		var newValue = encodeHTML(candidate.value);
+		
 		var li = document.createElement("li");
 		li.setAttribute('id',candidate.value);
 		var b = document.createElement('button');
-		
-		var newValue = encodeHTML(candidate.value);
 				
 		b.setAttribute("value", newValue);
 		newValue = removeSpaces(newValue);
@@ -105,6 +105,16 @@ function encodeHTML(s) {
     return s.replace('/&/g', '&amp;').replace('/</g', '&lt;').replace('/"/g', '&quot;').replace('/>/g', '&gt;').replace(/\./g, '');
 }
 
+function removeSpecial(s)
+{
+	return s.replace(/[^a-zA-Z]/g, '');
+} 
+
+function strip(html){
+   var doc = new DOMParser().parseFromString(html, 'text/html');
+   return doc.body.textContent || "";
+}
+
 function removeSpaces(str)
 {
 	//console.log("old version of the string: " + str);
@@ -132,7 +142,7 @@ function addItem(){
 	if(addMe)
 	{
 		//can only add a tag once
-		var newValue = encodeHTML(candidate.value);
+		var newValue = removeSpecial(candidate.value);
 		var li = document.createElement("li");
 		li.setAttribute('id',newValue);
 		li.style.display = "inline";
@@ -147,7 +157,7 @@ function addItem(){
 		console.log(newValue);
 		
 		b.setAttribute("onClick", "clickedBoy("+newValue+")");
-		b.appendChild(document.createTextNode(newValue));
+		b.appendChild(document.createTextNode(candidate.value));
 		
 		//console.log(b);
 		
