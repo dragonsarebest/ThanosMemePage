@@ -33,7 +33,7 @@ namespace Main
         public string doLogin(string email, string password)
         {
             Session.data["uid"] = db.getUid(email, password);
-            //Console.WriteLine("BLAHHHH");
+            Console.WriteLine("Uid: " + db.getUid(email, password));
             return "OK";
         }
 
