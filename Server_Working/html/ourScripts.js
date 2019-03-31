@@ -102,7 +102,7 @@ function clickedComment(inputBoy)
 }
 
 function encodeHTML(s) {
-    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(/>/g, '&gt;');
+    return s.replace('/&/g', '&amp;').replace('/</g', '&lt;').replace('/"/g', '&quot;').replace('/>/g', '&gt;').replace(/\./g, '');
 }
 
 function removeSpaces(str)
@@ -132,16 +132,20 @@ function addItem(){
 	if(addMe)
 	{
 		//can only add a tag once
+		var newValue = encodeHTML(candidate.value);
 		var li = document.createElement("li");
-		li.setAttribute('id',candidate.value);
+		li.setAttribute('id',newValue);
 		li.style.display = "inline";
 		var b = document.createElement('button');
 		
-		var newValue = encodeHTML(candidate.value);
+		
 				
 		b.setAttribute("value", newValue);
 		b.setAttribute("id", newValue);
 		b.setAttribute("style", "margin:5px;");
+		
+		console.log(newValue);
+		
 		b.setAttribute("onClick", "clickedBoy("+newValue+")");
 		b.appendChild(document.createTextNode(newValue));
 		
@@ -158,6 +162,7 @@ function addItem(){
 
 function clickedBoy(inputBoy)
 {
+	console.log("onClick");
 	console.log(inputBoy);
 	
 	var ul = document.getElementById("myList");
@@ -165,7 +170,7 @@ function clickedBoy(inputBoy)
 	for(var i = 0; i < list.length; i++)
 	{
 		//console.log(list[i]);
-		if(list[i].id == inputBoy.id)
+		if(list[i].id == inputBoy)
 		{
 			ul.removeChild(list[i]);
 		}
