@@ -170,7 +170,7 @@ function clickedBoy(inputBoy)
 	for(var i = 0; i < list.length; i++)
 	{
 		//console.log(list[i]);
-		if(list[i].id == inputBoy)
+		if(list[i].id == inputBoy.id)
 		{
 			ul.removeChild(list[i]);
 		}
