@@ -26,7 +26,7 @@ namespace Main
         public static void Main(string[] args)
         {
             //always clear the database on startup
-            Handler.db.Initialize();              //Only run this if you want to reset the database
+            //Handler.db.Initialize();              //Only run this if you want to reset the database
             Handler.db.printAccountTables();        //Print the users in the database inside the Accounts table
 
 
