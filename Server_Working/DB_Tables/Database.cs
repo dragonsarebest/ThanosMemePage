@@ -116,12 +116,15 @@ namespace Main
         // Adds a new record to the accounts table this will need to go in the real database.cs
         public bool AddRecord(string email, string username, string password)
         {
+            int uid = email.GetHashCode();
             var cmd = new SQLiteCommand(
-                          "insert into accounts (email,username,password) values ($email, $username, $password)",
+                          "insert into accounts (email,username,password,uid) values ($email, $username, $password, $uid)",
                           conn);
+
             cmd.Parameters.AddWithValue("$email", email);
             cmd.Parameters.AddWithValue("$username", username);
             cmd.Parameters.AddWithValue("$password", password);
+            cmd.Parameters.AddWithValue("$uid", uid);
             try
             {
                 cmd.ExecuteNonQuery();
