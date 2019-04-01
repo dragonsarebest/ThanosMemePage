@@ -43,6 +43,12 @@ function setUp()
 	//console.log(ul);
 }
 
+function subMeme(){
+	var ourMeme = document.getElementById("fullImage");
+	window.location.replace("Home.html"); //meme spread page will go here
+}
+
+
 function addComment(){
 	var fd = new FormData();
     var ul = document.getElementById("commentList");
