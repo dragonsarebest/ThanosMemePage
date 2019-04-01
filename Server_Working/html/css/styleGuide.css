@@ -111,3 +111,9 @@ div.ScrollBox{
 	left: 2%;
 	top: 2%;
 }
+
+#submitMeme{
+	/*settings for submit meme*/
+	padding: 5%;
+	width: 100%;
+}

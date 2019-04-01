@@ -44,7 +44,7 @@ function setUp()
 
 function subMeme(){
 	var ourMeme = document.getElementById("fullImage");
-	window.location.replace(""); //meme spread page will go here
+	window.location.replace("Home.html"); //meme spread page will go here
 }
 
 function addComment(){
