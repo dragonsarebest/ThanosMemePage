@@ -66,12 +66,33 @@ namespace Main
             cmd.ExecuteNonQuery();
             cmd = new SQLiteCommand("create table views (ip text, userid integer, postid integer, date integer)", conn);
             cmd.ExecuteNonQuery();
-            cmd = new SQLiteCommand("create table comments (commentid integer, parentid integer, date integer, data text, postid integer, userid integer, jtagid integer)", conn);
+            //cmd = new SQLiteCommand("create table comments (commentid integer, parentid integer, date integer, comment text, postid integer, userid integer)", conn);
+            //cmd.ExecuteNonQuery();
+            cmd = new SQLiteCommand("create table comments (comment text, commentid integer primary key)", conn);
             cmd.ExecuteNonQuery();
 
             //make a dummy account for testing
-            AddRecord("test@example.com", "real name", "abc");
+            AddRecord("test@example.com", "bob bobby bobbity boop", "abc");
+            addComment("test comment");
 
+        }
+
+        public bool addComment(string comment)
+        {
+            var cmd = new SQLiteCommand(
+                "insert into comments (comment) values ($comment)", conn);
+            cmd.Parameters.AddWithValue("$comment", comment);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("SQL made a booboo");
+                Console.WriteLine(e);
+                return false;
+            }
         }
 
         public bool UploadMeme(string table, byte[] memeData)
@@ -142,6 +163,26 @@ namespace Main
                     {
                         string name = (string)R["username"];
                         Console.WriteLine(name);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        // Prints out the comments tables for bug testing!
+        public void printCommentTables()
+        {
+            try
+            {
+                var cmd = new SQLiteCommand("select * from comments", conn);
+                using (var R = cmd.ExecuteReader())
+                {
+                    while (R.Read())
+                    {
+                        string c = (string)R["comment"];
+                        Console.WriteLine(c);
                     }
                 }
             }
