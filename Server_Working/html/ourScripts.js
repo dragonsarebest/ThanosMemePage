@@ -34,6 +34,7 @@ function setUp()
 	
 	var li = document.createElement("li");
 	li.innerHTML = "Tags: ";
+	li.style.margin = "margin:5px";
 	li.style.display = "inline";
 	//console.log(li);
 	
@@ -42,49 +43,44 @@ function setUp()
 	//console.log(ul);
 }
 
-function subMeme(){
-	var ourMeme = document.getElementById("fullImage");
-	window.location.replace("Home.html"); //meme spread page will go here
-}
-
 function addComment(){
-	var addMe = true;
+	var fd = new FormData();
     var ul = document.getElementById("commentList");
     var candidate = document.getElementById("myComment");
-		
-	var list = ul.childNodes;
-	for(var i = 0; i < list.length; i++)
-	{
-		if(list[i].id == candidate.value)
-		{
-			addMe = false;
-			//console.log("already there!");
-		}
-	}	
-		
-	if(addMe)
-	{
-		//can only add a tag once s
-		var newValue = removeSpecial(candidate.value);
-		newValue = removeSpaces(newValue);
-		
-		var li = document.createElement("li");
-		li.setAttribute('id',newValue);
-		var b = document.createElement('button');
-				
-		b.setAttribute("value", newValue);
-		b.setAttribute("id", newValue);
-		b.setAttribute("style", "margin:5px;");
-		b.setAttribute("onClick", "clickedComment("+newValue+")");
-		b.appendChild(document.createTextNode(candidate.value));
-		
-		//console.log(b);
-		
-		li.appendChild(b);
-		//console.log(li);
-		
-		ul.appendChild(li);		
-	}
+	
+	var newValue = removeSpecial(candidate.value);
+	newValue = removeSpaces(newValue);
+	
+	fd.append("comment", newValue);
+	//fd.append("comment", newValue);
+	
+	var li = document.createElement("li");
+	li.setAttribute('id',newValue);
+	var b = document.createElement('button');
+	
+	b.setAttribute("value", newValue);
+	b.setAttribute("id", newValue);
+	b.setAttribute("style", "margin:5px;");
+	b.setAttribute("onClick", "clickedComment("+newValue+")");
+	b.appendChild(document.createTextNode(candidate.value));
+	
+	//console.log(b);
+	
+	li.appendChild(b);
+	//console.log(li);
+	
+	ul.appendChild(li);	
+	
+	var req = new XMLHttpRequest();
+    req.addEventListener( "load", () => {
+        if( req.readyState === 4 && req.status === 200 ){
+            console.log("addComment: "+req.responseText);
+            if( callback != undefined )
+                callback(req);
+        }
+    });
+    req.open("POST", "addComment" );
+    req.send( fd );
 }
 
 function clickedComment(inputBoy)
