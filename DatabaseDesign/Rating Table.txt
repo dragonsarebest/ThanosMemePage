@@ -1,6 +1,0 @@
-Rating:
-	UserID:	Foreign Key - Int
-	PostID:	Foreign Key - Int
-	Rating:	Int ( 1 - 5 )
-	
-Elijah
