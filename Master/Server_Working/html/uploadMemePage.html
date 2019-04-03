@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"
+	
+	content="width=device-width,initial-scale=1,shrink-to-fit=no">
+	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+	<link rel="manifest" href="images/site.webmanifest">
+			
+	<link href="bootstrap.min.css"rel="stylesheet">
+	<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"rel = "stylesheet">
+	
+	
+
+	<link href="css/UserCreation.css" type="text/css" rel="stylesheet">
+		
+	<script src="jquery.min.js"></script>
+	<script src="ourScripts.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+	<script src="bootstrap.bundle.min.js"></script>
+	
+	<title>Upload a MeMe</title>
+</head>
+<body onload = "setUp();">
+		<header>
+			<div class="header">
+		  <a href="https://youtu.be/s9q61m7S9yA" class="logo">Snappers!</a>
+		  <div class="header-right">
+			<a class="active" href="Home.html">Home</a>
+			<a href="about.html">About</a>
+			<a href="login.html">Login</a>
+			<a href="signup.html">Sign Up</a>
+			<a href="Contact.html">Contact</a>
+		  </div>
+		</div>
+			
+		</header>
+	<div class="container">
+		
+			
+		<br>
+		
+		<div class = "row">
+			<div id = "listContainer"> </div>
+			<input type="text" id="candidate" placeholder="Tag"/>
+			<input type = "hidden" id = "candidate-id">
+			<button onclick="addItem()">add tag</button>
+		</div>
+		
+		<div class = "row">
+			<ul id="myList"></ul>
+		</div>
+		
+		<div class = "row">
+		
+			<div class = "column">
+			<input id="uploadImage" type="file" name="myPhoto" accept = "image/*" onchange="PreviewImage();"/>
+				<script type="text/javascript">
+
+					function PreviewImage() {
+						var oFReader = new FileReader();
+						oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+
+						oFReader.onload = function (oFREvent) {
+							document.getElementById("uploadPreview").src = oFREvent.target.result;
+							document.getElementById("fullImage").src = oFREvent.target.result;
+						};
+					};
+
+				</script>
+				<img id="uploadPreview"/>
+				<img id="fullImage">
+				
+				<input id = "submitMeme" type="submit" value="upload meme" onclick = "subMeme();"/>
+			</div>
+		
+		<div class = "column">
+			<div id = "subHeader">
+			<font color = #A788A8 size = 5>Comment Section</font> 
+			</div>
+			<div class="ScrollBox">
+				<textarea id = "myComment" placeholder = "make a comment..." oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+				<input id = "myCommentSub" type = "submit" value = "submit" onclick = "addComment();"/>
+				
+				<ul id = "commentList">
+					<li>
+						Comments will go here...
+					</li>
+				</ul>
+				
+			</div>
+			
+		</div>
+	
+    </div>
+	
+</body>
+
+<script>
+
+</script>
+
+</html>
