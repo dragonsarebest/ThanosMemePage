@@ -23,6 +23,7 @@ namespace Main
         [BlueberryPie.Expose]
         public string addComment(string comment)
         {
+
             if (db.addComment(comment))
             {
                 Handler.db.printCommentTables();

@@ -10,6 +10,7 @@ function addRecord(){
     req.addEventListener( "load", () => {
         if( req.readyState === 4 && req.status === 200 ){
             console.log("addRecord: "+req.responseText);
+			//window.location.replace("http://localhost:8888/login.html")
             if( callback != undefined )
                 callback(req);
         }
