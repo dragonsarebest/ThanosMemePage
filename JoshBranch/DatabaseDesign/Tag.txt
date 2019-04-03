@@ -1,0 +1,4 @@
+Brady Carrel
+Table: Tag 
+	Id: primary key int
+	Content: string

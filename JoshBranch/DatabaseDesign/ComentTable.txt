@@ -1,0 +1,9 @@
+TABLE:
+Comment
+	CommentID, Pointer
+	ParrentCommentID, Pointer
+	Date, dataObject
+	data, string
+	JunctionTagPtr, Pointer
+	PostID, Pointer
+	UserID, Pointer
