@@ -18,6 +18,24 @@
 		<script src="bootstrap.bundle.min.js"></script>
 		
 		<title>Thanos Meme Pages</title>
+		
+		<style>
+			.loginPos {
+				position: absolute;
+				top: 30%;
+				right: 10%;
+			}
+			.registerPos {
+				position: absolute;
+				top: 125%;
+				right: 80%;
+			}
+			.form-size {
+				width: 300%;
+				margin-left: 35%;
+				padding-top: 10%;
+			}
+		</style>
     </head>
 	
     <body>
@@ -39,10 +57,10 @@
         
 
 		<!-- Image -->
-		<img src="./images/website-is-done-meme.jpg" alt="MemePic" style="height:74%;width:50%;position:absolute" height="100%" width="50%">
+		<img src="./images/website-is-done-meme.jpg" alt="MemePic" style="height:65%;width:50%;position:absolute" height="100%" width="50%">
 		
 		<!-- Login Stuff -->
-		<form id="signup-form" style="position:absolute;">
+		<form class = "loginPos" id="signup-form" style="position:absolute;">
             <div class="form-group">
                 
 			<div class="form-group">
@@ -56,17 +74,17 @@
         </form>
 		
 		<!-- Register Stuff -->
-		<form id="signup-form" style="position:absolute;">
-            <div class="form-group">
+		<form class = "registerPos" id="signup-form" style="position:absolute;">
+            <div class="form-size">
                 <input id="name" type="username" class="form-control" placeholder="Thanos_underling" required autofocus>
 			</div>
-			<div class="form-group">
-				<input id="email" type="email" class="form-control" placeholder="bob@example.com" required>
+			<div class="form-size">
+				<input id="email" type="email" class="form-control" placeholder="Loki@dead4real.edu" required>
 			</div>
-			<div class="form-group">
+			<div class="form-size">
 				<input id="password" type="password" class="form-control" placeholder="password" required> 
 			</div>
-			<div class="form-group">
+			<div class="form-size">
 				<input type="password" class="form-control" placeholder="confirm password">
 			</div>
 			<button class="btn btn-med btn-primary btn-block">Signup</button>
