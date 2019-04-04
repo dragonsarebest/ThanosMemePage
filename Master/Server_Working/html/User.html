@@ -35,6 +35,26 @@
 				margin-left: 35%;
 				padding-top: 10%;
 			}
+			<!-- Make forms vetical if screen is less than 800px wide -->
+			@media (max-width: 800px) {
+				.loginPos {
+					position: absolute;
+					top: 30%;
+					right: 10%;
+					.form-inline {
+					}
+				}
+				.registerPos {
+					position: absolute;
+					top: 125%;
+					right: 80%;
+				}
+				.form-size {
+					width: 300%;
+					margin-left: 35%;
+					padding-top: 10%;
+				}
+			}
 		</style>
     </head>
 	
@@ -60,34 +80,35 @@
 		<img src="./images/website-is-done-meme.jpg" alt="MemePic" style="height:65%;width:50%;position:absolute" height="100%" width="50%">
 		
 		<!-- Login Stuff -->
-		<form class = "loginPos" id="signup-form" style="position:absolute;">
+		<form class = "loginPos form-inline" id="signup-form" style="position:absolute;">
             <div class="form-group">
                 
 			<div class="form-group">
-				<input id="email" type="email" class="form-control" placeholder="Loki@dead4real.edu" required>
+				<input id="email" type="email" style="right:50%" class="form-control" placeholder="Loki@dead4real.edu" required>
 			</div>
 			<div class="form-group">
-				<input id="password" type="password" class="form-control" placeholder="password" required> 
+				<input id="password" type="password" style="margin-left:10%" class="form-control" placeholder="password" required> 
 			</div>
 		
-			<button class="btn btn-med btn-primary btn-block">Log In</button>
+			<button class="btn btn-med btn-primary btn-block" style="margin-top:3%;width:91%">Log In</button>
         </form>
 		
 		<!-- Register Stuff -->
 		<form class = "registerPos" id="signup-form" style="position:absolute;">
             <div class="form-size">
-                <input id="name" type="username" class="form-control" placeholder="Thanos_underling" required autofocus>
+                <input id="name" type="username" style="width:75%" class="form-control" placeholder="Thanos_underling" required autofocus>
 			</div>
 			<div class="form-size">
-				<input id="email" type="email" class="form-control" placeholder="Loki@dead4real.edu" required>
+				<input id="email" type="email" style="width:75%" class="form-control" placeholder="Loki@dead4real.edu" required>
 			</div>
 			<div class="form-size">
-				<input id="password" type="password" class="form-control" placeholder="password" required> 
+				<input id="password" type="password" style="width:75%" class="form-control" placeholder="password" required> 
 			</div>
 			<div class="form-size">
-				<input type="password" class="form-control" placeholder="confirm password">
+				<input type="password" class="form-control" style="width:75%" placeholder="confirm password">
 			</div>
-			<button class="btn btn-med btn-primary btn-block">Signup</button>
+			
+			<button class="btn btn-med btn-primary btn-block" style="margin-left:75%;margin-top:10%;width:150%">Sign up</button>
         </form>
 		<!-- <footer> Temp footer</footer> -->
 		
