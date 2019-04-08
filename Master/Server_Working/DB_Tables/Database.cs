@@ -29,6 +29,7 @@ namespace Main
             SQLiteCommand cmd;
             try
             {
+                // Completly wipes all tables from the database
                 cmd = new SQLiteCommand("drop table accounts;", conn);
                 cmd.ExecuteNonQuery();
                 cmd = new SQLiteCommand("drop table posts;", conn);
@@ -77,6 +78,7 @@ namespace Main
 
         }
 
+        // Adds a new Comment to the database
         public bool addComment(string comment)
         {
             var cmd = new SQLiteCommand(
@@ -95,6 +97,7 @@ namespace Main
             }
         }
 
+        // Uploads a meme to the database
         public bool UploadMeme(string table, byte[] memeData)
         {
             var cmd = new SQLiteCommand(
@@ -119,7 +122,6 @@ namespace Main
             var cmd = new SQLiteCommand(
                           "insert into accounts (email,username,password) values ($email, $username, $password)",
                           conn);
-
             cmd.Parameters.AddWithValue("$email", email);
             cmd.Parameters.AddWithValue("$username", username);
             cmd.Parameters.AddWithValue("$password", password);
@@ -136,6 +138,8 @@ namespace Main
             }
         }
 
+        // Gets the Uid from the database that matches the sent in email and password
+        // Good example to see how to save information from the database!!!
         public int getUid(string email, string password)
         {
             var cmd = new SQLiteCommand("select uid from accounts where email=$e and password=$p", conn);
@@ -145,7 +149,7 @@ namespace Main
             {
                 while (R.Read())
                 {
-                    long u = (long)R["uid"];
+                    long u = (long)R["uid"]; //whatever you put in the quotes that is part of that table will go into R
                     return (int)u;
                 }
             }
@@ -157,12 +161,13 @@ namespace Main
         {
             try
             {
+                // Selects all entrys in the accounts table
                 var cmd = new SQLiteCommand("select * from accounts", conn);
                 using (var R = cmd.ExecuteReader())
                 {
                     while (R.Read())
                     {
-                        string name = (string)R["username"];
+                        string name = (string)R["username"]; // Only prints out the username (can change what is in the quotes)
                         Console.WriteLine(name);
                     }
                 }
