@@ -184,3 +184,40 @@ header{
 	 text-align: center;
 	 background-color: #1B2B42;
 }
+
+/*new (with picture) login page styles*/
+.loginPos {
+	position: absolute;
+	top: 30%;
+	right: 10%;
+}
+.registerPos {
+	position: absolute;
+	top: 125%;
+	right: 73%;
+}
+.form-size {
+	width: 300%;
+	margin-left: 0%;
+	padding-top: 10%;
+}
+/*Make forms vetical if screen is less than 800px wide*/
+@media (max-width: 800px) {
+	.loginPos {
+		position: absolute;
+		top: 30%;
+		right: 10%;
+		.form-inline {
+		}
+	}
+	.registerPos {
+		position: absolute;
+		top: 125%;
+		right: 80%;
+	}
+	.form-size {
+		width: 300%;
+		margin-left: 0%;
+		padding-top: 10%;
+	}
+}

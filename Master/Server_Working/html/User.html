@@ -1,129 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-		<meta charset="utf-8">
-		<meta name="viewport" 
-			content="width=device-width, initial-scale=1, shrink-to-fit=yes">
-		
-		<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-		<link rel="manifest" href="images/site.webmanifest">
-		
-		<link href="bootstrap.min.css" rel="stylesheet">
-		<link href="jqueryui/jquery-ui.css" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta name="viewport" 
+            content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+        <link rel="manifest" href="images/site.webmanifest">
+        <link href="bootstrap.min.css" rel="stylesheet">
+        <link href="jqueryui/jquery-ui.css" rel="stylesheet">
         <link href="css/UserCreation.css" type="text/css" rel="stylesheet">
-		
-		<script src="formtest.js"></script>
-		<script src="randomPicGen.js"></script>
-		
-		
-		<script src="jqueryui/jquery-ui.js"></script>
-		<script src="bootstrap.bundle.min.js"></script>
-		
-		<title>Thanos Meme Pages</title>
-		
-		<style>
-			.loginPos {
-				position: absolute;
-				top: 30%;
-				right: 10%;
-			}
-			.registerPos {
-				position: absolute;
-				top: 110%;
-				right: 73%;
-			}
-			.form-size {
-				width: 300%;
-				margin-left: 35%;
-				padding-top: 10%;
-			}
-			<!-- Make forms vetical if screen is less than 800px wide -->
-			@media (max-width: 800px) {
-				.loginPos {
-					position: absolute;
-					top: 30%;
-					right: 10%;
-					.form-inline {
-					}
-				}
-				.registerPos {
-					position: absolute;
-					top: 110%;
-					right: 80%;
-				}
-				.form-size {
-					width: 300%;
-					margin-left: 35%;
-					padding-top: 10%;
-				}
-			}
-		</style>
-		
-		<!-- $pictures = array("1.jpg", "2.jpg", "3.jpg"); -->
+        <script src="formtest.js"></script>
+        <script src="randomPicGen.js"></script>
+        <script src="jqueryui/jquery-ui.js"></script>
+        <script src="bootstrap.bundle.min.js"></script>
+        <title>Thanos Meme Pages</title>
+        <!-- $pictures = array("1.jpg", "2.jpg", "3.jpg"); -->
     </head>
-	
     <body>
-		<!-- Image -->
-		<img id="myPicture" alt="some image" style="height:65%;width:50%;position:absolute;bottom:0;" height="100%" width="50%">
-	
-	
-		<div class="header" style="position:absolute;width:100%">
-		  <a href="https://youtu.be/s9q61m7S9yA" class="logo">Snappers!</a>
-		  <div class="header-right">
-			<a href="Home.html">Home</a>
-			<a href="about.html">About</a>
-			<a href="login.html">Login</a>
-			<a href="signup.html">Sign Up</a>
-			<a href="Contact.html">Contact</a>
-		  </div>
-		</div>
-		
-		<!-- <header1> Home </header1> -->
-		
-		<!-- <iframe src="signup.html" style="position:right-side;height:500px;width:500px;border:none;"></iframe> -->
-	
-        
-
-
-	
-		
-		<!-- Login Stuff -->
-		<div class="form-size">
-			<form class = "loginPos form-inline" action="Home.html" id="signup-form" style="position:absolute;">
-				<div class="form-group">	
-					
-				<div class="form-group">
-					<input id="email" type="email" style="right:50%" class="form-control" placeholder="Loki@dead4real.edu" required>
-				</div>
-				<div class="form-group">
-					<input id="password" type="password" style="margin-left:10%" class="form-control" placeholder="password" required> 
-				</div>
-			
-				<button class="btn btn-med btn-primary btn-block" style="margin-top:3%;width:91%">Log In</button>
-			</form>
-			
-			<!-- Register Stuff -->
-			<form class = "registerPos" id="signup-form" action="Home.html" style="position:absolute;">
-				<div class="form-size">
-					<input id="name" type="username" style="margin-left:10%;width:75%" class="form-control" placeholder="Thanos_underling" required autofocus>
-				</div>
-				<div class="form-size">
-					<input id="email" type="email" style="margin-left:10%;width:75%" class="form-control" placeholder="Loki@dead4real.edu" required>
-				</div>
-				<div class="form-size">
-					<input id="password" type="password" style="margin-left:10%;width:75%" class="form-control" placeholder="password" required> 
-				</div>
-				<div class="form-size">
-					<input type="password" class="form-control" style="margin-left:10%;width:75%" placeholder="confirm password">
-				</div>
-				
-				<button class="btn btn-med btn-primary btn-block" style="margin-left:100%;margin-top:10%;width:150%">Sign up</button>
-			</form>
-		</div>
-		<!-- <footer> Temp footer</footer> -->
-		
-		
+        <!-- Image -->
+        <img id="myPicture" alt="some image" style="height:74%;width:50%;position:absolute;bottom:0;" height="100%" width="50%">
+        <div class="header" style="position:absolute;width:100%">
+            <a href="https://youtu.be/s9q61m7S9yA" class="logo">Snappers!</a>
+            <div class="header-right">
+                <a href="Home.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="login.html">Login</a>
+                <a href="signup.html">Sign Up</a>
+                <a href="Contact.html">Contact</a>
+            </div>
+        </div>
+        <!-- <header1> Home </header1> -->
+        <!-- <iframe src="signup.html" style="position:right-side;height:500px;width:500px;border:none;"></iframe> -->
+        <!-- Login Stuff -->
+        <form class = "loginPos form-inline" action="Home.html" id="signup-form" style="position:absolute;">
+            <div class="form-group">
+                <div class="form-group">
+                    <input id="email" type="email" style="right:50%" class="form-control" placeholder="Loki@dead4real.edu" required>
+                </div>
+                <div class="form-group">
+                    <input id="password" type="password" style="margin-left:10%" class="form-control" placeholder="password" required> 
+                </div>
+                <button class="btn btn-med btn-primary btn-block" style="margin-top:3%;width:91%">Log In</button>
+        </form>
+        <!-- Register Stuff -->
+        <form class = "registerPos" id="signup-form" action="Home.html" style="position:absolute;">
+        <div class="form-size">
+        <input id="name" type="username" style="width:75%" class="form-control" placeholder="Thanos_underling" required autofocus>
+        </div>
+        <div class="form-size">
+        <input id="email" type="email" style="width:75%" class="form-control" placeholder="Loki@dead4real.edu" required>
+        </div>
+        <div class="form-size">
+        <input id="password" type="password" style="width:75%" class="form-control" placeholder="password" required> 
+        </div>
+        <div class="form-size">
+        <input type="password" class="form-control" style="width:75%" placeholder="confirm password">
+        </div>
+        <button class="btn btn-med btn-primary btn-block" style="margin-left:75%;margin-top:10%;width:150%">Sign up</button>
+        </form>
+        </div>
+        <!-- <footer> Temp footer</footer> -->
     </body>
 </html>
