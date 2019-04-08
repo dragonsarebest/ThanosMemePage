@@ -8,10 +8,11 @@ namespace Main
         public static Database db = new Database();
         // OUR CODE!!!!
 
-        //add new data to the account tables
+        // Add new data to the account tables
         [BlueberryPie.Expose]
         public string addRecord(string username, string email, string password)
         {
+            // Calls the addRecord function from the database
             if (db.AddRecord(email, username, password))
             {
                 Handler.db.printAccountTables();
@@ -20,10 +21,11 @@ namespace Main
             return "FAILED";
         }
 
+        // Adds data to the comments table
         [BlueberryPie.Expose]
         public string addComment(string comment)
         {
-
+            // Calls the addComment function from the database
             if (db.addComment(comment))
             {
                 Handler.db.printCommentTables();
@@ -49,6 +51,7 @@ namespace Main
             return "OK";
         }
 
+        // Sets the session data to not contain a session ID
         [BlueberryPie.Expose]
         public string doLogout()
         {
@@ -62,8 +65,8 @@ namespace Main
         public static void Main(string[] args)
         {
             //always clear the database on startup
-            Handler.db.Initialize();              //Only run this if you want to reset the database
-            Handler.db.printAccountTables();        //Print the users in the database inside the Accounts table
+            Handler.db.Initialize();                //Only run this if you want to reset the database
+            Handler.db.printAccountTables();    
             Handler.db.printCommentTables();
 
             var srv = new BlueberryPie.Server<Handler>(port: 8888, staticFileDir: "..\\..\\..\\html");
