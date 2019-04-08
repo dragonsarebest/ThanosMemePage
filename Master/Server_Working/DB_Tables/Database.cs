@@ -53,7 +53,7 @@ namespace Main
             // TODO: change the way passwords are saved
             cmd = new SQLiteCommand("create table accounts (username text, email text unique, password text, uid integer primary key)", conn);
             cmd.ExecuteNonQuery();
-            cmd = new SQLiteCommand("create table posts (postid integer primary key, creatorid integer, worldvisible integer, postdata blob, jtagid integer, jcommentid integer)", conn);
+            cmd = new SQLiteCommand("create table posts (postid integer primary key, creatorid integer, worldvisible integer, postdata blob, date integer)", conn);
             cmd.ExecuteNonQuery();
             // tag junction table
             cmd = new SQLiteCommand("create table jtag (postid integer, tagid integer)", conn);
@@ -97,12 +97,15 @@ namespace Main
             }
         }
 
-        // Uploads a meme to the database
-        public bool UploadMeme(string table, byte[] memeData)
+        public bool UploadMeme(byte[] memeData, int userID)
         {
             var cmd = new SQLiteCommand(
-                "insert into " + table + " (postdata) values ($memeData)", conn);
-            cmd.Parameters.AddWithValue("$memeData", memeData);
+                "insert into posts (postdata) values (creatorid, worldvisible, postdata, date) values ($creatorid, $worldvisible, $postdata, $date)", conn);
+            //cmd.Parameters.AddWithValue("$memeData", memeData);
+            cmd.Parameters.AddWithValue("$creatorid", userID);
+            cmd.Parameters.AddWithValue("$worldvisible", 1);
+            cmd.Parameters.AddWithValue("$postdata", memeData);
+            cmd.Parameters.AddWithValue("$date", 20190408);
             try
             {
                 cmd.ExecuteNonQuery();
@@ -149,12 +152,54 @@ namespace Main
             {
                 while (R.Read())
                 {
+                    //long u = (long)R["uid"];
                     long u = (long)R["uid"]; //whatever you put in the quotes that is part of that table will go into R
                     return (int)u;
                 }
             }
             return -1;
         }
+
+        public bool setBlob(string column, int creatorid, byte[] blob)
+        {
+            var cmd = new SQLiteCommand(
+                "update posts set " + column + "=$b where creatorid=$cid", conn);
+            cmd.Parameters.AddWithValue("$b", blob);
+            cmd.Parameters.AddWithValue("$cid", creatorid);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        // TODO finish me
+        /*public byte[] getBlob(string column, int uid)
+        {
+            var cmd = new SQLiteCommand("select " + column + " from posts where postid=$u", conn);
+            cmd.Parameters.AddWithValue("$u", uid);
+            using (var R = cmd.ExecuteReader())
+            {
+                while (R.Read())
+                {
+                    var x = R[column];
+                    if (x.GetType() == typeof(DBNull))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return (byte[])x;
+                    }
+                }
+            }
+            return null;
+        }*/
 
         // Prints out the Account tables for bug testing!
         public void printAccountTables()

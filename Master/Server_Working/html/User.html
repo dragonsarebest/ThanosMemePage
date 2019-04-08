@@ -1,110 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" 
-            content="width=device-width, initial-scale=1, shrink-to-fit=yes">
-        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-        <link rel="manifest" href="images/site.webmanifest">
-        <link href="bootstrap.min.css" rel="stylesheet">
-        <link href="jqueryui/jquery-ui.css" rel="stylesheet">
+		<meta charset="utf-8">
+		<meta name="viewport" 
+			content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+		
+		<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		<link rel="manifest" href="images/site.webmanifest">
+		
+		<link href="bootstrap.min.css" rel="stylesheet">
+		<link href="jqueryui/jquery-ui.css" rel="stylesheet">
         <link href="css/UserCreation.css" type="text/css" rel="stylesheet">
-        <script src="formtest.js"></script>
-        <script src="randomPicGen.js"></script>
 		
-        <script src="jqueryui/jquery-ui.js"></script>
-        <script src="bootstrap.bundle.min.js"></script>
+		<script src="jqueryui/jquery-ui.js"></script>
+		<script src="bootstrap.bundle.min.js"></script>
 		
-		<script>
-		#container {
-			position: relative;
-			bottom: 0;
-			margin: 0px auto;
-			width: 100%;
-			height: 100%;
-			border: 10px #333 solid;
-		}
-		#videoElement {
-			min-width: 100%;
-			min-height: 100%;
-			background-color: #666;
-		}
-		</script>
-		
-        <title>Thanos Meme Pages</title>
-        <!-- $pictures = array("1.jpg", "2.jpg", "3.jpg"); -->
-
-		
-		
-		
+		<title>Thanos Meme Pages</title>
     </head>
+	
     <body>
-        <!-- Image -->
-        <img id="myPicture" alt="some image" style="height:66%;width:50%;position:absolute;bottom:0;" height="100%" width="50%">
-		
-		<div class="header" style="position:absolute;width:100%">
-            <a href="https://youtu.be/s9q61m7S9yA" class="logo">Snappers!</a>
-            <div class="header-right">
-                <a href="Home.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="login.html">Login</a>
-                <a href="signup.html">Sign Up</a>
-                <a href="Contact.html">Contact</a>
-            </div>
-        </div>
-        <!-- <header1> Home </header1> -->
-        <!-- <iframe src="signup.html" style="position:right-side;height:500px;width:500px;border:none;"></iframe> -->
-		
-		<div id="container">
-			<video autoplay="true" id="videoElement">
-		
-			</video>
+		<div class="header">
+		  <a href="https://youtu.be/s9q61m7S9yA" class="logo">Snappers!</a>
+		  <div class="header-right">
+			<a href="Home.html">Home</a>
+			<a href="about.html">About</a>
+			<a href="User.html">Login</a>
+			<a href="User.html">Sign Up</a>
+			<a href="Contact.html">Contact</a>
+		  </div>
 		</div>
-		<script>
-			var video = document.querySelector("#videoElement");
+		
+		<!-- <header1> Home </header1> -->
 
-			if (navigator.mediaDevices.getUserMedia) {
-			  navigator.mediaDevices.getUserMedia({ video: true })
-				.then(function (stream) {
-				  video.srcObject = stream;
-				})
-				.catch(function (err0r) {
-				  console.log("Something went wrong!");
-				});
-			}
-		</script>
+		<!-- Image -->
+		<img src="./images/website-is-done-meme.jpg" alt="MemePic" height="100%" width="50%">
 		
-		
-        <!-- Login Stuff -->
-        <form class = "loginPos form-inline" action="Home.html" id="signup-form" style="position:absolute;">
+		<!-- Login Stuff -->
+		<form id="signup-form">
             <div class="form-group">
-                <div class="form-group">
-                    <input id="email" type="email" style="right:50%" class="form-control" placeholder="Loki@dead4real.edu" required>
-                </div>
-                <div class="form-group">
-                    <input id="password" type="password" style="margin-left:10%" class="form-control" placeholder="password" required> 
-                </div>
-                <button class="btn btn-med btn-primary btn-block" style="margin-top:3%;width:91%">Log In</button>
+                
+			<div class="form-group">
+				<input id="email" type="email" class="form-control" placeholder="Loki@dead4real.edu" required>
+			</div>
+			<div class="form-group">
+				<input id="password" type="password" class="form-control" placeholder="password" required> 
+			</div>
+		
+			<button class="btn btn-med btn-primary btn-block">Log In</button>
         </form>
-        <!-- Register Stuff -->
-        <form class = "registerPos" id="signup-form" action="Home.html" style="position:absolute;">
-        <div class="form-size">
-        <input id="name" type="username" style="margin-left:20%;width:75%" class="form-control" placeholder="Thanos_underling" required autofocus>
-        </div>
-        <div class="form-size">
-        <input id="email" type="email" style="margin-left:20%;width:75%" class="form-control" placeholder="Loki@dead4real.edu" required>
-        </div>
-        <div class="form-size">
-        <input id="password" type="password" style="margin-left:20%;width:75%" class="form-control" placeholder="password" required> 
-        </div>
-        <div class="form-size">
-        <input type="password" class="form-control" style="margin-left:20%;width:75%" placeholder="confirm password">
-        </div>
-        <button class="btn btn-med btn-primary btn-block" style="margin-left:100%;margin-top:10%;width:150%">Sign up</button>
+		
+		<!-- Register Stuff -->
+		<form id="signup-form">
+            <div class="form-group">
+                <input id="name" type="username" class="form-control" placeholder="Thanos_underling" required autofocus>
+			</div>
+			<div class="form-group">
+				<input id="email" type="email" class="form-control" placeholder="bob@example.com" required>
+			</div>
+			<div class="form-group">
+				<input id="password" type="password" class="form-control" placeholder="password" required> 
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" placeholder="confirm password">
+			</div>
+			<button class="btn btn-med btn-primary btn-block">Signup</button>
         </form>
-        </div>
-        <!-- <footer> Temp footer</footer> -->
+		<!-- <footer> Temp footer</footer> -->
+	
+        
     </body>
 </html>

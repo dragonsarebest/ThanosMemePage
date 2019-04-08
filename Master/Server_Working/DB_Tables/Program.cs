@@ -34,6 +34,24 @@ namespace Main
             return "FAILED";
         }
 
+        [BlueberryPie.Expose]
+        public string uploadMeme(Stream meme)
+        {
+            int userID = Session.data["uid"];
+            if (userID == -1)
+            {
+                return "ERROR: not logged in";
+            }
+            var sr = new BinaryReader(meme);
+            var data = sr.ReadBytes((int)meme.Length);
+            if (db.setBlob("postdata", userID, data))
+            {
+                //Handler.db.printPostsTables();
+                return "CREATED";
+            }
+            return "FAILED";
+        }
+
         //gets the user ID from the session database
         int getUid()
         {
@@ -65,8 +83,8 @@ namespace Main
         public static void Main(string[] args)
         {
             //always clear the database on startup
-            Handler.db.Initialize();                //Only run this if you want to reset the database
-            Handler.db.printAccountTables();    
+            //Handler.db.Initialize();              //Only run this if you want to reset the database
+            Handler.db.printAccountTables();        //Print the users in the database inside the Accounts table
             Handler.db.printCommentTables();
 
             var srv = new BlueberryPie.Server<Handler>(port: 8888, staticFileDir: "..\\..\\..\\html");
