@@ -1,7 +1,6 @@
 "use strict";
 
 function addRecord(){
-<<<<<<< .mine
 	var inp1 = document.getElementById("password");
 	var inp2 = document.getElementById("confirmedpassword");
 	if(inp1.value === inp2.value){
@@ -33,43 +32,6 @@ function addRecord(){
 		alert("Passwords don't match!");
 		console.log("You're passwords don't match!");
 	}
-||||||| .r146
-    var inp = document.getElementById("value");    
-    var fd = new FormData();
-    fd.append( "username", document.getElementById("name").value );
-	fd.append( "email", document.getElementById("email").value );
-	fd.append( "password", document.getElementById("password").value );
-    var req = new XMLHttpRequest();
-    req.addEventListener( "load", () => {
-        if( req.readyState === 4 && req.status === 200 ){
-            console.log("addRecord: "+req.responseText);
-			//window.location.replace("http://localhost:8888/login.html")
-            if( callback != undefined )
-                callback(req);
-        }
-    });
-    req.open("POST", "addRecord" );
-    req.send( fd );
-=======
-    var inp = document.getElementById("value");    
-    var fd = new FormData();
-    fd.append( "username", document.getElementById("name").value );
-	fd.append( "email", document.getElementById("email").value );
-	fd.append( "password", document.getElementById("password").value );
-    var req = new XMLHttpRequest();
-    req.addEventListener( "load", () => {
-        if( req.readyState === 4 && req.status === 200 ){
-            console.log("addRecord: "+req.responseText);
-			if(req.responseText === "FAILED") 
-				window.location = "http://localhost:8888/signup.html";
-            if(req.responseText === "CREATED")
-				window.location = "http://localhost:8888/User.html";
-        }
-    });
-    req.open("POST", "addRecord" );
-    req.send( fd );
->>>>>>> .r153
-	
 }
 
 function doLogin(){
@@ -88,8 +50,4 @@ function doLogin(){
     req.open("POST", "doLogin" );
     req.send( fd );
 	alert("Success!");
-	else
-	{
-		window.location.href = "userFail.html";
-	}
 }
