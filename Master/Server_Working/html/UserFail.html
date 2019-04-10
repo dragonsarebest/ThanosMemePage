@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" 
+            content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+        <link rel="manifest" href="images/site.webmanifest">
+        <link href="bootstrap.min.css" rel="stylesheet">
+        <link href="jqueryui/jquery-ui.css" rel="stylesheet">
+        <link href="css/UserCreation.css" type="text/css" rel="stylesheet">
+        
+		<script src="formtest.js"></script>
+        <script src="randomPicGen.js"></script>
+        
+		<script src="jqueryui/jquery-ui.js"></script>
+        <script src="bootstrap.bundle.min.js"></script>
+		
+		<style>
+			#container {
+				position: absolute;
+				bottom: 0;
+				margin: 0px auto;
+				width: 51%;
+				height: 78%;
+				background-image: url("paper.gif");
+			}
+			#videoElement {
+				width: 100%;
+				height: 100%;
+				<!-- background-color: #A788A8; -->
+				<!-- background-image: url("paper.gif"); -->
+			}
+		</style>
+		
+        <title>Thanos Meme Pages</title>
+        <!-- $pictures = array("1.jpg", "2.jpg", "3.jpg"); -->
+    </head>
+    <body>
+        <!-- Image -->
+        <img id="myPicture" alt="some image" style="height:66%;width:50%;position:absolute;bottom:0;" height="100%" width="50%">
+		
+		<!-- Webcam -->
+		<div id="container">
+			<video autoplay="true" id="videoElement">
+		
+			</video>
+		</div>
+		<script>
+			var video = document.querySelector("#videoElement");
+
+			if (navigator.mediaDevices.getUserMedia) {
+			  navigator.mediaDevices.getUserMedia({ video: true })
+				.then(function (stream) {
+				  video.srcObject = stream;
+				})
+				.catch(function (err0r) {
+				  console.log("Something went wrong!");
+				});
+			}
+		</script>
+		
+		<!-- Header -->
+		<div class="header" style="position:absolute;width:100%">
+            <a href="https://youtu.be/s9q61m7S9yA" class="logo">Snappers!</a>
+            <div class="header-right">
+                <a href="Home.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="login.html">Login</a>
+                <a href="signup.html">Sign Up</a>
+                <a href="Contact.html">Contact</a>
+            </div>
+        </div>
+        <!-- <header1> Home </header1> -->
+        <!-- <iframe src="signup.html" style="position:right-side;height:500px;width:500px;border:none;"></iframe> -->
+        
+		<!-- Login Stuff -->
+		
+        <form class = "loginPos form-inline" id="signup-form" style="position:absolute;">
+			<font color="crimson" style="position:absolute;"><b>Email or password was incorrect.</b></font>
+            <div class="form-group">
+                <div class="form-group">
+                    <input id="email" type="email" style="right:50%" class="form-control" placeholder="Loki@dead4real.edu" required>
+                </div>
+                <div class="form-group">
+                    <input id="password" type="password" style="margin-left:10%" class="form-control" placeholder="password" required> 
+                </div>
+                <button onclick="doLogin()" class="btn btn-med btn-primary btn-block" style="margin-top:3%;width:91%">Log In</button>
+        </form>
+        
+		
+		<!-- Register Stuff -->
+        <form class = "registerPos" id="signup-form" action="Home.html" style="position:absolute;">
+			<div class="form-size">
+				<input id="name" type="username" style="margin-left:20%;width:75%" class="form-control" placeholder="Thanos_underling" required autofocus>
+			</div>
+			<div class="form-size">
+				<input id="email" type="email" style="margin-left:20%;width:75%" class="form-control" placeholder="Loki@dead4real.edu" required>
+			</div>
+			<div class="form-size">
+				<input id="password" type="password" style="margin-left:20%;width:75%" class="form-control" placeholder="password" required> 
+			</div>
+			<div class="form-size">
+				<input type="password" class="form-control" style="margin-left:20%;width:75%" placeholder="confirm password">
+			</div>
+			<button onclick="addRecord()" class="btn btn-med btn-primary btn-block" style="margin-left:100%;margin-top:10%;width:150%">Sign up</button>
+        </form>
+        </div>
+        <!-- <footer> Temp footer</footer> -->
+    </body>
+</html>
