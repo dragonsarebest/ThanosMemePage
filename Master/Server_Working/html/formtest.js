@@ -10,13 +10,15 @@ function addRecord(){
     req.addEventListener( "load", () => {
         if( req.readyState === 4 && req.status === 200 ){
             console.log("addRecord: "+req.responseText);
-			//window.location.replace("http://localhost:8888/login.html")
-            if( callback != undefined )
-                callback(req);
+			if(req.responseText === "FAILED") 
+				window.location = "http://localhost:8888/signup.html";
+            if(req.responseText === "CREATED")
+				window.location = "http://localhost:8888/User.html";
         }
     });
     req.open("POST", "addRecord" );
     req.send( fd );
+	
 }
 
 function doLogin(){
