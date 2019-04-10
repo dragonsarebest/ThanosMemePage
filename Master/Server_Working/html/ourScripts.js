@@ -1,5 +1,19 @@
 "use strict";
 
+//be DRY, not WET
+function sendRequest(url, formdata, callback){
+    var req = new XMLHttpRequest();
+    req.addEventListener( "load", () => {
+        if( req.readyState === 4 && req.status === 200 ){
+            console.log(url+": "+req.responseText);
+            if( callback != undefined )
+                callback(req);
+        }
+    });
+    req.open("POST", url );
+    req.send( formdata );
+}
+
 var availableTags = [
   "ActionScript",
   "AppleScript",
@@ -45,7 +59,15 @@ function setUp()
 
 function subMeme(){
 	var ourMeme = document.getElementById("fullImage");
-	window.location.replace("Home.html"); //meme spread page will go here
+	var fd = new FormData();
+    var fileToUpload = document.getElementById("uploadImage").files[0];
+    if( fileToUpload ){
+        fd.append( "meme", fileToUpload );
+    }
+    sendRequest( "uploadMeme", fd, () => {
+		window.location.replace("Home.html"); //meme spread page will go here
+    });
+	
 }
 
 

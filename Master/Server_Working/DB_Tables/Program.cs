@@ -44,7 +44,7 @@ namespace Main
             }
             var sr = new BinaryReader(meme);
             var data = sr.ReadBytes((int)meme.Length);
-            if (db.setBlob("postdata", userID, data))
+            if (db.UploadMeme(data, userID))
             {
                 //Handler.db.printPostsTables();
                 return "CREATED";

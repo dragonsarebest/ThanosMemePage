@@ -50,6 +50,7 @@ namespace Main
             catch (Exception)
             {
             }
+
             // TODO: change the way passwords are saved
             cmd = new SQLiteCommand("create table accounts (username text, email text unique, password text, uid integer primary key)", conn);
             cmd.ExecuteNonQuery();
@@ -100,7 +101,7 @@ namespace Main
         public bool UploadMeme(byte[] memeData, int userID)
         {
             var cmd = new SQLiteCommand(
-                "insert into posts (postdata) values (creatorid, worldvisible, postdata, date) values ($creatorid, $worldvisible, $postdata, $date)", conn);
+                "insert into posts (creatorid, worldvisible, postdata, date) values ($creatorid, $worldvisible, $postdata, $date)", conn);
             //cmd.Parameters.AddWithValue("$memeData", memeData);
             cmd.Parameters.AddWithValue("$creatorid", userID);
             cmd.Parameters.AddWithValue("$worldvisible", 1);
@@ -152,7 +153,6 @@ namespace Main
             {
                 while (R.Read())
                 {
-                    //long u = (long)R["uid"];
                     long u = (long)R["uid"]; //whatever you put in the quotes that is part of that table will go into R
                     return (int)u;
                 }
