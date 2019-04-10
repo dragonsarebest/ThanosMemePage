@@ -34,5 +34,8 @@ function doLogin(){
     });
     req.open("POST", "doLogin" );
     req.send( fd );
-	alert("Success!");
+	if(true)
+	{
+		window.location.href = "Home.html";
+	}
 }
