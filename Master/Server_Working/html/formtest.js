@@ -38,4 +38,8 @@ function doLogin(){
 	{
 		window.location.href = "Home.html";
 	}
+	else
+	{
+		window.location.href = "userFail.html";
+	}
 }
