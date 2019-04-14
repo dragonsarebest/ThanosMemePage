@@ -1,5 +1,19 @@
 "use strict";
 
+function sendRequest(url, formdata, callback, type){
+	console.log("Sending Request");
+    var req = new XMLHttpRequest();
+    req.addEventListener( "load", () => {
+        if( req.readyState === 4 && req.status === 200 ){
+            console.log(url+": "+req.responseText);
+            if( callback != undefined )
+                callback(req.responseText);
+        }
+    });
+    req.open(type, url );
+    req.send( formdata );
+}
+
 function addRecord(){
 	var inp1 = document.getElementById("password");
 	var inp2 = document.getElementById("confirmedpassword");
@@ -9,17 +23,8 @@ function addRecord(){
 		fd.append( "username", document.getElementById("name").value );
 		fd.append( "email", document.getElementById("email").value );
 		fd.append( "password", document.getElementById("password").value );
-		var req = new XMLHttpRequest();
-		req.addEventListener( "load", () => {
-			if( req.readyState === 4 && req.status === 200 ){
-				console.log("addRecord: "+req.responseText);
-				//window.location.replace("http://localhost:8888/login.html")
-				if( callback != undefined )
-					callback(req);
-			}
-		});
-		req.open("POST", "addRecord" );
-		req.send( fd );
+		sendRequest("addRecord", fd, undefined, "POST");
+		
 	}
 	else
 	{
@@ -34,20 +39,29 @@ function addRecord(){
 	}
 }
 
+function updatePage(Uid)
+{
+	if(Uid != "-1")
+	{
+		alert("Successful Login");
+		console.log("Successful Login");
+		window.location.href = "Home.html";
+	}
+	else
+	{
+		alert("Failed Login");
+		console.log("Failed Login");
+		window.location.href = "userFail.html";
+	}
+}
+
 function doLogin(){
 	var inp = document.getElementById("signup-form");    
     var fd = new FormData();
 	fd.append( "email", document.getElementById("email").value );
 	fd.append( "password", document.getElementById("password").value );
-	var req = new XMLHttpRequest();
-    req.addEventListener( "load", () => {
-        if( req.readyState === 4 && req.status === 200 ){
-            console.log("doLogin: "+req.responseText);
-            if( callback != undefined )
-                callback(req);
-        }
-    });
-    req.open("POST", "doLogin" );
-    req.send( fd );
-	alert("Success!");
+	sendRequest("doLogin", fd, undefined, "POST");
+	
+	sendRequest("getSessionUid", null, () => {updatePage();} , "GET");
+	
 }

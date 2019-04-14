@@ -54,7 +54,7 @@ namespace Main
             // TODO: change the way passwords are saved
             cmd = new SQLiteCommand("create table accounts (username text, email text unique, password text, uid integer primary key)", conn);
             cmd.ExecuteNonQuery();
-            cmd = new SQLiteCommand("create table posts (postid integer primary key, creatorid integer, worldvisible integer, postdata blob, date text)", conn);
+            cmd = new SQLiteCommand("create table posts (postid integer primary key, creatorid integer, worldvisible integer, postdata blob, date integer)", conn);
             cmd.ExecuteNonQuery();
             // tag junction table
             cmd = new SQLiteCommand("create table jtag (postid integer, tagid integer)", conn);
@@ -106,7 +106,7 @@ namespace Main
             cmd.Parameters.AddWithValue("$creatorid", userID);
             cmd.Parameters.AddWithValue("$worldvisible", 1);
             cmd.Parameters.AddWithValue("$postdata", memeData);
-            cmd.Parameters.AddWithValue("$date", DateTime.Now.ToString("yyyy/MM/dd HH:mm"));
+            cmd.Parameters.AddWithValue("$date", 20190408);
             try
             {
                 cmd.ExecuteNonQuery();
