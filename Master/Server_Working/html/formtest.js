@@ -3,14 +3,12 @@
 function sendRequest(url, formdata, callback, type){
 	console.log("Sending Request");
     var req = new XMLHttpRequest();
-    req.addEventListener( "load", () => {
-        if( req.readyState === 4 && req.status === 200 ){
-            console.log(url+": "+req.responseText);
-            if( callback != undefined )
-                callback(req.responseText);
-        }
-    });
-    req.open(type, url );
+	req.onload = function() {
+		console.log(url+": "+req.response);
+		if(callback != undefined)
+		{callback(req.response);}
+	}
+    req.open(type, url, false);
     req.send( formdata );
 }
 
@@ -41,6 +39,9 @@ function addRecord(){
 
 function updatePage(Uid)
 {
+	// The current issue is that no matter how you pass the xmlhttp.response (the Uid in this case) it becomes
+	// undefined in the local function
+	console.log("///TESTING///Current Uid = " + Uid);
 	if(Uid != "-1")
 	{
 		alert("Successful Login");
@@ -62,6 +63,24 @@ function doLogin(){
 	fd.append( "password", document.getElementById("password").value );
 	sendRequest("doLogin", fd, undefined, "POST");
 	
-	sendRequest("getSessionUid", null, () => {updatePage();} , "GET");
+	console.log("Sending Request");
+    var req = new XMLHttpRequest();
+	req.onload = function() {
+		console.log("getSessionUid: "+req.response);
+		if(req.response != "-1")
+		{
+			alert("Successful Login");
+			console.log("Successful Login");
+			window.location.href = "Home.html";
+		}
+		else
+		{
+			alert("Failed Login");
+			console.log("Failed Login");
+			window.location.href = "userFail.html";
+		}
+	}
+    req.open("GET", "getSessionUid", false);
+    req.send();
 	
 }
