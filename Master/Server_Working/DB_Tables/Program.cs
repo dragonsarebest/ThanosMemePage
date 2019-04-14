@@ -46,7 +46,6 @@ namespace Main
             var data = sr.ReadBytes((int)meme.Length);
             if (db.UploadMeme(data, userID))
             {
-                //Handler.db.printPostsTables();
                 return "CREATED";
             }
             return "FAILED";
@@ -87,7 +86,7 @@ namespace Main
             Handler.db.printAccountTables();        //Print the users in the database inside the Accounts table
             Handler.db.printCommentTables();
 
-            var srv = new BlueberryPie.Server<Handler>(port: 9888, staticFileDir: "..\\..\\..\\html");
+            var srv = new BlueberryPie.Server<Handler>(port: 8888, staticFileDir: "..\\..\\..\\html");
             srv.Start();
         }
     }

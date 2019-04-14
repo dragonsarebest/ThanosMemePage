@@ -15,48 +15,21 @@ function sendRequest(url, formdata, callback){
 }
 
 var availableTags = [
-  "ActionScript",
-  "AppleScript",
-  "Asp",
-  "BASIC",
-  "C",
-  "C++",
-  "Clojure",
-  "COBOL",
-  "ColdFusion",
-  "Erlang",
-  "Fortran",
-  "Groovy",
-  "Haskell",
-  "Java",
-  "JavaScript",
-  "Lisp",
-  "Perl",
-  "PHP",
-  "Python",
-  "Ruby",
-  "Scala",
-  "Scheme"
+  "DankMemes"
 ];
 
 function setUp()
 {
 	console.log("setup");
 	var ul = document.getElementById("myList");
-	
-	//console.log(ul);
-	
 	var li = document.createElement("li");
 	li.innerHTML = "Tags: ";
 	li.style.margin = "margin:5px";
 	li.style.display = "inline";
-	//console.log(li);
-	
 	ul.appendChild(li);
-	
-	//console.log(ul);
 }
 
+// uploads image to the database and redirects user to Home.html 
 function subMeme(){
 	var ourMeme = document.getElementById("fullImage");
 	var fd = new FormData();
@@ -67,9 +40,7 @@ function subMeme(){
     sendRequest( "uploadMeme", fd, () => {
 		window.location.replace("Home.html"); //meme spread page will go here
     });
-	
 }
-
 
 function addComment(){
 	var fd = new FormData();
@@ -80,7 +51,6 @@ function addComment(){
 	newValue = removeSpaces(newValue);
 	
 	fd.append("comment", newValue);
-	//fd.append("comment", newValue);
 	
 	var li = document.createElement("li");
 	li.setAttribute('id',newValue);
@@ -92,12 +62,10 @@ function addComment(){
 	b.setAttribute("onClick", "clickedComment("+newValue+")");
 	b.appendChild(document.createTextNode(candidate.value));
 	
-	//console.log(b);
-	
 	li.appendChild(b);
-	//console.log(li);
-	
 	ul.appendChild(li);	
+	
+	sendRequest("addComment", fd, )
 	
 	var req = new XMLHttpRequest();
     req.addEventListener( "load", () => {
@@ -113,9 +81,6 @@ function addComment(){
 
 function clickedComment(inputBoy)
 {
-	//console.log("onClick");
-	//console.log(inputBoy.id);
-	//console.log(inputBoy);
 	//firefox inputBoy is li, chrome inputBoy is htmlcollection envolping a li
 	
 	if(HTMLCollection.prototype.isPrototypeOf(inputBoy))
@@ -123,7 +88,6 @@ function clickedComment(inputBoy)
 		//console.log("we in chrome");
 		//we need to get the li out of this HTMLCollection
 		inputBoy = inputBoy.item(0);
-		//console.log(inputBoy);
 	}
 	else
 	{
@@ -193,8 +157,6 @@ function addItem(){
 		li.style.display = "inline";
 		var b = document.createElement('button');
 		
-		
-				
 		b.setAttribute("value", newValue);
 		b.setAttribute("id", newValue);
 		b.setAttribute("style", "margin:5px;");
@@ -204,13 +166,8 @@ function addItem(){
 		b.setAttribute("onClick", "clickedBoy("+newValue+")");
 		b.appendChild(document.createTextNode(candidate.value));
 		
-		//console.log(b);
-		
 		li.appendChild(b);
-		//console.log(li);
-		
 		ul.appendChild(li);
-		
 		availableTags.push(newValue);
 	}
 }

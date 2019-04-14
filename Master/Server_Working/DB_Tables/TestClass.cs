@@ -8,7 +8,7 @@ namespace tddtest
     [TestFixture]
     public class MyTests
     {
-        string serverurl = "http://localhost:9888/";
+        string serverurl = "http://localhost:8888/";
 
         public MyTests()
         {
