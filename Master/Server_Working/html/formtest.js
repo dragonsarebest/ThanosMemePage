@@ -37,25 +37,6 @@ function addRecord(){
 	}
 }
 
-function updatePage(Uid)
-{
-	// The current issue is that no matter how you pass the xmlhttp.response (the Uid in this case) it becomes
-	// undefined in the local function
-	console.log("///TESTING///Current Uid = " + Uid);
-	if(Uid != "-1")
-	{
-		alert("Successful Login");
-		console.log("Successful Login");
-		window.location.href = "Home.html";
-	}
-	else
-	{
-		alert("Failed Login");
-		console.log("Failed Login");
-		window.location.href = "userFail.html";
-	}
-}
-
 function doLogin(){
 	var inp = document.getElementById("signup-form");    
     var fd = new FormData();
@@ -69,15 +50,13 @@ function doLogin(){
 		console.log("getSessionUid: "+req.response);
 		if(req.response != "-1")
 		{
-			alert("Successful Login");
 			console.log("Successful Login");
-			window.location.href = "Home.html";
+			window.location.href = "home.html";
 		}
 		else
 		{
 			alert("Failed Login");
 			console.log("Failed Login");
-			window.location.href = "userFail.html";
 		}
 	}
     req.open("GET", "getSessionUid", false);
