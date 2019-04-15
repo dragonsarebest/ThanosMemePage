@@ -22,6 +22,7 @@ function addRecord(){
 		fd.append( "email", document.getElementById("email").value );
 		fd.append( "password", document.getElementById("password").value );
 		sendRequest("addRecord", fd, undefined, "POST");
+		window.location.href = "User.html";
 		
 	}
 	else
