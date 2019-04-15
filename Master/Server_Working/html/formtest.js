@@ -57,6 +57,7 @@ function doLogin(){
 		{
 			alert("Failed Login");
 			console.log("Failed Login");
+			window.location.href = "userfail.html";
 		}
 	}
     req.open("GET", "getSessionUid", false);
