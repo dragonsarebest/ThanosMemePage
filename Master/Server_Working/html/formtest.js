@@ -42,8 +42,18 @@ function unHighlight(){
 	console.log("Changing Background");
 }
 
+function loginUnHighlight(){
+	var inp1 = document.getElementById("email");
+	var inp2 = document.getElementById("password");
+	inp1.style.background = "white";
+	inp2.style.background = "white";
+	console.log("Changing Background");
+}
+
 function doLogin(){
-	var inp = document.getElementById("signup-form");    
+	var inp = document.getElementById("signup-form"); 
+	var inp1 = document.getElementById("email");
+	var inp2 = document.getElementById("password");	
     var fd = new FormData();
 	fd.append( "email", document.getElementById("email").value );
 	fd.append( "password", document.getElementById("password").value );
@@ -60,9 +70,10 @@ function doLogin(){
 		}
 		else
 		{
+			inp1.style.background = "#ff0000";
+			inp2.style.background = "#ff0000";
 			alert("Failed Login");
 			console.log("Failed Login");
-			window.location.href = "userfail.html";
 		}
 	}
     req.open("GET", "getSessionUid", false);
