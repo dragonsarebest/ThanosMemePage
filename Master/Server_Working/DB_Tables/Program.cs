@@ -59,8 +59,8 @@ namespace Main
                 return -1;
             return Session.data["uid"];
         }
-		
-		
+
+
 		// For in-session fetches
 		[BlueberryPie.Expose]
 		public string getSessionUid()
@@ -69,7 +69,7 @@ namespace Main
                 return "-1";
             return Session.data["uid"].ToString();
 		}
-	
+
         //uses canned username/password
         [BlueberryPie.Expose]
         public string doLogin(string email, string password)
@@ -93,7 +93,7 @@ namespace Main
         public static void Main(string[] args)
         {
             //always clear the database on startup
-            Handler.db.Initialize();              //Only run this if you want to reset the database
+            //Handler.db.Initialize();              //Only run this if you want to reset the database
             Handler.db.printAccountTables();        //Print the users in the database inside the Accounts table
             Handler.db.printCommentTables();
 

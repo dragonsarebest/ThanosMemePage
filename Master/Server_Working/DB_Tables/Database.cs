@@ -10,7 +10,7 @@ namespace Main
     public class Database
     {
         //HashSet<string> knownEmails = new HashSet<string>();
-        static readonly string dbpath = "database.sql";
+        static readonly string dbpath = "..\\..\\database.sql";
         System.Data.SQLite.SQLiteConnection conn;
         public Database()
         {
