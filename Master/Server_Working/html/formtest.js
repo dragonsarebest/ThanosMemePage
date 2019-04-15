@@ -13,14 +13,14 @@ function sendRequest(url, formdata, callback, type){
 }
 
 function addRecord(){
-	var inp1 = document.getElementById("password");
-	var inp2 = document.getElementById("confirmedpassword");
+	var inp1 = document.getElementById("registerPassword");
+	var inp2 = document.getElementById("confirmedPassword");
 	if(inp1.value === inp2.value){
 		var inp = document.getElementById("value");    
 		var fd = new FormData();
 		fd.append( "username", document.getElementById("name").value );
-		fd.append( "email", document.getElementById("email").value );
-		fd.append( "password", document.getElementById("password").value );
+		fd.append( "email", document.getElementById("registerEmail").value );
+		fd.append( "password", document.getElementById("registerPassword").value );
 		sendRequest("addRecord", fd, undefined, "POST");
 		window.location.href = "User.html";
 		
@@ -29,13 +29,17 @@ function addRecord(){
 	{
 		inp1.style.background = "#ff0000";
 		inp2.style.background = "#ff0000";
-		setTimeout(()=>{
-			inp1.style.background = "white";
-			inp2.style.background = "white";
-			}, 750);
 		alert("Passwords don't match!");
 		console.log("You're passwords don't match!");
 	}
+}
+
+function unHighlight(){
+	var inp1 = document.getElementById("registerPassword");
+	var inp2 = document.getElementById("confirmedPassword");
+	inp1.style.background = "white";
+	inp2.style.background = "white";
+	console.log("Changing Background");
 }
 
 function doLogin(){

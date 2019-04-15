@@ -38,13 +38,13 @@
                 <input id="name" type="username" class="form-control" placeholder="Thanos_underling" required autofocus>
 			</div>
 			<div class="form-group">
-				<input id="email" type="email" class="form-control" placeholder="bob@example.com" required>
+				<input id="registerEmail" type="email" class="form-control" placeholder="bob@example.com" required>
 			</div>
 			<div class="form-group">
-				<input id="password" type="password" class="form-control" placeholder="password" required> 
+				<input oninput="unHighlight()" id="registerPassword" type="password" class="form-control" placeholder="password" required> 
 			</div>
 			<div class="form-group">
-				<input id="confirmedpassword" type="password" class="form-control" placeholder="confirm password">
+				<input oninput="unHighlight()" id="confirmedPassword" type="password" class="form-control" placeholder="confirm password">
 			</div>
 			<button onclick="addRecord();" class="btn btn-med btn-primary btn-block">Signup</button>
         </div>
