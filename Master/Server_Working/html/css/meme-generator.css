@@ -1,0 +1,26 @@
+:root {
+    font-family: Helvetica;
+    font-size: 14px;
+}
+
+* {
+    font: inherit;
+}
+
+#meme-canvas {
+    width: 100%;
+}
+
+.container {
+	padding-left: 25%;
+	margin-left: 15%;
+
+}
+
+.gen_button {
+	background-color: #B4A24C;
+}
+
+.text_field {
+	background-color: #D9C63C;
+}

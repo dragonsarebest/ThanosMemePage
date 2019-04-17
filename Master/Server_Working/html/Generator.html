@@ -14,12 +14,18 @@
 		<link href="jqueryui/jquery-ui.css" rel="stylesheet">
         <link href="css/UserCreation.css" type="text/css" rel="stylesheet">
 		
+		<link rel="stylesheet" href="css/meme-generator.css">
+		
 		<script src="jqueryui/jquery-ui.js"></script>
 		<script src="bootstrap.bundle.min.js"></script>
 		
 		<script src="menu.js"></script>
+		
 
 		<title>Thanos Meme Pages</title>
+		
+		<!-- Meme Generation (js script +  kinda html layout, that was altered to match look of site + css, with additions to help match with site) code learned via Youtube video from the channel "GeekLaunch" -->
+		
     </head>
 	
     <body onload="MenuUpload();">
@@ -52,116 +58,31 @@
 		
 		<button onclick="MenuUpload()">Click Me</button>
 		-->
-	
-		<div id="feed" onload="showMemes();">
-			
-		</div>
-		
-		<form method="get" action="Generator.html">
-			<button type="submit">Make a Meme!</button>
-		</form>
-		
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
 
+		<br />
+		<br />
+		<br />
+		
+		<div class="container">
+			<p>
+				<textarea id="top-text" class="text_field"></textarea>
+				Text size: <input type="range" id="top-text-size-input" min="0.05" max="0.25" value="0.15" step="0.01">
+			</p>
+			<p>
+				<textarea id="bottom-text" class="text_field"></textarea>
+				Text size: <input type="range" id="bottom-text-size-input" min="0.05" max="0.25" value="0.15" step="0.01">
+			</p>
+			<p>
+				<input type="file" id="image-input" accept="image/*" class="gen_button">
+			</p>
+			<p>
+				<button id="generate-btn" class="gen_button">Generate!</button>
+			</p>
+			<p>
+				<canvas id="meme-canvas" title="Right click -> &quot;Save image as...&quot;"></canvas>
+			</p>
+		</div>
+        <script src="meme-generator.js"></script>
 
 <!-- <footer> Temp footer</footer> -->
 
