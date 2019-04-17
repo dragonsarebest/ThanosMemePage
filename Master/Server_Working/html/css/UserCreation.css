@@ -16,7 +16,7 @@ body{
   min-height:250px;
   padding: 20px 10px 20px;
   position: sticky;
-  top: -135px;
+  top: -165px;
 }
 
 /* Style the header links */
@@ -45,7 +45,7 @@ body{
 
 /* Style the active/current link*/
 .header a.active {
-  background-color: dodgerblue;
+  background-color: #306493;
 }
 
 /* Float the link section to the right */
@@ -61,11 +61,10 @@ body{
 
 /* Float the section to center */
 .header-center {
-	position: fixed;
-	top: 0;
-	left: 50%;
-	margin-top: 120px;
+	padding-left: 50%;
+	margin-top: 150px;
 	margin-left: -225px;
+
 }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */ 
