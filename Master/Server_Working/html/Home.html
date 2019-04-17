@@ -17,22 +17,44 @@
 		<script src="jqueryui/jquery-ui.js"></script>
 		<script src="bootstrap.bundle.min.js"></script>
 		
+		<script src="menu.js"></script>
+		
 		<title>Thanos Meme Pages</title>
     </head>
 	
     <body>
 		<div class="header">
-		  <a href="https://youtu.be/s9q61m7S9yA" class="logo">Snappers!</a>
-		  <div class="header-right">
-			<a class="active" href="Home.html">Home</a>
-			<a href="about.html">About</a>
-			<a href="User.html">Login</a>
-			<a href="signup.html">Sign Up</a>
-			<a href="Contact.html">Contact</a>
-		  </div>
+			<a href="https://youtu.be/s9q61m7S9yA" class="logo">Snappers!</a>
+			<div class="header-right">
+				<a class="active" href="Home.html">Home</a>
+				<a href="about.html">About</a>
+				<a href="User.html">Login</a>
+				<a href="signup.html">Sign Up</a>
+				<a href="Contact.html">Contact</a>
+			</div>
+			
+			<!--
+			<table width="100%" border="10">
+				<th width="25%"><a href="Home.html" width="100%"><img style="" src="./images/red.png" alt="HOME" height="15%">HOME</a></th>
+				<th width="25%"><a href="about.html" width="100%" style="position: absolute;"><img src="./images/purple.png" alt="ABOUT" height="45%"><br />ABOUT</a></th>
+				<th width="25%"><a href="User.html"><img src="./images/yellow.png" alt="USER" height="45%"><br />USER</a></th>
+				<th width="25%"><a href="Contact.html"><img src="./images/blue.png" alt="CONTACT" height="10%"><br />CONTACT</a></th>
+				<th width="25%" id="UploadB"><a href="Contact.html"><img src="./images/orange.png" alt="CONTACT" height="10%"><br />UPLOAD</a></th>
+			</table>
+			-->
+			
+			<div>
+				<a href="Home.html" width="100%"><img style="" src="./images/red.png" alt="HOME" height="15%"><br />HOME</a>
+				<a href="about.html" width="100%" style=""><img src="./images/purple.png" alt="ABOUT" height="45%"><br />ABOUT</a>
+				<a href="User.html"><img src="./images/yellow.png" alt="USER" height="45%"><br />USER</a>
+				<a href="Contact.html"><img src="./images/blue.png" alt="CONTACT" height="10%"><br />CONTACT</a>
+				<a href="uploadMemePage.html"  id="UploadB"><img src="./images/orange.png" alt="CONTACT" height="10%"><br />UPLOAD</a>
+			</div>
 		</div>
 		
 		<header1> Home </header1>
+		
+		<button onclick="MenuUpload()">Click Me</button>
 	
 		<div id="feed" onload="showMemes();">
 			
