@@ -141,6 +141,21 @@ namespace Main
                 return false;
             }
         }
+        public List<int> getMostRecentPosts()
+        {
+            List<int> L = new List<int>();
+            var cmd = new SQLiteCommand("select postid from posts order by date desc limit 10", conn);
+            using (var R = cmd.ExecuteReader())
+            {
+                while (R.Read())
+                {
+                    int u = (int)R["postid"];
+                    L.Add(u);
+                }
+            }
+            return L;
+        }
+
 
         // Gets the Uid from the database that matches the sent in email and password
         // Good example to see how to save information from the database!!!
