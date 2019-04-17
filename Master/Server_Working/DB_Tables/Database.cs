@@ -149,8 +149,8 @@ namespace Main
             {
                 while (R.Read())
                 {
-                    int u = (int)R["postid"];
-                    L.Add(u);
+                    int p = Convert.ToInt32(R["postid"]);
+                    L.Add(p);
                 }
             }
             return L;
@@ -192,6 +192,31 @@ namespace Main
                 return false;
             }
         }
+
+        // Pulls meme image from database based on post id, check if it exists, and returns it.
+        public byte[] GetMeme(int pid)
+        {
+            var cmd = new SQLiteCommand("select postdata from posts where postid=$p", conn);
+            cmd.Parameters.AddWithValue("$p", pid);
+            using (var R = cmd.ExecuteReader())
+            {
+                while (R.Read())
+                {
+                    var meme = R["postdata"];
+                    if (meme.GetType() == typeof(DBNull))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return (byte[])meme;
+                    }
+                    //byte[] meme = (byte[])R["postdata"];
+                }
+            }
+            return null;
+        }
+
 
         // TODO finish me
         /*public byte[] getBlob(string column, int uid)

@@ -223,3 +223,50 @@ function clickedBoy(inputBoy)
 	   .appendTo( ul );
 	};
  });
+ 
+ function HomeOnLoad(){
+	 showFeed();
+	 MenuUpload();
+ }
+ 
+ 
+// TODO finish this 
+// function to show memes in order on the home page 
+function showFeed(){
+	var bigdiv = document.getElementById("feed");
+	
+	
+	sendRequest("/topTen", null, (xhr)=>{
+		bigdiv = document.getElementById("feed");
+		bigdiv.innerHTML = xhr.responseText;
+	});
+	
+/* 	var littlediv = document.createElement("div");
+	var img = new Image();
+	img.src = "/getPic?postid=" + q;
+	littlediv.appendChild(img);
+	bigdiv.appendChild(littlediv); */
+}
+
+function MenuUpload() {
+	var x = document.getElementById("UploadB");
+	var y = document.getElementById("AccountB");
+	var z = document.getElementById("RegisterB");
+	
+	var req = new XMLHttpRequest();
+	req.onload = function() {
+		
+		if (req.response == "-1") {
+			x.style.display = "block";
+			y.style.display = "block";
+			z.style.display = "none";
+		} else {
+			x.style.display = "none";
+			y.style.display = "none";
+			z.style.display = "block";
+		}
+	}
+	
+	req.open("GET", "getSessionUid", false);
+	req.send();
+}

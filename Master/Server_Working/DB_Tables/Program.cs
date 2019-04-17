@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Main
@@ -85,6 +86,27 @@ namespace Main
         {
             Session.data["uid"] = -1;
             return "OK";
+        }
+
+        // Attempts to get meme image from database by post id
+        // TODO add error handling if GetMeme() returns null.
+        [BlueberryPie.Expose(mimetype: "application/octet-stream")]
+        public byte[] doGetMeme(int pid)
+        {
+            return db.GetMeme(pid);
+        }
+
+        // Gets top ten most recent posts based on submission times
+        [BlueberryPie.Expose]
+        public string topTen()
+        {
+            List<string> L = new List<string>();
+            var p = db.getMostRecentPosts();
+            foreach (var pid in p)
+            {
+                L.Add("<img src='/doGetMeme?pid=" + pid + "'>");
+            }
+            return string.Join("<br>", L);
         }
     }
 
