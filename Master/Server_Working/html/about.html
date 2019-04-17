@@ -17,6 +17,8 @@
 		<script src="jqueryui/jquery-ui.js"></script>
 		<script src="bootstrap.bundle.min.js"></script>
 		
+		<script src="menu.js"></script>
+		
 		<style>
 			p {
 				text-align: center;
@@ -28,16 +30,29 @@
 		<title>Thanos Meme Pages</title>
     </head>
 	
-    <body>
+    <body onload="MenuUpload();">
 		<div class="header">
-		  <a href="#default" class="logo">Snappers!</a>
-		  <div class="header-right">
-			<a href="Home.html">Home</a>
-			<a class="active" href="about.html">About</a>
-			<a href="User.html">Login</a>
-			<a href="signup.html">Sign Up</a>
-			<a href="Contact.html">Contact</a>
-		  </div>
+			<a href="https://youtu.be/s9q61m7S9yA" class="logo">Snappers!</a>
+			
+			<!--	Old Buttons
+			<div class="header-right">
+				<a class="active" href="Home.html">Home</a>
+				<a href="about.html">About</a>
+				<a href="User.html">Login</a>
+				<a href="signup.html">Sign Up</a>
+				<a href="Contact.html">Contact</a>
+			</div>
+			-->
+
+			<div class="header-container">
+				<div class="header-center">
+					<a href="Home.html" width="100%"><img style="" src="./images/red.png" alt="HOME" height="15%"><br />HOME</a>
+					<a href="about.html" width="100%" style=""><img src="./images/purple.png" alt="ABOUT" height="45%"><br />ABOUT</a>
+					<a href="login.html"><img src="./images/yellow.png" alt="USER" height="45%"><br />USER</a>
+					<a href="Contact.html"><img src="./images/blue.png" alt="CONTACT" height="10%"><br />CONTACT</a>
+					<a href="uploadMemePage.html"  id="UploadB"><img src="./images/orange.png" alt="CONTACT" height="10%"><br />UPLOAD</a>
+				</div>
+			</div>
 		</div>
 		
 <!-- <header1> About </header1> -->
