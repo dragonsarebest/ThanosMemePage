@@ -51,6 +51,15 @@ body{
   float: right;
 }
 
+/* Float the section to center */
+.header-center {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -325px;
+	margin-left: -220px;
+}
+
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */ 
 @media screen and (max-width: 500px) {
   .header a {
