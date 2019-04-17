@@ -21,6 +21,7 @@ function addRecord(){
 		fd.append( "username", document.getElementById("name").value );
 		fd.append( "email", document.getElementById("registerEmail").value );
 		fd.append( "password", document.getElementById("registerPassword").value );
+		alert("Account Successfully Created");
 		sendRequest("addRecord", fd, undefined, "POST");
 		window.location.href = "User.html";
 		
@@ -29,7 +30,7 @@ function addRecord(){
 	{
 		inp1.style.background = "#ff0000";
 		inp2.style.background = "#ff0000";
-		alert("Passwords don't match!");
+		alert("Passwords Do Not Match");
 		console.log("You're passwords don't match!");
 	}
 }
@@ -65,15 +66,16 @@ function doLogin(){
 		console.log("getSessionUid: "+req.response);
 		if(req.response != "-1")
 		{
-			console.log("Successful Login");
+			alert("Login Successful");
+			console.log("Login Successful");
 			window.location.href = "home.html";
 		}
 		else
 		{
 			inp1.style.background = "#ff0000";
 			inp2.style.background = "#ff0000";
-			alert("Failed Login");
-			console.log("Failed Login");
+			alert("Login Failed");
+			console.log("Login Failed");
 		}
 	}
     req.open("GET", "getSessionUid", false);
