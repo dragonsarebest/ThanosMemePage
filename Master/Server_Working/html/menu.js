@@ -8,13 +8,13 @@ function MenuUpload() {
 	req.onload = function() {
 		
 		if (req.response == "-1") {
-			x.style.display = "block";
-			y.style.display = "block";
-			z.style.display = "none";
-		} else {
 			x.style.display = "none";
 			y.style.display = "none";
 			z.style.display = "block";
+		} else {
+			x.style.display = "block";
+			y.style.display = "block";
+			z.style.display = "none";
 		}
 	}
 	
