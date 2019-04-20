@@ -106,7 +106,10 @@ namespace Main
             cmd.Parameters.AddWithValue("$creatorid", userID);
             cmd.Parameters.AddWithValue("$worldvisible", 1);
             cmd.Parameters.AddWithValue("$postdata", memeData);
-            cmd.Parameters.AddWithValue("$date", 20190408);
+            int times;
+            Int32.TryParse(DateTime.Now.ToString("yyyyMMdd"), out times);
+            cmd.Parameters.AddWithValue("$date", times);
+            //cmd.Parameters.AddWithValue("$date", 20190408);
             try
             {
                 cmd.ExecuteNonQuery();
