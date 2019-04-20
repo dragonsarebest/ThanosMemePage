@@ -17,6 +17,8 @@
       <script src="ourScripts.js"></script>
       <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
       <script src="bootstrap.bundle.min.js"></script>
+	  <script src="ourScripts.js"></script>
+	  <script src="menu.js"></script>
       <title>Upload a MeMe</title>
    </head>
    <body onload = "setUp();">
@@ -38,7 +40,7 @@
 			<div class="header-center">
 				<a href="Home.html" width="100%"><img style="" src="./images/red.png" alt="HOME" height="15%"><br />HOME</a>
 				<a href="about.html" width="100%" style=""><img src="./images/purple.png" alt="ABOUT" height="45%"><br />ABOUT</a>
-				<a href="uploadMemePage.html"  id="AccountB"><img src="./images/yellow.png" alt="CONTACT" height="10%"><br />MY ACCOUNT</a>
+				<a href="account.html"  id="AccountB"><img src="./images/yellow.png" alt="CONTACT" height="10%" onload="display()"><br /></a>
 				<a href="Contact.html"><img src="./images/blue.png" alt="CONTACT" height="10%"><br />CONTACT</a>
 				<a class="active" href="uploadMemePage.html"  id="UploadB"><img src="./images/orange.png" alt="CONTACT" height="10%"><br />UPLOAD</a>
 			</div>
@@ -90,5 +92,4 @@
          </div>
       </div>
    </body>
-   <script></script>
 </html>

@@ -175,6 +175,22 @@ namespace Main
             return -1;
         }
 
+        public string getUsername(string email, string password)
+        {
+            var cmd = new SQLiteCommand("select username from accounts where email=$e and password=$p", conn);
+            cmd.Parameters.AddWithValue("$e", email);
+            cmd.Parameters.AddWithValue("$p", password);
+            using (var R = cmd.ExecuteReader())
+            {
+                while (R.Read())
+                {
+                    string name = (string)R["username"]; // Only prints out the username (can change what is in the quotes)
+                    return name;
+                }
+            }
+            return "not logged in";
+        }
+
         public bool setBlob(string column, int creatorid, byte[] blob)
         {
             var cmd = new SQLiteCommand(
