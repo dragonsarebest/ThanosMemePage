@@ -289,19 +289,3 @@ function MenuUpload() {
 	req.open("GET", "getSessionUid", false);
 	req.send();
 }
-
-function getUsername() {
-	var text = document.createTextNode('testing');
-	var req = new XMLHttpRequest();
-	req.onload = function() {
-		
-		if (req.response == "not logged in") {
-			text = document.createTextNode('Username');
-		} else {
-			text = document.createTextNode(req.response);
-		}
-	}
-	req.open("GET", "getSessionUsername", false);
-	req.send();
-	return text;
-}

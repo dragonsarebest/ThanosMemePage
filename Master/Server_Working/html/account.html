@@ -40,7 +40,7 @@
 				<a href="about.html">About</a>
 				<a href="User.html">Login</a>
 				<a href="signup.html">Sign Up</a>
-				<a href="Contact.html">Contact</a>
+					<a href="Contact.html">Contact</a>
 			</div>
 			-->
 
@@ -57,7 +57,43 @@
 		</div>
 		
 		
-		<button type="submit" onclick="logout()">Logout</button>
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="well">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#home" data-toggle="tab">Profile</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane active in" id="home">
+        <form id="tab">
+		<button type='button' onclick="logout()" class="btn btn-med btn-primary btn-block" style="margin-left:6.5%;margin-top:1%;width:5%">Logout</button>
+            <label>Username</label>
+            <input type="text" value="jsmith" class="input-xlarge" id="Username">
+			<script>
+				var test = displayUsername();
+				document.getElementById("Username").value = test;
+			</script>
+			
+			
+            <label>Email</label>
+            <input type="text" value="Email" class="input-xlarge" id="Email">
+			<script>
+				var test = displayEmail();
+				document.getElementById("Email").value = test;
+			</script>
+			
+			
+			<label>Old Password</label>
+            <input type="text" class="input-xlarge" id="oldPassword">
+			<label>Confirm Password</label>
+            <input type="text" class="input-xlarge" id="confirmedOldPassword">
+			<label>New Password</label>
+            <input type="text" class="input-xlarge" id="newPassword">
+          	<div>
+        	    <button type='button' onclick="updateInformation()" class="btn btn-med btn-primary btn-block" style="margin-left:6.5%;margin-top:1%;width:5%">Update</button>
+        	</div>
+        </form>
+      </div>
+  </div>
         
     </body>
 </html>
