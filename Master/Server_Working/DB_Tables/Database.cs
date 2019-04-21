@@ -140,7 +140,6 @@ namespace Main
         {
             var cmd = new SQLiteCommand(
                 "insert into posts (creatorid, worldvisible, postdata, date) values ($creatorid, $worldvisible, $postdata, $date)", conn);
-            //cmd.Parameters.AddWithValue("$memeData", memeData);
             cmd.Parameters.AddWithValue("$creatorid", userID);
             cmd.Parameters.AddWithValue("$worldvisible", 1);
             cmd.Parameters.AddWithValue("$postdata", memeData);
@@ -316,30 +315,6 @@ namespace Main
             }
             return null;
         }
-
-
-        // TODO finish me
-        /*public byte[] getBlob(string column, int uid)
-        {
-            var cmd = new SQLiteCommand("select " + column + " from posts where postid=$u", conn);
-            cmd.Parameters.AddWithValue("$u", uid);
-            using (var R = cmd.ExecuteReader())
-            {
-                while (R.Read())
-                {
-                    var x = R[column];
-                    if (x.GetType() == typeof(DBNull))
-                    {
-                        return null;
-                    }
-                    else
-                    {
-                        return (byte[])x;
-                    }
-                }
-            }
-            return null;
-        }*/
 
         // Prints out the Account tables for bug testing!
         public void printAccountTables()
