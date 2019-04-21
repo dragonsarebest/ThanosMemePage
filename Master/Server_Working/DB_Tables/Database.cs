@@ -52,7 +52,7 @@ namespace Main
             }
 
             // TODO: change the way passwords are saved
-            cmd = new SQLiteCommand("create table accounts (username text, email text unique, password text, uid integer primary key)", conn);
+            cmd = new SQLiteCommand("create table accounts (username text, email text unique, password long, uid integer primary key)", conn);
             cmd.ExecuteNonQuery();
             cmd = new SQLiteCommand("create table posts (postid integer primary key, creatorid integer, worldvisible integer, postdata blob, date integer)", conn);
             cmd.ExecuteNonQuery();
@@ -128,7 +128,8 @@ namespace Main
                           conn);
             cmd.Parameters.AddWithValue("$email", email);
             cmd.Parameters.AddWithValue("$username", username);
-            cmd.Parameters.AddWithValue("$password", password);
+            long hash = password.GetHashCode();
+            cmd.Parameters.AddWithValue("$password", hash);
             try
             {
                 cmd.ExecuteNonQuery();
@@ -187,7 +188,8 @@ namespace Main
         {
             var cmd = new SQLiteCommand("select uid from accounts where email=$e and password=$p", conn);
             cmd.Parameters.AddWithValue("$e", email);
-            cmd.Parameters.AddWithValue("$p", password);
+            long hash = password.GetHashCode();
+            cmd.Parameters.AddWithValue("$p", hash);
             using (var R = cmd.ExecuteReader())
             {
                 while (R.Read())
@@ -203,7 +205,8 @@ namespace Main
         {
             var cmd = new SQLiteCommand("select username from accounts where email=$e and password=$p", conn);
             cmd.Parameters.AddWithValue("$e", email);
-            cmd.Parameters.AddWithValue("$p", password);
+            long hash = password.GetHashCode();
+            cmd.Parameters.AddWithValue("$p", hash);
             using (var R = cmd.ExecuteReader())
             {
                 while (R.Read())
@@ -219,7 +222,8 @@ namespace Main
         {
             var cmd = new SQLiteCommand("select Email from accounts where email=$e and password=$p", conn);
             cmd.Parameters.AddWithValue("$e", email);
-            cmd.Parameters.AddWithValue("$p", password);
+            long hash = password.GetHashCode();
+            cmd.Parameters.AddWithValue("$p", hash);
             using (var R = cmd.ExecuteReader())
             {
                 while (R.Read())

@@ -20,3 +20,25 @@ C:\Users\sr115\Desktop\OOP\MemeDepository\branches\AccountPageBranch\Master\Serv
 C:\Users\sr115\Desktop\OOP\MemeDepository\branches\AccountPageBranch\Master\Server_Working\DB_Tables\obj\Debug\DB_Tables.csproj.CopyComplete
 C:\Users\sr115\Desktop\OOP\MemeDepository\branches\AccountPageBranch\Master\Server_Working\DB_Tables\obj\Debug\DB_Tables.exe
 C:\Users\sr115\Desktop\OOP\MemeDepository\branches\AccountPageBranch\Master\Server_Working\DB_Tables\obj\Debug\DB_Tables.pdb
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\DB_Tables.exe.config
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\DB_Tables.exe
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\DB_Tables.pdb
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\BlueberryPie.dll
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\EntityFramework.dll
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\HttpMultipartParser.dll
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\nunit.framework.dll
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\System.Data.SQLite.dll
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\EntityFramework.xml
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\nunit.framework.pdb
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\nunit.framework.xml
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\System.Data.SQLite.xml
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\obj\Debug\DB_Tables.csprojAssemblyReference.cache
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\obj\Debug\DB_Tables.csproj.CoreCompileInputs.cache
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\obj\Debug\DB_Tables.csproj.CopyComplete
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\obj\Debug\DB_Tables.exe
+C:\Users\brady\OneDrive\Desktop\New folder\trunk\Master\Server_Working\DB_Tables\obj\Debug\DB_Tables.pdb
