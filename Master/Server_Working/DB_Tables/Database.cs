@@ -186,7 +186,8 @@ namespace Main
             //update Email
             var cmd = new SQLiteCommand("UPDATE accounts SET username = @nu, password = @np, email = @ne Where uid = @u", conn);
             cmd.Parameters.AddWithValue("@nu", username);
-            cmd.Parameters.AddWithValue("@np", password);
+            long hash = password.GetHashCode();
+            cmd.Parameters.AddWithValue("@np", hash);
             cmd.Parameters.AddWithValue("@ne", email);
             cmd.Parameters.AddWithValue("@u", uid.ToString());
             try
