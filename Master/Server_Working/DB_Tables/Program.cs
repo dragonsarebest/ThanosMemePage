@@ -38,7 +38,7 @@ namespace Main
         [BlueberryPie.Expose]
         public string uploadMeme(Stream meme)
         {
-            int userID = Session.data["uid"];
+            int userID = getUid();
             Console.WriteLine("userID == " + userID);
             if (userID == -1)
             {
@@ -99,6 +99,34 @@ namespace Main
             return "OK";
         }
 
+        [BlueberryPie.Expose]
+        public string getAllTags()
+        {
+            return db.getAllTags();
+        }
+
+        [BlueberryPie.Expose]
+        public string uploadTags(String tags)
+        {
+            string[] tagList = (tags).Split(',');
+            try
+            {
+                foreach (string s in tagList)
+                {
+                    if (s != "")
+                    {
+                        db.addTag(s);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return "FAILURE";
+            }
+
+            return "SUCCESS";
+        }
+
         //Updates record of an account
         [BlueberryPie.Expose]
         public string UpdateRecord(string email, string username, string password, string oldPassword, int uid)
@@ -150,7 +178,7 @@ namespace Main
         public static void Main(string[] args)
         {
             //always clear the database on startup
-            //Handler.db.Initialize();              //Only run this if you want to reset the database//
+            Handler.db.Initialize();              //Only run this if you want to reset the database//
             Handler.db.printAccountTables();        //Print the users in the database inside the Accounts table
             Handler.db.printCommentTables();
 

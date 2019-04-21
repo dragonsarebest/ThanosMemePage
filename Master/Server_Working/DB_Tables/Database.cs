@@ -62,7 +62,7 @@ namespace Main
             // comment junction table
             cmd = new SQLiteCommand("create table jcomment (postid integer, commentid integer)", conn);
             cmd.ExecuteNonQuery();
-            cmd = new SQLiteCommand("create table tags (tagid integer, content string)", conn);
+            cmd = new SQLiteCommand("create table tags (tagid integer, content string unique)", conn);
             cmd.ExecuteNonQuery();
             cmd = new SQLiteCommand("create table rating (userid integer, postid integer, rating integer)", conn);
             cmd.ExecuteNonQuery();
@@ -76,7 +76,45 @@ namespace Main
             //make a dummy account for testing
             AddRecord("test@example.com", "bob bobby bobbity boop", "abc");
             addComment("test comment");
+            addTag("your mom oooooh");
+            addTag("your father smelled of elderberries");
+            addTag("no you");
+            addTag("owo whats this");
 
+        }
+
+        public bool addTag(string tag)
+        {
+            var cmd = new SQLiteCommand(
+                "insert into tags (content) values ($content)", conn);
+            cmd.Parameters.AddWithValue("$content", tag);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("SQL made a booboo");
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        public string getAllTags()
+        {
+            string tags = "";
+            var cmd = new SQLiteCommand("select content from tags", conn);
+            using (var R = cmd.ExecuteReader())
+            {
+                while (R.Read())
+                {
+                    string u = (string)R["content"];
+                    tags += u + ",";
+                }
+            }
+            Console.WriteLine(tags);
+            return tags;
         }
 
         // Adds a new Comment to the database
@@ -211,6 +249,8 @@ namespace Main
             {
                 while (R.Read())
                 {
+                    Console.WriteLine(R["username"]);
+
                     string name = (string)R["username"]; // Only prints out the username (can change what is in the quotes)
                     return name;
                 }

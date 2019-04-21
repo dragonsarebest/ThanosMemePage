@@ -14,9 +14,32 @@ function sendRequest(url, formdata, callback){
     req.send( formdata );
 }
 
+function getRequest(url, callback){
+    var req = new XMLHttpRequest();
+    req.addEventListener( "load", () => {
+        if( req.readyState === 4 && req.status === 200 ){
+            console.log(url+": "+req.responseText);
+            if( callback != undefined )
+                callback(req);
+        }
+    });
+    req.open("GET", url );
+	req.send();
+}
+
+var newTags = [];
+
 var availableTags = [
   "DankMemes"
 ];
+
+function addToAvailableTags(entries){
+      entries.forEach(function(element) {
+		if(availableTags[element] == undefined)
+			availableTags.push(element);
+	});
+	console.log(availableTags);
+};
 
 function setUp()
 {
@@ -27,10 +50,19 @@ function setUp()
 	li.style.margin = "margin:5px";
 	li.style.display = "inline";
 	ul.appendChild(li);
+	
+	getRequest("getAllTags", (r) => {
+		var tagList = r.responseText.split(",");
+		tagList = tagList.slice(0, tagList.length-1);
+		console.log("tagList from server: " + tagList);
+		addToAvailableTags(tagList);
+		return;
+	});	
 }
 
 // uploads image to the database and redirects user to Home.html 
 function subMeme(){
+	subTags();
 	var ourMeme = document.getElementById("fullImage");
 	var fd = new FormData();
     var fileToUpload = document.getElementById("uploadImage").files[0];
@@ -40,6 +72,17 @@ function subMeme(){
     sendRequest( "uploadMeme", fd, () => {
 		window.location.replace("Home.html"); //meme spread page will go here
     });
+}
+
+function subTags()
+{
+	var fd = new FormData();
+	var stringTag = "";
+	newTags.forEach(function(element) {
+		stringTag += element + ",";
+	});
+    fd.append("tags", stringTag);
+	sendRequest("uploadTags", fd, ()=>{;});
 }
 
 function addComment(){
@@ -168,7 +211,8 @@ function addItem(){
 		
 		li.appendChild(b);
 		ul.appendChild(li);
-		availableTags.push(newValue);
+		//availableTags.push(newValue);
+		newTags.push(newValue);
 	}
 }
 
