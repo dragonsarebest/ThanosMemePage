@@ -15,6 +15,8 @@ body{
   background-position: center center;
   min-height:250px;
   padding: 20px 10px 20px;
+  position: sticky;
+  top: -165px;
 }
 
 /* Style the header links */
@@ -43,12 +45,26 @@ body{
 
 /* Style the active/current link*/
 .header a.active {
-  background-color: dodgerblue;
+  background-color: #306493;
 }
 
 /* Float the link section to the right */
 .header-right {
   float: right;
+}
+
+.header-container {
+	position: fixed;
+	width: 100%;
+	background-color: white;
+}
+
+/* Float the section to center */
+.header-center {
+	padding-left: 50%;
+	margin-top: 150px;
+	margin-left: -225px;
+
 }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */ 
@@ -63,8 +79,161 @@ body{
   }
 }
 
+
+
+
 #signup-form {
 	width: 30%;
 	margin-left: 35%;
 	padding-top: 5%;
+}
+
+
+div.column{
+	/*spaces out image upload with comment section*/
+	/*padding-right: 5%;*/
+}
+
+div #subHeader{
+	/*centers the header for the comment section*/
+	position: relative;
+	text-align: center;
+	left: 220px;
+}
+
+.ui-autocomplete {
+	/*this is for the autocomplete tag field*/
+    overflow-y: scroll;   /* prevent horizontal scrollbar */
+	height:120px; 
+	cursor:pointer; 
+	position: absolute;
+}
+
+#listContainer{
+	/*this centers the autocomplete propperly so its right bellow the add tag input*/
+	z-index: 999;
+	position: relative;
+	top: 36px;
+}
+
+div.ScrollBox{
+	/*these are the settings for the comment section*/
+	border: 5px solid black;
+	color: #D9C63C;
+	border-color: #B4A24C;
+	display: block;
+	width: 300%;
+	height: 93%;
+	background-color: #306493;
+	overflow: scroll;
+}
+
+#myList{
+	/*settings for tags list shown to user*/
+	color: #D9C63C;
+	/*padding-left: 1%;*/
+	/*padding-right: 1%;*/
+}
+
+#commentList{
+	/*settings for any submitted comments*/
+	position: relative;
+	top: 4%;
+	/*margin: 5px;*/
+}
+
+#myCommentSub{
+	/*settings for the comment submit button*/
+	position: relative;
+	top: 4%;
+	left: 38%;
+}
+
+#myComment{
+	/*setings for the comment input*/
+	text-align: left;
+	resize: none;
+	width: 96%;
+	position: relative;
+	/*padding-right: 2%;*/
+	left: 2%;
+	top: 2%;
+}
+
+#submitMeme{
+	/*settings for submit meme*/
+	/*padding: 5%;*/
+	width: 100%;
+}
+
+div #uploadImage{
+	width: 100%;
+	/*makes the box arround input be the same width as the preview image*/
+}
+
+div #uploadPreview{
+	/*sets dimensions of preview image and sets a default background color*/
+	width: 450px;
+	height: 450px;
+	background-color: #1B2B42;
+}
+
+#fullImage{
+	/*we store the full image here, it will, however, not be displayed*/
+	display: none;
+}
+/*for input objects under div's with a class of row*/
+.row input{
+	border: 5px solid black;
+	color: #D9C63C;
+	border-color: #B4A24C;
+	/*block means it's evenly spaced out*/
+	display: block;
+	width: 20%;
+	background-color: #306493;
+}
+
+/*this is for the username header to the webpage*/
+header{
+	 border-bottom: 10px solid black;
+	 border-bottom-color: #B4A24C;
+	 text-align: center;
+	 background-color: #1B2B42;
+}
+
+/*new (with picture) login page styles*/
+.loginPos {
+	position: absolute;
+	top: 30%;
+	right: 10%;
+}
+.registerPos {
+	position: absolute;
+	top: 125%;
+	right: 73%;
+}
+.form-size {
+	width: 300%;
+	margin-left: 0%;
+	padding-top: 10%;
+}
+/*Make forms vetical if screen is less than 800px wide*/
+@media (max-width: 800px) {
+	.loginPos {
+		position: absolute;
+		top: 30%;
+		right: 10%;
+		.form-inline {
+		}
+	}
+	.registerPos {
+		position: absolute;
+		top: 125%;
+		right: 80%;
+	}
+	.form-size {
+		width: 300%;
+		margin-left: 0%;
+		padding-top: 10%;
+	}
 }

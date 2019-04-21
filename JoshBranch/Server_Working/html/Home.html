@@ -12,32 +12,59 @@
 		
 		<link href="bootstrap.min.css" rel="stylesheet">
 		<link href="jqueryui/jquery-ui.css" rel="stylesheet">
-        	<link href="css/UserCreation.css" type="text/css" rel="stylesheet">
+        <link href="css/UserCreation.css" type="text/css" rel="stylesheet">
 		
 		<script src="jqueryui/jquery-ui.js"></script>
 		<script src="bootstrap.bundle.min.js"></script>
 		
+		<script src="menu.js"></script>
+		<script src="ourScripts.js"></script>
+
 		<title>Thanos Meme Pages</title>
     </head>
 	
-    <body>
+    <body onload="HomeOnLoad()">
 		<div class="header">
-		  <a href="https://youtu.be/s9q61m7S9yA" class="logo">Snappers!</a>
-		  <div class="header-right">
-			<a class="active" href="Home.html">Home</a>
-			<a href="about.html">About</a>
-			<a href="login.html">Login</a>
-			<a href="signup.html">Sign Up</a>
-			<a href="Contact.html">Contact</a>
-		  </div>
+			<a href="https://youtu.be/s9q61m7S9yA" class="logo" style="position: fixed; top: 0;">Snappers!</a>
+			
+			<!--	Old Buttons
+			<div class="header-right">
+				<a class="active" href="Home.html">Home</a>
+				<a href="about.html">About</a>
+				<a href="User.html">Login</a>
+				<a href="signup.html">Sign Up</a>
+				<a href="Contact.html">Contact</a>
+			</div>
+			-->
+
+
+			<div class="header-center">
+				<a class="active" href="Home.html" width="100%"><img style="" src="./images/red.png" alt="HOME" height="15%"><br />HOME</a>
+				<a href="about.html" width="100%" style=""><img src="./images/purple.png" alt="ABOUT" height="45%"><br />ABOUT</a>
+				<a href="User.html" id="RegisterB"><img src="./images/yellow.png" alt="USER" height="45%"><br />USER</a>
+				<a href="account.html"  id="AccountB"><img src="./images/yellow.png" alt="CONTACT" height="10%" onload="display()"><br /></a>
+				<a href="Contact.html"><img src="./images/blue.png" alt="CONTACT" height="10%"><br />CONTACT</a>
+				<a href="uploadMemePage.html"  id="UploadB"><img src="./images/orange.png" alt="CONTACT" height="10%"><br />UPLOAD</a>
+			</div>
+
 		</div>
 		
-<header1> Home </header1>
-
-<footer><a href="uploadMemePage.html">upload page</a></footer>
+		<!-- 
+		<header1> Home </header1>
+		
+		<button onclick="MenuUpload()">Click Me</button>
+		-->
+	
+		<div id="feed" onload="showMemes();">
+			
+		</div>
+		
+		<form method="get" action="Generator.html">
+			<button type="submit">Make a Meme!</button>
+		</form>
 
 <!-- <footer> Temp footer</footer> -->
 
-        
     </body>
+	
 </html>

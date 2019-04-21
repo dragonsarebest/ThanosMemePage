@@ -10,7 +10,7 @@ namespace Main
     public class Database
     {
         //HashSet<string> knownEmails = new HashSet<string>();
-        static readonly string dbpath = "database.sql";
+        static readonly string dbpath = "..\\..\\database.sql";
         System.Data.SQLite.SQLiteConnection conn;
         public Database()
         {
@@ -29,6 +29,7 @@ namespace Main
             SQLiteCommand cmd;
             try
             {
+                // Completly wipes all tables from the database
                 cmd = new SQLiteCommand("drop table accounts;", conn);
                 cmd.ExecuteNonQuery();
                 cmd = new SQLiteCommand("drop table posts;", conn);
@@ -49,10 +50,11 @@ namespace Main
             catch (Exception)
             {
             }
+
             // TODO: change the way passwords are saved
             cmd = new SQLiteCommand("create table accounts (username text, email text unique, password text, uid integer primary key)", conn);
             cmd.ExecuteNonQuery();
-            cmd = new SQLiteCommand("create table posts (postid integer primary key, creatorid integer, worldvisible integer, postdata blob, jtagid integer, jcommentid integer)", conn);
+            cmd = new SQLiteCommand("create table posts (postid integer primary key, creatorid integer, worldvisible integer, postdata blob, date integer)", conn);
             cmd.ExecuteNonQuery();
             // tag junction table
             cmd = new SQLiteCommand("create table jtag (postid integer, tagid integer)", conn);
@@ -77,6 +79,7 @@ namespace Main
 
         }
 
+        // Adds a new Comment to the database
         public bool addComment(string comment)
         {
             var cmd = new SQLiteCommand(
@@ -95,17 +98,18 @@ namespace Main
             }
         }
 
-        ///posts a meme into the posts table
         public bool UploadMeme(byte[] memeData, int userID)
         {
-            //creatorid integer, worldvisible integer, postdata blob, date integer
             var cmd = new SQLiteCommand(
                 "insert into posts (creatorid, worldvisible, postdata, date) values ($creatorid, $worldvisible, $postdata, $date)", conn);
-            
+            //cmd.Parameters.AddWithValue("$memeData", memeData);
             cmd.Parameters.AddWithValue("$creatorid", userID);
-            cmd.Parameters.AddWithValue("$worldvisible", memeData);
+            cmd.Parameters.AddWithValue("$worldvisible", 1);
             cmd.Parameters.AddWithValue("$postdata", memeData);
-            cmd.Parameters.AddWithValue("$date", memeData);
+            int times;
+            Int32.TryParse(DateTime.Now.ToString("yyyyMMdd"), out times);
+            cmd.Parameters.AddWithValue("$date", times);
+            //cmd.Parameters.AddWithValue("$date", 20190408);
             try
             {
                 cmd.ExecuteNonQuery();
@@ -140,7 +144,24 @@ namespace Main
                 return false;
             }
         }
+        public List<int> getMostRecentPosts()
+        {
+            List<int> L = new List<int>();
+            var cmd = new SQLiteCommand("select postid from posts order by date desc limit 10", conn);
+            using (var R = cmd.ExecuteReader())
+            {
+                while (R.Read())
+                {
+                    int p = Convert.ToInt32(R["postid"]);
+                    L.Add(p);
+                }
+            }
+            return L;
+        }
 
+
+        // Gets the Uid from the database that matches the sent in email and password
+        // Good example to see how to save information from the database!!!
         public int getUid(string email, string password)
         {
             var cmd = new SQLiteCommand("select uid from accounts where email=$e and password=$p", conn);
@@ -150,24 +171,109 @@ namespace Main
             {
                 while (R.Read())
                 {
-                    long u = (long)R["uid"];
+                    long u = (long)R["uid"]; //whatever you put in the quotes that is part of that table will go into R
                     return (int)u;
                 }
             }
             return -1;
         }
 
+        public string getUsername(string email, string password)
+        {
+            var cmd = new SQLiteCommand("select username from accounts where email=$e and password=$p", conn);
+            cmd.Parameters.AddWithValue("$e", email);
+            cmd.Parameters.AddWithValue("$p", password);
+            using (var R = cmd.ExecuteReader())
+            {
+                while (R.Read())
+                {
+                    Console.WriteLine(R["username"]);
+
+                    string name = (string)R["username"]; // Only prints out the username (can change what is in the quotes)
+                    return name;
+                }
+            }
+            return "not logged in";
+        }
+
+        public bool setBlob(string column, int creatorid, byte[] blob)
+        {
+            var cmd = new SQLiteCommand(
+                "update posts set " + column + "=$b where creatorid=$cid", conn);
+            cmd.Parameters.AddWithValue("$b", blob);
+            cmd.Parameters.AddWithValue("$cid", creatorid);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        // Pulls meme image from database based on post id, check if it exists, and returns it.
+        public byte[] GetMeme(int pid)
+        {
+            var cmd = new SQLiteCommand("select postdata from posts where postid=$p", conn);
+            cmd.Parameters.AddWithValue("$p", pid);
+            using (var R = cmd.ExecuteReader())
+            {
+                while (R.Read())
+                {
+                    var meme = R["postdata"];
+                    if (meme.GetType() == typeof(DBNull))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return (byte[])meme;
+                    }
+                    //byte[] meme = (byte[])R["postdata"];
+                }
+            }
+            return null;
+        }
+
+
+        // TODO finish me
+        /*public byte[] getBlob(string column, int uid)
+        {
+            var cmd = new SQLiteCommand("select " + column + " from posts where postid=$u", conn);
+            cmd.Parameters.AddWithValue("$u", uid);
+            using (var R = cmd.ExecuteReader())
+            {
+                while (R.Read())
+                {
+                    var x = R[column];
+                    if (x.GetType() == typeof(DBNull))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return (byte[])x;
+                    }
+                }
+            }
+            return null;
+        }*/
+
         // Prints out the Account tables for bug testing!
         public void printAccountTables()
         {
             try
             {
+                // Selects all entrys in the accounts table
                 var cmd = new SQLiteCommand("select * from accounts", conn);
                 using (var R = cmd.ExecuteReader())
                 {
                     while (R.Read())
                     {
-                        string name = (string)R["username"];
+                        string name = (string)R["username"]; // Only prints out the username (can change what is in the quotes)
                         Console.WriteLine(name);
                     }
                 }
@@ -189,27 +295,6 @@ namespace Main
                     {
                         string c = (string)R["comment"];
                         Console.WriteLine(c);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        // Prints out the posts tables for bug testing!
-        public void printPostsTables()
-        {
-            try
-            {
-                var cmd = new SQLiteCommand("select * from posts", conn);
-                using (var R = cmd.ExecuteReader())
-                {
-                    while (R.Read())
-                    {
-                        //creatorid integer, worldvisible integer, postdata blob, date integer
-                        int cretaor = (int)R["creatorid"];
-                        Console.WriteLine(cretaor);
                     }
                 }
             }

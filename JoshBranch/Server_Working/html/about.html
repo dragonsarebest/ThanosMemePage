@@ -17,22 +17,79 @@
 		<script src="jqueryui/jquery-ui.js"></script>
 		<script src="bootstrap.bundle.min.js"></script>
 		
+		<script src="menu.js"></script>
+		
+		<style>
+			p {
+				text-align: center;
+				font-size: 60px;
+				margin-top: 200px;
+			}
+		</style>
+		
 		<title>Thanos Meme Pages</title>
     </head>
 	
-    <body>
+    <body onload="MenuUpload();">
 		<div class="header">
-		  <a href="#default" class="logo">Snappers!</a>
-		  <div class="header-right">
-			<a href="Home.html">Home</a>
-			<a class="active" href="about.html">About</a>
-			<a href="login.html">Login</a>
-			<a href="signup.html">Sign Up</a>
-			<a href="Contact.html">Contact</a>
-		  </div>
+			<a href="https://youtu.be/s9q61m7S9yA" class="logo" style="position: fixed; top: 0;">Snappers!</a>
+			
+			<!--	Old Buttons
+			<div class="header-right">
+				<a class="active" href="Home.html">Home</a>
+				<a href="about.html">About</a>
+				<a href="User.html">Login</a>
+				<a href="signup.html">Sign Up</a>
+				<a href="Contact.html">Contact</a>
+			</div>
+			-->
+
+
+			<div class="header-center">
+				<a href="Home.html" width="100%"><img style="" src="./images/red.png" alt="HOME" height="15%"><br />HOME</a>
+				<a class="active" href="about.html" width="100%" style=""><img src="./images/purple.png" alt="ABOUT" height="45%"><br />ABOUT</a>
+				<a href="User.html" id="RegisterB"><img src="./images/yellow.png" alt="USER" height="45%"><br />USER</a>
+				<a href="account.html"  id="AccountB"><img src="./images/yellow.png" alt="CONTACT" height="10%" onload="display()"><br /></a>
+				<a href="Contact.html"><img src="./images/blue.png" alt="CONTACT" height="10%"><br />CONTACT</a>
+				<a href="uploadMemePage.html"  id="UploadB"><img src="./images/orange.png" alt="CONTACT" height="10%"><br />UPLOAD</a>
+			</div>
+
 		</div>
 		
-<header1> About </header1>
+<!-- <header1> About </header1> -->
+
+
+		<p id="EndGame"></p>
+		<script>
+			// Set the date we're counting down to
+			var countDownDate = new Date("April 26, 2019 00:00:00").getTime();
+
+			// Update the count down every 1 second
+			var x = setInterval(function() {
+
+			  // Get todays date and time
+			  var now = new Date().getTime();
+				
+			  // Find the distance between now and the count down date
+			  var distance = countDownDate - now;
+				
+			  // Time calculations for days, hours, minutes and seconds
+			  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+				
+			  // Output the result in an element with id="demo"
+			  document.getElementById("EndGame").innerHTML = days + "d " + hours + "h "
+			  + minutes + "m " + seconds + "s ";
+				
+			  // If the count down is over, write some text 
+			  if (distance < 0) {
+				clearInterval(x);
+				document.getElementById("EndGame").innerHTML = "EXPIRED";
+			  }
+			}, 1000);
+		</script>
         
     </body>
 </html>

@@ -1,68 +1,46 @@
 "use strict";
 
+//be DRY, not WET
+function sendRequest(url, formdata, callback){
+    var req = new XMLHttpRequest();
+    req.addEventListener( "load", () => {
+        if( req.readyState === 4 && req.status === 200 ){
+            console.log(url+": "+req.responseText);
+            if( callback != undefined )
+                callback(req);
+        }
+    });
+    req.open("POST", url );
+    req.send( formdata );
+}
+
 var availableTags = [
-  "ActionScript",
-  "AppleScript",
-  "Asp",
-  "BASIC",
-  "C",
-  "C++",
-  "Clojure",
-  "COBOL",
-  "ColdFusion",
-  "Erlang",
-  "Fortran",
-  "Groovy",
-  "Haskell",
-  "Java",
-  "JavaScript",
-  "Lisp",
-  "Perl",
-  "PHP",
-  "Python",
-  "Ruby",
-  "Scala",
-  "Scheme"
+  "DankMemes"
 ];
 
 function setUp()
 {
 	console.log("setup");
 	var ul = document.getElementById("myList");
-	
-	//console.log(ul);
-	
 	var li = document.createElement("li");
 	li.innerHTML = "Tags: ";
 	li.style.margin = "margin:5px";
 	li.style.display = "inline";
-	//console.log(li);
-	
 	ul.appendChild(li);
-	
-	//console.log(ul);
 }
 
+// uploads image to the database and redirects user to Home.html 
 function subMeme(){
 	var ourMeme = document.getElementById("fullImage");
-	
 	var fd = new FormData();
-	fd.append("image", ourMeme);
-	
-	var req = new XMLHttpRequest();
-    req.addEventListener( "load", () => {
-        if( req.readyState === 4 && req.status === 200 ){
-            console.log("UploadMeme: "+req.responseText);
-            if( callback != undefined )
-                callback(req);
-        }
+    var fileToUpload = document.getElementById("uploadImage").files[0];
+    if( fileToUpload ){
+        fd.append( "meme", fileToUpload );
+    }
+    sendRequest( "uploadMeme", fd, () => {
+		window.location.replace("Home.html"); //meme spread page will go here
     });
-    req.open("POST", "UploadMeme" );
-    req.send( fd );
-	
-	window.location.replace("Home.html"); //meme spread page will go here
 }
-
 
 function addComment(){
 	var fd = new FormData();
@@ -73,7 +51,6 @@ function addComment(){
 	newValue = removeSpaces(newValue);
 	
 	fd.append("comment", newValue);
-	//fd.append("comment", newValue);
 	
 	var li = document.createElement("li");
 	li.setAttribute('id',newValue);
@@ -85,12 +62,10 @@ function addComment(){
 	b.setAttribute("onClick", "clickedComment("+newValue+")");
 	b.appendChild(document.createTextNode(candidate.value));
 	
-	//console.log(b);
-	
 	li.appendChild(b);
-	//console.log(li);
-	
 	ul.appendChild(li);	
+	
+	sendRequest("addComment", fd, )
 	
 	var req = new XMLHttpRequest();
     req.addEventListener( "load", () => {
@@ -106,9 +81,6 @@ function addComment(){
 
 function clickedComment(inputBoy)
 {
-	//console.log("onClick");
-	//console.log(inputBoy.id);
-	//console.log(inputBoy);
 	//firefox inputBoy is li, chrome inputBoy is htmlcollection envolping a li
 	
 	if(HTMLCollection.prototype.isPrototypeOf(inputBoy))
@@ -116,7 +88,6 @@ function clickedComment(inputBoy)
 		//console.log("we in chrome");
 		//we need to get the li out of this HTMLCollection
 		inputBoy = inputBoy.item(0);
-		//console.log(inputBoy);
 	}
 	else
 	{
@@ -186,8 +157,6 @@ function addItem(){
 		li.style.display = "inline";
 		var b = document.createElement('button');
 		
-		
-				
 		b.setAttribute("value", newValue);
 		b.setAttribute("id", newValue);
 		b.setAttribute("style", "margin:5px;");
@@ -197,13 +166,8 @@ function addItem(){
 		b.setAttribute("onClick", "clickedBoy("+newValue+")");
 		b.appendChild(document.createTextNode(candidate.value));
 		
-		//console.log(b);
-		
 		li.appendChild(b);
-		//console.log(li);
-		
 		ul.appendChild(li);
-		
 		availableTags.push(newValue);
 	}
 }
@@ -259,3 +223,85 @@ function clickedBoy(inputBoy)
 	   .appendTo( ul );
 	};
  });
+ 
+ function HomeOnLoad(){
+	 showFeed();
+	 var x = document.getElementById("UploadB");
+	 var y = document.getElementById("AccountB");
+	 var z = document.getElementById("RegisterB");
+	 
+	 var req = new XMLHttpRequest();
+	 req.onload = function() {
+	 	
+	 	if (req.response == "-1") {
+	 		x.style.display = "none";
+	 		y.style.display = "none";
+	 		z.style.display = "block";
+	 	} else {
+	 		x.style.display = "block";
+	 		y.style.display = "block";
+	 		z.style.display = "none";
+	 	}
+	 }
+	 
+	 req.open("GET", "getSessionUid", false);
+	 req.send();
+ }
+ 
+ 
+// TODO finish this 
+// function to show memes in order on the home page 
+function showFeed(){
+	var bigdiv = document.getElementById("feed");
+	
+	
+	sendRequest("/topTen", null, (xhr)=>{
+		bigdiv = document.getElementById("feed");
+		bigdiv.innerHTML = xhr.responseText;
+	});
+	
+/* 	var littlediv = document.createElement("div");
+	var img = new Image();
+	img.src = "/getPic?postid=" + q;
+	littlediv.appendChild(img);
+	bigdiv.appendChild(littlediv); */
+}
+
+function MenuUpload() {
+	var x = document.getElementById("UploadB");
+	var y = document.getElementById("AccountB");
+	var z = document.getElementById("RegisterB");
+	
+	var req = new XMLHttpRequest();
+	req.onload = function() {
+		
+		if (req.response == "-1") {
+			x.style.display = "block";
+			y.style.display = "block";
+			z.style.display = "none";
+		} else {
+			x.style.display = "none";
+			y.style.display = "none";
+			z.style.display = "block";
+		}
+	}
+	
+	req.open("GET", "getSessionUid", false);
+	req.send();
+}
+
+function getUsername() {
+	var text = document.createTextNode('testing');
+	var req = new XMLHttpRequest();
+	req.onload = function() {
+		
+		if (req.response == "not logged in") {
+			text = document.createTextNode('Username');
+		} else {
+			text = document.createTextNode(req.response);
+		}
+	}
+	req.open("GET", "getSessionUsername", false);
+	req.send();
+	return text;
+}
