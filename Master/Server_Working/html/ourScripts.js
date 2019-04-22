@@ -62,12 +62,13 @@ function setUp()
 
 // uploads image to the database and redirects user to Home.html 
 function subMeme(){
-	subTags();
+	var tags = subTags();
 	var ourMeme = document.getElementById("fullImage");
 	var fd = new FormData();
     var fileToUpload = document.getElementById("uploadImage").files[0];
     if( fileToUpload ){
         fd.append( "meme", fileToUpload );
+		fd.append( "tags", tags);
     }
     sendRequest( "uploadMeme", fd, () => {
 		window.location.replace("Home.html"); //meme spread page will go here
@@ -83,6 +84,7 @@ function subTags()
 	});
     fd.append("tags", stringTag);
 	sendRequest("uploadTags", fd, ()=>{;});
+	return stringTag;
 }
 
 function addComment(){

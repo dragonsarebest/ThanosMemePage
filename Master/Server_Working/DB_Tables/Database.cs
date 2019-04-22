@@ -136,7 +136,7 @@ namespace Main
             }
         }
 
-        public bool UploadMeme(byte[] memeData, int userID)
+        public bool UploadMeme(byte[] memeData, int userID, string[] tagList)
         {
             var cmd = new SQLiteCommand(
                 "insert into posts (creatorid, worldvisible, postdata, date) values ($creatorid, $worldvisible, $postdata, $date)", conn);
@@ -145,9 +145,60 @@ namespace Main
             cmd.Parameters.AddWithValue("$postdata", memeData);
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             cmd.Parameters.AddWithValue("$date", timestamp);
+
+            //need to get the current primary key in this table and the primary key
+            //for each tag and slap it into a junction table
+
+            var cmd2 = new SQLiteCommand("select postid from posts where creatorid = $creatorid and postdata = $postdata and $date = date", conn);
+            cmd2.Parameters.AddWithValue("$creatorid", userID);
+            cmd2.Parameters.AddWithValue("$postdata", memeData);
+            cmd2.Parameters.AddWithValue("$date", timestamp);
+
             try
             {
                 cmd.ExecuteNonQuery();
+
+                using (var R = cmd2.ExecuteReader())
+                {
+                    while (R.Read())
+                    {
+                        int postid = Convert.ToInt32(R["postid"]);
+                        //Console.WriteLine("Found POST!!!: " + postid);
+                        foreach (string s in tagList)
+                        {
+                            if (s != "")
+                            {
+                                //("create table tags (tagid integer, content string unique)", conn);
+                                var cmd3 = new SQLiteCommand("select tagid from tags where content = $content", conn);
+                                cmd3.Parameters.AddWithValue("$content", s);
+                                using (var R2 = cmd3.ExecuteReader())
+                                {
+                                    //Console.WriteLine("Got TAG!!!: " + s);
+                                    while (R2.Read())
+                                    {
+                                        Console.WriteLine(R2);
+                                        if (R2.IsDBNull(0))
+                                        {
+                                            //means this tag aint in the boy?
+                                            //Console.WriteLine("Not Found tagid");
+                                            continue;
+                                        }
+                                        int tagid = Convert.ToInt32(R2["tagid"]);
+                                        //Console.WriteLine("Got tagID!!!: " + tagid);
+                                        var cmd4 = new SQLiteCommand(
+                                          "insert into jtag (postid, tagid) values ($postid, $tagid)",
+                                          conn);
+                                        cmd4.Parameters.AddWithValue("$postid", postid);
+                                        cmd4.Parameters.AddWithValue("$tagid", tagid);
+                                        cmd4.ExecuteNonQuery();
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 return true;
             }
             catch (Exception e)
@@ -156,6 +207,8 @@ namespace Main
                 Console.WriteLine(e);
                 return false;
             }
+
+
         }
 
         // Adds a new record to the accounts table this will need to go in the real database.cs

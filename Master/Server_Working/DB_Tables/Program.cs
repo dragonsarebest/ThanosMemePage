@@ -36,7 +36,7 @@ namespace Main
         }
 
         [BlueberryPie.Expose]
-        public string uploadMeme(Stream meme)
+        public string uploadMeme(Stream meme, string tags)
         {
             int userID = getUid();
             Console.WriteLine("userID == " + userID);
@@ -46,7 +46,8 @@ namespace Main
             }
             var sr = new BinaryReader(meme);
             var data = sr.ReadBytes((int)meme.Length);
-            if (db.UploadMeme(data, userID))
+            string[] tagList = (tags).Split(',');
+            if (db.UploadMeme(data, userID, tagList))
             {
                 return "CREATED";
             }
