@@ -111,14 +111,29 @@ function updateInformation(){
 	
     var req = new XMLHttpRequest();
 	req.onload = function() {
-		if(document.getElementById("oldPassword").value == document.getElementById("confirmedOldPassword").value && newpassword.value.toString().length > 0)
+		if(document.getElementById("oldPassword").value == document.getElementById("confirmedOldPassword").value && newpassword.value.toString().length == 0)
+		{
+			alert("Account Updated!");
+			fd.append( "uid", req.response );
+			sendRequest("UpdateRecordNoPassword", fd, undefined, "POST");
+			window.location.href = "account.html";
+		}
+		else if(document.getElementById("oldPassword").value != document.getElementById("confirmedOldPassword").value && newpassword.value.toString().length == 0)
+		{
+			oldpassword.style.background = "#ff0000";
+			confoldpassword.style.background = "#ff0000";
+			alert("Old Passwords Must Match");
+			console.log("Update Failed");
+		}
+		
+		else if(document.getElementById("oldPassword").value == document.getElementById("confirmedOldPassword").value && newpassword.value.toString().length > 0)
 		{
 			alert("Account Updated!");
 			fd.append( "uid", req.response );
 			sendRequest("UpdateRecord", fd, undefined, "POST");
 			window.location.href = "account.html";
 		}
-		else
+		else if(document.getElementById("oldPassword").value != document.getElementById("confirmedOldPassword").value && newpassword.value.toString().length > 0)
 		{
 			oldpassword.style.background = "#ff0000";
 			confoldpassword.style.background = "#ff0000";

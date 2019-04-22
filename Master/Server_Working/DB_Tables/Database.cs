@@ -203,6 +203,27 @@ namespace Main
             }
         }
 
+        // updates old account
+        public bool UpdateRecordNoPassword(string email, string username, string oldPassword, int uid)
+        {
+            //update Email
+            var cmd = new SQLiteCommand("UPDATE accounts SET username = @nu, email = @ne Where uid = @u", conn);
+            cmd.Parameters.AddWithValue("@nu", username);
+            cmd.Parameters.AddWithValue("@ne", email);
+            cmd.Parameters.AddWithValue("@u", uid.ToString());
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("SQL Made a BooBoo");
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
 
         public List<int> getMostRecentPosts()
         {

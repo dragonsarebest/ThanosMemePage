@@ -141,6 +141,20 @@ namespace Main
             return "FAILED";
         }
 
+        //Updates record of an account without updating password
+        [BlueberryPie.Expose]
+        public string UpdateRecordNoPassword(string email, string username, string password, string oldPassword, int uid)
+        {
+            if (db.UpdateRecordNoPassword(email, username, oldPassword, uid))
+            {
+                Session.data["uid"] = db.getUid(email, oldPassword);
+                Session.data["username"] = db.getUsername(email, oldPassword);
+                Session.data["Email"] = db.getEmail(email, oldPassword);
+                return "CREATED";
+            }
+            return "FAILED";
+        }
+
 
         // Sets the session data to not contain a session ID
         [BlueberryPie.Expose]
