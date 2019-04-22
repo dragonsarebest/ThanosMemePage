@@ -54,7 +54,7 @@ namespace Main
             // TODO: change the way passwords are saved
             cmd = new SQLiteCommand("create table accounts (username text, email text unique, password long, uid integer primary key)", conn);
             cmd.ExecuteNonQuery();
-            cmd = new SQLiteCommand("create table posts (postid integer primary key, creatorid integer, worldvisible integer, postdata blob, date integer)", conn);
+            cmd = new SQLiteCommand("create table posts (postid integer primary key, creatorid integer, worldvisible integer, postdata blob, date text)", conn);
             cmd.ExecuteNonQuery();
             // tag junction table
             cmd = new SQLiteCommand("create table jtag (postid integer, tagid integer)", conn);
@@ -143,7 +143,8 @@ namespace Main
             cmd.Parameters.AddWithValue("$creatorid", userID);
             cmd.Parameters.AddWithValue("$worldvisible", 1);
             cmd.Parameters.AddWithValue("$postdata", memeData);
-            cmd.Parameters.AddWithValue("$date", 20190408);
+            string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            cmd.Parameters.AddWithValue("$date", timestamp);
             try
             {
                 cmd.ExecuteNonQuery();
@@ -228,7 +229,7 @@ namespace Main
         public List<int> getMostRecentPosts()
         {
             List<int> L = new List<int>();
-            var cmd = new SQLiteCommand("select postid from posts order by date desc limit 10", conn);
+            var cmd = new SQLiteCommand("select postid from posts order by datetime(date) desc limit 10", conn);
             using (var R = cmd.ExecuteReader())
             {
                 while (R.Read())
@@ -332,7 +333,6 @@ namespace Main
                     {
                         return (byte[])meme;
                     }
-                    //byte[] meme = (byte[])R["postdata"];
                 }
             }
             return null;
