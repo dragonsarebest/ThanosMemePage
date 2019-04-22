@@ -68,7 +68,7 @@ function doLogin(){
 		{
 			alert("Login Successful");
 			console.log("Login Successful");
-			window.location.href = "home.html";
+			window.location.href = "index.html";
 		}
 		else
 		{

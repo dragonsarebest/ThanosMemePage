@@ -60,7 +60,7 @@ function setUp()
 	});	
 }
 
-// uploads image to the database and redirects user to Home.html 
+// uploads image to the database and redirects user to index.html 
 function subMeme(){
 	var tags = subTags();
 	var ourMeme = document.getElementById("fullImage");
@@ -71,7 +71,7 @@ function subMeme(){
 		fd.append( "tags", tags);
     }
     sendRequest( "uploadMeme", fd, () => {
-		window.location.replace("Home.html"); //meme spread page will go here
+		window.location.replace("index.html"); //meme spread page will go here
     });
 }
 
@@ -272,45 +272,17 @@ function clickedBoy(inputBoy)
  
  function HomeOnLoad(){
 	 showFeed();
-	 var x = document.getElementById("UploadB");
-	 var y = document.getElementById("AccountB");
-	 var z = document.getElementById("RegisterB");
-	 
-	 var req = new XMLHttpRequest();
-	 req.onload = function() {
-	 	
-	 	if (req.response == "-1") {
-	 		x.style.display = "none";
-	 		y.style.display = "none";
-	 		z.style.display = "block";
-	 	} else {
-	 		x.style.display = "block";
-	 		y.style.display = "block";
-	 		z.style.display = "none";
-	 	}
-	 }
-	 
-	 req.open("GET", "getSessionUid", false);
-	 req.send();
+	 MenuUpload();
  }
  
  
-// TODO finish this 
 // function to show memes in order on the home page 
 function showFeed(){
 	var bigdiv = document.getElementById("feed");
-	
-	
 	sendRequest("/topTen", null, (xhr)=>{
 		bigdiv = document.getElementById("feed");
 		bigdiv.innerHTML = xhr.responseText;
 	});
-	
-/* 	var littlediv = document.createElement("div");
-	var img = new Image();
-	img.src = "/getPic?postid=" + q;
-	littlediv.appendChild(img);
-	bigdiv.appendChild(littlediv); */
 }
 
 function MenuUpload() {

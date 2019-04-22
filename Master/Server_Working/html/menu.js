@@ -56,7 +56,7 @@ function logout() {
     var fd = new FormData();
 	sendRequest("doLogout", "POST");
 	console.log("Log out sucessful");
-	window.location.href = "home.html";
+	window.location.href = "index.html";
 }
 
 function display() {
