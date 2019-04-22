@@ -113,12 +113,23 @@ function updateInformation(){
 	req.onload = function() {
 		if(document.getElementById("oldPassword").value == document.getElementById("confirmedOldPassword").value && newpassword.value.toString().length == 0)
 		{
-			alert("Account Updated!");
-			fd.append( "uid", req.response );
-			sendRequest("UpdateRecordNoPassword", fd, undefined, "POST");
-			window.location.href = "account.html";
+			if(oldpassword.value.toString().length == 0)
+			{
+				oldpassword.style.background = "#ff0000";
+				confoldpassword.style.background = "#ff0000";
+				alert("You must enter your old password!");
+				console.log("Update Failed");
+			}
+			else
+			{
+				alert("Account Updated!");
+				fd.append( "uid", req.response );
+				sendRequest("UpdateRecordNoPassword", fd, undefined, "POST");
+				window.location.href = "account.html";
+			}
 		}
 		else if(document.getElementById("oldPassword").value != document.getElementById("confirmedOldPassword").value && newpassword.value.toString().length == 0)
+
 		{
 			oldpassword.style.background = "#ff0000";
 			confoldpassword.style.background = "#ff0000";
