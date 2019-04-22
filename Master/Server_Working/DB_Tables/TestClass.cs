@@ -29,9 +29,10 @@ namespace tddtest
         [SetUp]
         public void testSetupEveryTime()
         {
-            //Handler.InitializeDatabase();
+            //Database.InitializeDatabase();
         }
 
+        /*
         [Test]
         public void testGetRegistrationPage()
         {
@@ -39,19 +40,20 @@ namespace tddtest
             string s = wc.DownloadString(serverurl + "signup.html");
             Assert.AreNotEqual(-1, s.IndexOf("Register"));
         }
-
+        
         [Test]
         public void testSubmitData()
         {
             WebClient wc = new WebClient();
             var nvc = new NameValueCollection();
-            nvc.Add("email", "bob@example.com");
-            nvc.Add("password", "s3cr3t");
-            nvc.Add("realname", "Bob Bob A Rebob");
-            byte[] resp = wc.UploadValues(serverurl + "doRegister", nvc);
+            nvc.Add("username", "Bob Ross");
+            nvc.Add("email", "happylittletrees@example.com");
+            nvc.Add("password", "mistakes");
+            byte[] resp = wc.UploadValues(serverurl + "signup.html", nvc);
             string s = System.Text.Encoding.UTF8.GetString(resp);
+            Console.WriteLine("Response: \n\n");
             Console.WriteLine(s);
-            Assert.AreEqual("CREATED", s);
+            Assert.AreEqual("signup.html", s);
         }
 
         [Test]
@@ -70,9 +72,26 @@ namespace tddtest
             nvc.Add("email", "bob@example.com");
             nvc.Add("password", "s3cr3tiv3");
             nvc.Add("realname", "Alice");
-            resp = wc.UploadValues(serverurl + "doRegister", nvc);
+            resp = wc.UploadValues(serverurl + "user", nvc);
             s = System.Text.Encoding.UTF8.GetString(resp);
             Assert.AreEqual("FAILED", s);
+        }
+        */
+
+        [Test]
+        public void TestAddRecord()
+        {
+            string username = "Bob Ross";
+            string email = "happytrees@example.com";
+            string password = "happy_mistakes";
+
+            Assert.IsFalse(Main.Handler.db.AddRecord(username, email, password));
+        }
+
+        [Test]
+        public void TestLogOut()
+        {
+
         }
     }
 }
