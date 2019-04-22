@@ -62,7 +62,7 @@ namespace Main
             // comment junction table
             cmd = new SQLiteCommand("create table jcomment (postid integer, commentid integer)", conn);
             cmd.ExecuteNonQuery();
-            cmd = new SQLiteCommand("create table tags (tagid integer, content string unique)", conn);
+            cmd = new SQLiteCommand("create table tags (tagid integer primary key, content string unique)", conn);
             cmd.ExecuteNonQuery();
             cmd = new SQLiteCommand("create table rating (userid integer, postid integer, rating integer)", conn);
             cmd.ExecuteNonQuery();
