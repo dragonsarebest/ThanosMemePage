@@ -8,7 +8,7 @@ function sendRequest(url, formdata, callback, type){
 		if(callback != undefined)
 		{callback(req.response);}
 	}
-    req.open(type, url, false);
+    req.open(type, url, true);
     req.send( formdata );
 }
 
@@ -78,7 +78,7 @@ function doLogin(){
 			console.log("Login Failed");
 		}
 	}
-    req.open("GET", "getSessionUid", false);
+    req.open("GET", "getSessionUid", true);
     req.send();
 	
 }

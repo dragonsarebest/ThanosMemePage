@@ -30,7 +30,7 @@ function MenuUpload() {
 		}
 	}
 	
-	req.open("GET", "getSessionUid", false);
+	req.open("GET", "getSessionUid", true);
 	req.send();
 }
 
@@ -46,7 +46,7 @@ function getUsername() {
 			text = document.createTextNode(req.response);
 		}
 	}
-	req.open("GET", "getSessionUsername", false);
+	req.open("GET", "getSessionUsername", true);
 	req.send();
 	return text;
 }
@@ -76,7 +76,7 @@ function displayEmail() {
 				text = req.response;
 			}
 		}
-		req.open("GET", "getSessionEmail", false);
+		req.open("GET", "getSessionEmail", true);
 		req.send();
 		return text;
 }
@@ -92,7 +92,7 @@ function displayUsername() {
 				text = req.response;
 			}
 		}
-		req.open("GET", "getSessionUsername", false);
+		req.open("GET", "getSessionUsername", true);
 		req.send();
 		return text;
 }
@@ -152,7 +152,7 @@ function updateInformation(){
 			console.log("Update Failed");
 		}
 	}
-    req.open("GET", "getSessionUid", false);
+    req.open("GET", "getSessionUid", true);
     req.send();
 	
 }
