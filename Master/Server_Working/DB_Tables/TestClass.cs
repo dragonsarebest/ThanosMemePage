@@ -9,15 +9,16 @@ namespace tddtest
     public class MyTests
     {
         string serverurl = "http://localhost:8888/";
-
-        public MyTests()
-        {
-        }
+        string databaseLocale = "..\\..\\testDatabase.sql";
+        public static Main.Database db;
 
         [OneTimeSetUp]
         public void setUpAllTheThings()
         {
-            //Main.MainClass();
+            System.IO.Directory.SetCurrentDirectory("C:\\Users\\Chase\\Documents\\MemeRepository\\trunk\\Master\\Server_Working");
+            Console.WriteLine(System.IO.Directory.GetCurrentDirectory());
+            db = new Main.Database(databaseLocale);
+            db.Initialize();
         }
 
         [OneTimeTearDown]
@@ -81,11 +82,26 @@ namespace tddtest
         [Test]
         public void TestAddRecord()
         {
+
             string username = "Bob Ross";
             string email = "happytrees@example.com";
             string password = "happy_mistakes";
 
-            Assert.IsFalse(Main.Handler.db.AddRecord(username, email, password));
+            db.AddRecord(email, username, password);
+            var cmd = new System.Data.SQLite.SQLiteCommand("select uid from accounts where email=$e and password=$p and username = $u", db.conn);
+            cmd.Parameters.AddWithValue("$e", email);
+            cmd.Parameters.AddWithValue("$p", password);
+            cmd.Parameters.AddWithValue("$u", username);
+            int userID = -1;
+            using (var R = cmd.ExecuteReader())
+            {
+                while (R.Read())
+                {
+                    Console.WriteLine(R);
+                    userID = (int)((long)R["uid"]);
+                }
+            }
+            Assert.AreNotEqual(userID, -1);
         }
 
         [Test]
