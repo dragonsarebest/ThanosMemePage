@@ -250,7 +250,8 @@ function clickedBoy(inputBoy)
 }
 
  $(function() {
-	$( "#candidate" ).autocomplete({
+	 if($('body').is('.MemeUploadPage')){
+		$( "#candidate" ).autocomplete({
 	   appendTo: "#listContainer",
 	   minLength: 0,
 	   source: availableTags,
@@ -269,11 +270,14 @@ function clickedBoy(inputBoy)
 		
 	.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
 	   return $( "<li>" )
+	   .data( "ui-autocomplete", item )
 	   .append( "<a>" + item.label + "<br>" + "</a>" )
 	   .appendTo( ul );
 	};
+	 }
  });
  
+ // Home page setup
  function HomeOnLoad(){
 	 showFeed();
 	 MenuUpload();

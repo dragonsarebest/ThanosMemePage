@@ -13,16 +13,19 @@
       <link rel="stylesheet" type="text/css" href="css/styleGuide.css">
       <link href="jqueryui/jquery-ui.css" rel="stylesheet">
       <link href="css/UserCreation.css" type="text/css" rel="stylesheet">
-      <script src="jquery.min.js"></script>
+      
+	  <script src="jqueryui/external/jquery/jquery.js"></script>
+	  <script src="jquery.min.js"></script>
       <script src="ourScripts.js"></script>
       <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
       <script src="bootstrap.bundle.min.js"></script>
 	  <script src="ourScripts.js"></script>
 	  <script src="menu.js"></script>
 	  <script src="meme-generator.js"></script>
+	  
       <title>Upload a MeMe</title>
    </head>
-   <body onload = "uploadSetup();">
+   <body class = "MemeUploadPage" onload = "setUp();">
       <div class="container">
       <div class="header">
 			<a href="https://youtu.be/s9q61m7S9yA" class="logo" style="position: fixed; top: 0;">Snappers!</a>
@@ -63,7 +66,7 @@
                
             </script>
             <img id="uploadPreview"/>
-            <img id="fullImage" ">
+            <img id="fullImage">
 			<button onclick = "subMeme()">submit meme here</button>
          </div>
          <div class = "column">
