@@ -69,10 +69,14 @@ function subMeme(){
     if( fileToUpload ){
         fd.append( "meme", fileToUpload );
 		fd.append( "tags", tags);
-    }
-    sendRequest( "uploadMeme", fd, () => {
+		sendRequest( "uploadMeme", fd, () => {
 		window.location.replace("index.html"); //meme spread page will go here
     });
+    }
+	else
+		console.log("No files contained by uploadImage : " + document.getElementById("uploadImage").files[0]);
+	
+    
 }
 
 function subTags()
@@ -306,4 +310,28 @@ function MenuUpload() {
 	
 	req.open("GET", "getSessionUid", false);
 	req.send();
+}
+
+function generatedMemeSaveCheck() 
+{
+	if (localStorage.getItem("transfer_img") == null)
+		console.log("No pre-Generated image saved");
+	else
+	{
+		var dataImage = localStorage.getItem("transfer_img");
+		var meme_img = new Image();
+		meme_img.src = dataImage;
+		console.log("Pre-generated image found : " + dataImage);
+		document.getElementById("uploadPreview").src = dataImage;
+		document.getElementById("fullImage").src = dataImage;
+		document.getElementById("uploadImage") = "Hoe";
+		localStorage.setItem("transfer_img", null);
+	}
+}
+
+function uploadSetup()
+{
+	setUp();
+	generatedMemeSaveCheck();
+	console.log("exited uploadSetup");
 }

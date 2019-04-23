@@ -1,18 +1,16 @@
-let topTextInput, bottomTextInput, topTextSizeInput, bottomTextSizeInput, imageInput, generateBtn, canvas, ctx;
+let topTextInput, bottomTextInput, topTextSizeInput, bottomTextSizeInput, imageInput, generateBtn, canvas, ctx, meme_img;
 
-function submitCanvasToUpload()
+
+
+	
+function storeCanvasAsImage()
 {
 	var meme_canvas = document.getElementById('meme-canvas');
-	var meme_img = new Image();
+	meme_img = new Image();
 	meme_img.src = meme_canvas.toDataURL("image/png");/**/
-	console.log("Created an Image of Canvas");
-	window.addEventListener('reload', function(image) {
-		console.log("submitCanvasToUpload event listener has been triggered");
-		document.getElementById("uploadPreview").src = image.src;
-		document.getElementById("fullImage").src = image.src;
-	})
-	console.log("submitCanvasToUpload event listener has been added");
-	window.location.href = "uploadMemePage.html";
+	localStorage.setItem("transfer_img", meme_img.src);
+	console.log("canvas stored : ");
+	window.location.assign("uploadMemePage.html");
 }
 	
 	
