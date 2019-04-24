@@ -8,14 +8,15 @@ namespace tddtest
     [TestFixture]
     public class MyTests
     {
-        string serverurl = "http://localhost:8888/";
+        string serverurl = "http://localhost:9888/";
         string databaseLocale = "..\\..\\testDatabase.sql";
         public static Main.Database db;
 
         [OneTimeSetUp]
         public void setUpAllTheThings()
         {
-            System.IO.Directory.SetCurrentDirectory("C:\\Users\\Chase\\Documents\\MemeRepository\\trunk\\Master\\Server_Working");
+            //System.IO.Directory.SetCurrentDirectory("C:\\Users\\Chase\\Documents\\MemeRepository\\trunk\\Master\\Server_Working");
+            System.IO.Directory.SetCurrentDirectory(System.IO.Directory.GetCurrentDirectory());
             Console.WriteLine(System.IO.Directory.GetCurrentDirectory());
             db = new Main.Database(databaseLocale);
             db.Initialize();
@@ -108,6 +109,14 @@ namespace tddtest
         public void TestLogOut()
         {
 
+        }
+
+        [Test]
+        public void TestPrintingCommentTables()
+        {
+            //this isn't a super important test, but it should never fail
+            //I just wanted to see if the database was empty
+            db.printCommentTables();
         }
     }
 }
