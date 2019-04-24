@@ -182,14 +182,15 @@ namespace Main
             var p = db.getMostRecentPosts();
             foreach (var pid in p)
             {
-                L.Add("<img src='/doGetMeme?pid=" + pid + "'>");
                 Add_Rating_Button(L,pid);
+                L.Add("<img src='/doGetMeme?pid=" + pid + "'>");
             }
             return string.Join("<br>", L);
         }
+
         public void Add_Rating_Button(List<string> L,int pid)
         {
-            L.Add("<div>");
+            L.Add("<div class='rating'>");
             L.Add("<input type='radio' onclick=doRating(1); name = "+pid+"   id='Rating_1' value = '1' > ");
             L.Add("<input type='radio' onclick=doRating(2); name = "+pid+"  id='Rating_2' value = '2' > ");
             L.Add("<input type='radio' onclick=doRating(3); name = "+pid+"  id='Rating_3' value = '3' > ");
@@ -197,10 +198,11 @@ namespace Main
             L.Add("<input type='radio' onclick=doRating(5); name = " + pid + "  id='Rating_5' value = '5' > ");
             L.Add("</div>");
         }
+
         [BlueberryPie.Expose]
         public string doRating(string Post_Id, string Rating)
         {
-   
+
             if (db.doRating(Int32.Parse(Post_Id), Int32.Parse(Rating), Session.data["uid"]))
             {
                 return "Added";
