@@ -1,3 +1,5 @@
+"use strict";
+
 function sendRequest(url, formdata, callback){
     var req = new XMLHttpRequest();
     req.addEventListener( "load", () => {
@@ -30,7 +32,7 @@ function MenuUpload() {
 		}
 	}
 	
-	req.open("GET", "getSessionUid", true);
+	req.open("GET", "getSessionUid", false);
 	req.send();
 }
 
@@ -46,7 +48,7 @@ function getUsername() {
 			text = document.createTextNode(req.response);
 		}
 	}
-	req.open("GET", "getSessionUsername", true);
+	req.open("GET", "getSessionUsername", false);
 	req.send();
 	return text;
 }
@@ -76,7 +78,7 @@ function displayEmail() {
 				text = req.response;
 			}
 		}
-		req.open("GET", "getSessionEmail", true);
+		req.open("GET", "getSessionEmail", false);
 		req.send();
 		return text;
 }
@@ -87,12 +89,12 @@ function displayUsername() {
 		req.onload = function() {
 			
 			if (req.response == "not logged in") {
-				text = 'username';
+				text = 'Username';
 			} else {
 				text = req.response;
 			}
 		}
-		req.open("GET", "getSessionUsername", true);
+		req.open("GET", "getSessionUsername", false);
 		req.send();
 		return text;
 }
@@ -152,7 +154,7 @@ function updateInformation(){
 			console.log("Update Failed");
 		}
 	}
-    req.open("GET", "getSessionUid", true);
+    req.open("GET", "getSessionUid", false);
     req.send();
 	
 }
