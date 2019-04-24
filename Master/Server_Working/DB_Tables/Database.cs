@@ -138,7 +138,7 @@ namespace Main
         }
         public bool doRating(int Post_Id, int Rating, int Uid)
         {
-            var cmd = new SQLiteCommand("insert into ratings (userid, postid, rating) values ($userid, $postid, $rating");
+            var cmd = new SQLiteCommand("insert into rating (userid, postid, rating) values ($userid, $postid, $rating", conn);
             cmd.Parameters.AddWithValue("$userid", Uid);
             cmd.Parameters.AddWithValue("$postid", Post_Id);
             cmd.Parameters.AddWithValue("$rating", Rating);

@@ -162,8 +162,8 @@ function doRating(val)
 {
 	var inp = document.getElementById("Rating_"+val);
 	var fd = new FormData();
-	fd.append( "Post_Id", parseInt(document.getElementById("name")));
-	fd.append( "Rating", parseInt(val) );
+	fd.append( "Post_Id", inp.name );
+	fd.append( "Rating", val );
 	sendRequest("doRating", fd, undefined, "POST");
 }
 function encodeHTML(s) {

@@ -198,9 +198,10 @@ namespace Main
             L.Add("</div>");
         }
         [BlueberryPie.Expose]
-        public string doRating(int Post_Id, int Rating)
+        public string doRating(string Post_Id, string Rating)
         {
-            if (db.doRating(Post_Id, Rating, Session.data["uid"]))
+   
+            if (db.doRating(Int32.Parse(Post_Id), Int32.Parse(Rating), Session.data["uid"]))
             {
                 return "Added";
             }
