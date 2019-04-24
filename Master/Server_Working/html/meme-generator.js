@@ -9,7 +9,7 @@ function storeCanvasAsImage()
 	meme_img = new Image();
 	meme_img.src = meme_canvas.toDataURL("image/png");/**/
 	localStorage.setItem("transfer_img", meme_img.src);
-	console.log("canvas stored : ");
+	console.log("canvas stored : meme_img.src");
 	window.location.assign("uploadMemePage.html");
 }
 	

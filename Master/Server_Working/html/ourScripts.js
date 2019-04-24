@@ -63,16 +63,28 @@ function setUp()
 // uploads image to the database and redirects user to index.html 
 function subMeme(){
 	var tags = subTags();
-	var ourMeme = document.getElementById("fullImage");
+	//var ourMeme = document.getElementById("fullImage");
 	var fd = new FormData();
     var fileToUpload = document.getElementById("uploadImage").files[0];
     if( fileToUpload ){
         fd.append( "meme", fileToUpload );
 		fd.append( "tags", tags);
+		console.log("Files[0] contained by uploadImage : " + document.getElementById("uploadImage").files[0]);
 		sendRequest( "uploadMeme", fd, () => {
 		window.location.replace("index.html"); //meme spread page will go here
-    });
+		});
     }
+	else if (localStorage.getItem("transfer_img"))
+	{
+		fileToUpload = localStorage.getItem("transfer_img");
+		fd.append( "meme", fileToUpload );
+		fd.append( "tags", tags);
+		//console.log("Files[0] contained by uploadImage : " + document.getElementById("uploadImage").files[0]);
+		sendRequest( "uploadMeme", fd, () => {
+		window.location.replace("index.html"); //meme spread page will go here
+		});
+		localStorage.setItem("transfer_img", null);
+	}
 	else
 		console.log("No files contained by uploadImage : " + document.getElementById("uploadImage").files[0]);
 	
@@ -325,18 +337,27 @@ function MenuUpload() {
 
 function generatedMemeSaveCheck() 
 {
+	document.getElementById("uploadImage").required = false;
+	console.log(document.getElementById("uploadImage").type);
 	if (localStorage.getItem("transfer_img") == null)
 		console.log("No pre-Generated image saved");
 	else
 	{
+		//var oFReader = new FileWriter();
+		//oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+	   
+		//oFReader.onload = function (oFREvent) {
+		//	document.getElementById("uploadPreview").src = oFREvent.target.result;
+		//	document.getElementById("fullImage").src = oFREvent.target.result;
+			
 		var dataImage = localStorage.getItem("transfer_img");
-		var meme_img = new Image();
-		meme_img.src = dataImage;
+		//var meme_img = new Image();
+		//meme_img.src = dataImage;
 		console.log("Pre-generated image found : " + dataImage);
 		document.getElementById("uploadPreview").src = dataImage;
 		document.getElementById("fullImage").src = dataImage;
-		document.getElementById("uploadImage") = "Hoe";
-		localStorage.setItem("transfer_img", null);
+		//document.getElementById("uploadImage").files[0] = toDataURL(dataImage);
+		//localStorage.setItem("transfer_img", null);
 	}
 }
 
