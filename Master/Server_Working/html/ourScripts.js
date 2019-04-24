@@ -158,7 +158,14 @@ function clickedComment(inputBoy)
 		}
 	}	
 }
-
+function doRating(val)
+{
+	var inp = document.getElementById("Rating_"+val);
+	var fd = new FormData();
+	fd.append( "Post_Id", parseInt(document.getElementById("name")));
+	fd.append( "Rating", parseInt(val) );
+	sendRequest("doRating", fd, undefined, "POST");
+}
 function encodeHTML(s) {
     return s.replace('/&/g', '&amp;').replace('/</g', '&lt;').replace('/"/g', '&quot;').replace('/>/g', '&gt;');
 }

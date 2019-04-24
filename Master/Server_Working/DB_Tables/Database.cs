@@ -136,6 +136,24 @@ namespace Main
                 return false;
             }
         }
+        public bool doRating(int Post_Id, int Rating, int Uid)
+        {
+            var cmd = new SQLiteCommand("insert into ratings (userid, postid, rating) values ($userid, $postid, $rating");
+            cmd.Parameters.AddWithValue("$userid", Uid);
+            cmd.Parameters.AddWithValue("$postid", Post_Id);
+            cmd.Parameters.AddWithValue("$rating", Rating);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("SQL made a booboo");
+                Console.WriteLine(e);
+                return false;
+            }
+        }
 
         public bool UploadMeme(byte[] memeData, int userID, string[] tagList)
         {
