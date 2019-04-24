@@ -35,56 +35,9 @@ namespace tddtest
             //Database.InitializeDatabase();
         }
 
-        /*
-        [Test]
-        public void testGetRegistrationPage()
-        {
-            WebClient wc = new WebClient();
-            string s = wc.DownloadString(serverurl + "signup.html");
-            Assert.AreNotEqual(-1, s.IndexOf("Register"));
-        }
-        
-        [Test]
-        public void testSubmitData()
-        {
-            WebClient wc = new WebClient();
-            var nvc = new NameValueCollection();
-            nvc.Add("username", "Bob Ross");
-            nvc.Add("email", "happylittletrees@example.com");
-            nvc.Add("password", "mistakes");
-            byte[] resp = wc.UploadValues(serverurl + "signup.html", nvc);
-            string s = System.Text.Encoding.UTF8.GetString(resp);
-            Console.WriteLine("Response: \n\n");
-            Console.WriteLine(s);
-            Assert.AreEqual("signup.html", s);
-        }
-
-        [Test]
-        public void testNoDuplicateAccount()
-        {
-            WebClient wc = new WebClient();
-            var nvc = new NameValueCollection();
-            nvc.Add("email", "bob@example.com");
-            nvc.Add("password", "s3cr3t");
-            nvc.Add("realname", "Bob Bob A Rebob");
-            byte[] resp = wc.UploadValues(serverurl + "doRegister", nvc);
-            string s = System.Text.Encoding.UTF8.GetString(resp);
-            Assert.AreEqual("CREATED", s);
-
-            nvc = new NameValueCollection();
-            nvc.Add("email", "bob@example.com");
-            nvc.Add("password", "s3cr3tiv3");
-            nvc.Add("realname", "Alice");
-            resp = wc.UploadValues(serverurl + "user", nvc);
-            s = System.Text.Encoding.UTF8.GetString(resp);
-            Assert.AreEqual("FAILED", s);
-        }
-        */
-
         [Test]
         public void TestAddRecord()
         {
-
             string username = "Bob Ross";
             string email = "happytrees@example.com";
             string password = "happy_mistakes";
@@ -107,9 +60,63 @@ namespace tddtest
         }
 
         [Test]
-        public void TestLogOut()
+        public void TestPrintingAccountTables()
         {
+            // another test just to check the table isn't empty
+            db.AddRecord("testemail1@example.com", "Coolguy1", "thebestpassword1");
+            db.AddRecord("testemail2@example.com", "Coolguy2", "thebestpassword2");
+            db.AddRecord("testemail3@example.com", "Coolguy3", "thebestpassword3");
 
+            db.printAccountTables();
+        }
+
+        [Test]
+        public void TestAddingTag()
+        {
+            string tag1 = "test_1";
+            string tag2 = "test_2";
+            string tag3 = "test_3";
+            Assert.IsTrue(db.addTag(tag1));
+            Assert.IsTrue(db.addTag(tag2));
+            Assert.IsTrue(db.addTag(tag3));
+
+            string allTags = db.getAllTags();
+        }
+
+        [Test]
+        public void TestAddingComment()
+        {
+            string comment1 = "test_1";
+            string comment2 = "test_2";
+            string comment3 = "test_3";
+            Assert.IsTrue(db.addComment(comment1));
+            Assert.IsTrue(db.addComment(comment2));
+            Assert.IsTrue(db.addComment(comment3));
+
+            db.printCommentTables();
+        }
+
+        [Test]
+        public void TestGettingUsername()
+        {
+            string email = "anewemail@example.com";
+            string username = "New Guy";
+            string password = "Super_Secret_42";
+            string email2 = "anewemail2@example.com";
+            string username2 = "New Guy 2";
+            string password2 = "Super_Secret_43";
+
+            db.AddRecord(email, username, password);
+            db.AddRecord(email2, username2, password2);
+
+            string rcUser = db.getUsername(email, password);
+            Assert.Equals(rcUser, username);
+
+            rcUser = db.getUsername(email2, password2);
+            Assert.Equals(rcUser, username2);
+
+            rcUser = db.getUsername(email, password2);  // account doesn't exist
+            Assert.Equals(rcUser, "not logged in");
         }
 
         [Test]
