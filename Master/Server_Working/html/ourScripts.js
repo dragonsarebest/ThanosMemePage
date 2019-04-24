@@ -172,11 +172,15 @@ function clickedComment(inputBoy)
 }
 function doRating(val)
 {
-	var inp = document.getElementById("Rating_"+val);
-	var fd = new FormData();
-	fd.append( "Post_Id", inp.name );
-	fd.append( "Rating", val );
-	sendRequest("doRating", fd, undefined, "POST");
+	var req = new XMLHttpRequest();
+	var uid = req.open("GET", "getSessionUid", true);
+	if(uid != -1){
+		var inp = document.getElementById("Rating_"+val);
+		var fd = new FormData();
+		fd.append( "Post_Id", inp.name );
+		fd.append( "Rating", val );
+		sendRequest("doRating", fd, undefined, "POST");
+		}
 }
 function encodeHTML(s) {
     return s.replace('/&/g', '&amp;').replace('/</g', '&lt;').replace('/"/g', '&quot;').replace('/>/g', '&gt;');

@@ -182,7 +182,14 @@ namespace Main
             var p = db.getMostRecentPosts();
             foreach (var pid in p)
             {
-                Add_Rating_Button(L,pid);
+                if (Session.data.ContainsKey("uid"))
+                {
+                    if (Session.data["uid"] != -1)
+                    {
+                        Add_Rating_Button(L, pid);
+                    }
+                }
+                
                 L.Add("<img src='/doGetMeme?pid=" + pid + "'>");
             }
             return string.Join("<br>", L);
@@ -222,9 +229,9 @@ namespace Main
             //Handler.db.Initialize();              //Only run this if you want to reset the database//
             Handler.db.printAccountTables();        //Print the users in the database inside the Accounts table
             Handler.db.printCommentTables();
-
             var srv = new BlueberryPie.Server<Handler>(port: 9888, staticFileDir: "..\\..\\..\\html");
             srv.Start();
+            
         }
     }
 }
