@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System.Net;
 using System.Collections.Specialized;
+using System.Collections.Generic;
 
 namespace tddtest
 {
@@ -117,6 +118,18 @@ namespace tddtest
             //this isn't a super important test, but it should never fail
             //I just wanted to see if the database was empty
             db.printCommentTables();
+        }
+
+        [Test]
+        public void TestGettingMostRecentPosts()
+        {
+            List<int> A = new List<int>();
+            A = db.getMostRecentPosts();
+            foreach (int num in A)
+            {
+                Console.WriteLine(num);
+            }
+            Assert.IsNotNull(A);
         }
     }
 }
