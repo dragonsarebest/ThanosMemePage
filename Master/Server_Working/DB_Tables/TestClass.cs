@@ -131,6 +131,15 @@ namespace tddtest
             }
             Assert.IsNotNull(A);
         }
+
+        [Test]
+        public void checkLogIn()
+        {
+            db.AddRecord("emailtest@123.com", "usernameTest", "PasswordTest");
+            string user = db.getUsername("emailtest@123.com", "PasswordTest");
+            Console.WriteLine(user);
+            Assert.AreEqual(user, "usernameTest");
+        }
     }
 }
 
