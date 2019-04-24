@@ -140,6 +140,14 @@ namespace tddtest
             Console.WriteLine(user);
             Assert.AreEqual(user, "usernameTest");
         }
+
+        [Test]
+        public void FailCheckLogIn()
+        {
+            //checking to make sure you can't get a username with an email that isn't registered
+            string user = db.getUsername("FAKEEMAIL@123.com", "PasswordTest");
+            Assert.AreEqual(user, "not logged in");
+        }
     }
 }
 
