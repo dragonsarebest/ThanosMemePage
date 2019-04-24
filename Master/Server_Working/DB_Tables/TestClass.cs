@@ -148,6 +148,15 @@ namespace tddtest
             string user = db.getUsername("FAKEEMAIL@123.com", "PasswordTest");
             Assert.AreEqual(user, "not logged in");
         }
+
+        [Test]
+        public void checkGetEmail()
+        {
+            db.AddRecord("emailtest@123.com", "usernameTest", "PasswordTest");
+            string user = db.getEmail("emailtest@123.com", "PasswordTest");
+            Console.WriteLine(user);
+            Assert.AreEqual(user, "emailtest@123.com");
+        }
     }
 }
 
