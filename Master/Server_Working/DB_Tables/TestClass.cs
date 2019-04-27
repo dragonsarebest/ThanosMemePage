@@ -188,7 +188,7 @@ namespace tddtest
             byte[] bArray = { 1, 2, 3, 4 };
             string[] tags = { "TestTag" };
             bool upload = db.UploadMeme(bArray, 420, tags);
-            byte[] data = db.GetMeme(2);
+            byte[] data = db.GetMeme(2); // this is a 2 because it is the second meme uploaded in the test class. This will need changed probably
             Assert.AreEqual(bArray, data);
         }
 
