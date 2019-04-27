@@ -172,6 +172,17 @@ namespace tddtest
             string user = db.getEmail("FAKEEMAIL@123.com", "PasswordTest");
             Assert.AreEqual(user, "not logged in");
         }
+
+        [Test]
+        public void testUploadMeme()
+        {
+            byte[] bArray = { 1, 2, 3, 4 };
+            string[] tags = { "TestTag" };
+            bool upload = db.UploadMeme(bArray, 69, tags);
+            Assert.IsTrue(upload);
+        }
+
+        
     }
 }
 
