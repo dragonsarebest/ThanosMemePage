@@ -57,11 +57,11 @@
 		<div class="container">
 			<p>
 				<textarea id="top-text" class="text_field"></textarea>
-				Text size: <input type="range" id="top-text-size-input" min="0.05" max="0.25" value="0.15" step="0.01">
+				<br />Text size: <input type="range" id="top-text-size-input" min="0.05" max="0.25" value="0.15" step="0.01">
 			</p>
 			<p>
 				<textarea id="bottom-text" class="text_field"></textarea>
-				Text size: <input type="range" id="bottom-text-size-input" min="0.05" max="0.25" value="0.15" step="0.01">
+				<br />Text size: <input type="range" id="bottom-text-size-input" min="0.05" max="0.25" value="0.15" step="0.01">
 			</p>
 			<p>
 				<input type="file" id="image-input" accept="image/*" class="gen_button">
@@ -70,6 +70,8 @@
 				<button id="generate-btn" class="gen_button">Generate!</button>
 				<button id="uploadpage-btn" onclick="storeCanvasAsImage()" class="up_button">Upload?</button>
 			</p>
+		</div>
+		<div class="canvas_container">
 			<p>
 				<canvas id="meme-canvas" title="Right click -> &quot;Save image as...&quot;"></canvas>
 			</p>

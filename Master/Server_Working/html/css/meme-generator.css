@@ -8,13 +8,21 @@
 }
 
 #meme-canvas {
-    width: 100%;
+	width: 100%;
+}
+
+.canvas_container {
+	float: right;
+	width: 30%;
+	margin-right: 15%;
 }
 
 .container {
-	padding-left: 25%;
-	margin-left: 15%;
-
+	padding-left: 20%;
+	margin-left: 0%;
+	position: fixed;
+	float: left;
+	width: 50%;
 }
 
 .gen_button {
@@ -23,4 +31,6 @@
 
 .text_field {
 	background-color: #D9C63C;
+	border-radius: 10px;
+	width: 100%;
 }
