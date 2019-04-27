@@ -182,7 +182,17 @@ namespace tddtest
             Assert.IsTrue(upload);
         }
 
-        
+        [Test]
+        public void testUploadMemeRetrival()
+        {
+            byte[] bArray = { 1, 2, 3, 4 };
+            string[] tags = { "TestTag" };
+            bool upload = db.UploadMeme(bArray, 420, tags);
+            byte[] data = db.GetMeme(2);
+            Assert.AreEqual(bArray, data);
+        }
+
+
     }
 }
 
