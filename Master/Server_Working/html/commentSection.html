@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8">
+		<meta name="viewport" 
+		content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+		
+		<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		<link rel="manifest" href="images/site.webmanifest">
+		
+		<link href="bootstrap.min.css" rel="stylesheet">
+		<link href="jqueryui/jquery-ui.css" rel="stylesheet">
+		<!-- <link href="css/UserCreation.css" type="text/css" rel="stylesheet"> -->
+		<link href="css/master.css" type="text/css" rel="stylesheet">
+		
+		<script src="jqueryui/external/jquery/jquery.js"></script>
+		<script src="jqueryui/jquery-ui.js"></script>
+		<script src="bootstrap.bundle.min.js"></script>
+		
+		<script src="ourScripts.js"></script>
+		<script src="menu.js"></script>
+		
+
+		<title>Thanos Meme Pages</title>
+    </head>
+	
+    <body onload="onLoadCommentSection()">
+		<div class="header">
+		
+			<a href="https://youtu.be/s9q61m7S9yA" class="logo" style="position: fixed; top: 0;">Snappers!</a>
+
+			<div class="header-center">
+				<a class="active" href="index.html" width="100%"><img src="./images/red.png" alt="HOME" height="15%"><br />HOME</a>
+				<a href="about.html" width="100%"><img src="./images/purple.png" alt="ABOUT" height="45%"><br />ABOUT</a>
+				<a href="User.html" id="RegisterB"><img src="./images/yellow.png" alt="USER" height="45%"><br />USER</a>
+				<a href="account.html"  id="AccountB"><img src="./images/yellow.png" alt="CONTACT" height="10%" onload="display()"><br /></a>
+				<a href="Contact.html"><img src="./images/blue.png" alt="CONTACT" height="10%"><br />CONTACT</a>
+				<a href="uploadMemePage.html"  id="UploadB"><img src="./images/orange.png" alt="CONTACT" height="10%"><br />UPLOAD</a>
+			</div>
+
+		</div>
+		
+
+	  
+		
+		<div id = feed>
+            <div id = "subHeader">
+               <font color = #A788A8 size = 5>Comment Section</font> 
+            </div>
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">new comment</button>
+			
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" role="button">
+				<div class="modal-dialog">
+
+				  <!-- Modal content-->
+				  <div class="modal-content">
+					<div class="modal-header">
+						<p>user name and date will go here</p>
+					</div>
+					<div class="modal-body">
+						<textarea id = "myComment" placeholder = "make a comment..." oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+					</div>
+					<div class="modal-footer">
+						<div id = "currentComment" tag = "none" style = "visibility = hidden;"></div>
+						<button type = "button" class="btn btn-default" data-dismiss="modal" id = "none" onclick = "replyToComment()">reply</button>
+						<button type = "button" class="btn btn-default" data-dismiss="modal" id = "comment" onclick = "addComment();">submit</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" onclick = "removeComment()">remove comment</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				  </div>
+				  
+				</div>
+			</div>
+			
+            <div class="ScrollBox">
+               <ul id = "commentList">
+               </ul>
+            </div>
+         </div>
+		 
+		<div id = "hidden field" style =  "visibility = false;"></div>
+
+<!-- <footer> Temp footer</footer> -->
+
+    </body>
+	
+</html>

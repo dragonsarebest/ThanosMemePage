@@ -103,73 +103,133 @@ function subTags()
 	return stringTag;
 }
 
-function addComment(){
+function addComment(parentElement){
 	var fd = new FormData();
     var ul = document.getElementById("commentList");
     var candidate = document.getElementById("myComment");
+	var req = new XMLHttpRequest();
+	var uid = req.open("GET", "getSessionUid", true);
+	
+	if(candidate.value == "")
+		return;
+	
+	var currentComment = document.getElementById("currentComment");
 	
 	var newValue = removeSpecial(candidate.value);
 	newValue = removeSpaces(newValue);
+	if(parentElement == undefined)
+		removeComment();
 	
 	fd.append("comment", newValue);
 	
 	var li = document.createElement("li");
 	li.setAttribute('id',newValue);
 	var b = document.createElement('button');
-	
+	b.setAttribute("type", "button");
+	b.setAttribute("class", "btn btn-info btn-lg");
+	b.setAttribute("data-toggle", "modal");
+	b.setAttribute("data-target", "#myModal");
 	b.setAttribute("value", newValue);
 	b.setAttribute("id", newValue);
-	b.setAttribute("style", "margin:5px;");
-	b.setAttribute("onClick", "clickedComment("+newValue+")");
+	if(parentElement == undefined)
+		li.setAttribute("style", "margin:5px; position: relative; ");
+	else
+		li.setAttribute("style", "margin:5px; position: absolute; transform: translateX(100%)");
+	b.setAttribute("onClick", "setValueComment("+newValue+")");
+	console.log(newValue);
 	b.appendChild(document.createTextNode(candidate.value));
 	
-	li.appendChild(b);
-	ul.appendChild(li);	
+	//create a new modal for replies to this comment
 	
-	sendRequest("addComment", fd, )
-	
-	var req = new XMLHttpRequest();
-    req.addEventListener( "load", () => {
-        if( req.readyState === 4 && req.status === 200 ){
-            console.log("addComment: "+req.responseText);
-            if( callback != undefined )
-                callback(req);
-        }
-    });
-    req.open("POST", "addComment" );
-    req.send( fd );
-}
-
-function clickedComment(inputBoy)
-{
-	//firefox inputBoy is li, chrome inputBoy is htmlcollection envolping a li
-	
-	if(HTMLCollection.prototype.isPrototypeOf(inputBoy))
+	if(parentElement != undefined)
 	{
-		//console.log("we in chrome");
-		//we need to get the li out of this HTMLCollection
-		inputBoy = inputBoy.item(0);
+		li.appendChild(b);
+		parentElement.appendChild(li);
+		fd.append("parent", parentElement.id);
+		console.log(parentElement.id);
 	}
 	else
 	{
-		//console.log("we in firefox");
-		//code stays the same
+		console.log("no parent");
+		li.appendChild(b);
+		ul.appendChild(li);	
+		fd.append("parent", "none");
 	}
-		
+	
+	
+	sendRequest("addComment", fd)
+	
+	var req = new XMLHttpRequest();
+	req.addEventListener( "load", () => {
+		if( req.readyState === 4 && req.status === 200 ){
+			console.log("addComment: "+req.responseText);
+			if( callback != undefined )
+				callback(req);
+		}
+	});
+	req.open("POST", "addComment" );
+	req.send( fd );
+	
+	candidate.value = "";
+}
+
+function setValueComment(balue)
+{
+	var currentComment = document.getElementById("currentComment");
+	currentComment.setAttribute("tag", balue.id);
+	console.log(balue.id);
+}
+
+function replyToComment()
+{
+	var currentComment = document.getElementById("currentComment");
+	var currentCommentID = currentComment.getAttribute("tag");
+	
 	var ul = document.getElementById("commentList");
+		
 	var list = ul.childNodes;
+	
+	list = ul.getElementsByTagName("*");
+	
 	for(var i = 0; i < list.length; i++)
 	{
 		var temp = list[i].id;
 		if(temp != undefined)
 			temp = removeSpaces(temp);
 		//console.log("checking vs: " + temp);
-		if(temp == inputBoy.id)
+		if(temp == currentCommentID)
 		{
-			ul.removeChild(list[i]);
+			var parentComment = list[i];
+			addComment(list[i]);
 		}
 	}	
 }
+
+function removeComment()
+{
+	var currentComment = document.getElementById("currentComment");
+	var inputBoy = currentComment.getAttribute("tag");
+		
+	var ul = document.getElementById("commentList");
+	
+	var list = ul.childNodes;
+	
+	list = ul.getElementsByTagName("*");
+	
+	for(var i = 0; i < list.length; i++)
+	{
+		var temp = list[i].id;
+		if(temp != undefined)
+			temp = removeSpaces(temp);
+		//console.log("checking vs: " + temp);
+		if(temp == inputBoy)
+		{
+			//ul.removeChild(list[i]);
+			list[i].remove();
+		}
+	}		
+}
+
 function doRating(val)
 {
 	var req = new XMLHttpRequest();
@@ -325,6 +385,7 @@ function breakUpMemesIntoButtons()
 	for (var i = 0; i < elementals.length; i++)
 	{
 		var string = "image" + i;
+		//console.log(string);
 		elementals[i].setAttribute("class", "feedImage");
 		elementals[i].setAttribute("id", string);
 		elementals[i].setAttribute("visibility", "visible");
@@ -332,10 +393,28 @@ function breakUpMemesIntoButtons()
 	}
 }
 
-function getCommentSection(tag)
+function onLoadCommentSection()
 {
-	var imageToQuestion = document.getElementById(tag)
-	console.log(tag);
+	console.log("hello there kenobi");
+}
+
+function getCommentSection(id)
+{
+	if(HTMLCollection.prototype.isPrototypeOf(id))
+	{
+		//console.log("we in chrome");
+		//we need to get the li out of this HTMLCollection
+		id = id.item(0);
+	}
+	else
+	{
+		//console.log("we in firefox");
+		//code stays the same
+		id = id.getAttribute("id");
+	}
+	console.log(id);
+	var imageToQuestion = document.getElementById(id)
+	var postID = imageToQuestion.getAttribute("tag")
 }
 
 function MenuUpload() {
