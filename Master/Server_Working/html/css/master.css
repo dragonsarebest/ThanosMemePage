@@ -69,8 +69,15 @@ body {
 }
 
 /*Center images on the home meme feed*/
-#feed img {
+#feed img{
     width: 50%;
+    border-radius: 15px;
+    display: block;
+    margin: auto;
+}
+
+.feedImage{
+	width: 50%;
     border-radius: 15px;
     display: block;
     margin: auto;

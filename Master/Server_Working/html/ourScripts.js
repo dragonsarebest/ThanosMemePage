@@ -313,7 +313,29 @@ function showFeed(){
 	sendRequest("/topTen", null, (xhr)=>{
 		bigdiv = document.getElementById("feed");
 		bigdiv.innerHTML = xhr.responseText;
+		breakUpMemesIntoButtons();
 	});
+}
+
+function breakUpMemesIntoButtons()
+{
+	var feed = document.getElementById("feed");
+	var elementals = feed.getElementsByTagName('img');
+
+	for (var i = 0; i < elementals.length; i++)
+	{
+		var string = "image" + i;
+		elementals[i].setAttribute("class", "feedImage");
+		elementals[i].setAttribute("id", string);
+		elementals[i].setAttribute("visibility", "visible");
+		elementals[i].setAttribute("onClick", "getCommentSection("+string+")");		
+	}
+}
+
+function getCommentSection(tag)
+{
+	var imageToQuestion = document.getElementById(tag)
+	console.log(tag);
 }
 
 function MenuUpload() {
