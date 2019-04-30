@@ -369,12 +369,25 @@ function clickedBoy(inputBoy)
  
 // function to show memes in order on the home page 
 function showFeed(){
-	var bigdiv = document.getElementById("feed");
-	sendRequest("/topTen", null, (xhr)=>{
+	var selectbox = document.getElementById("setting");
+	var userSetting = selectbox.options[selectbox.selectedIndex].value;
+	if(userSetting == "N2O"){
+		var bigdiv = document.getElementById("feed");
+		sendRequest("/getMemeNewestToOldest", null, (xhr)=>{
 		bigdiv = document.getElementById("feed");
 		bigdiv.innerHTML = xhr.responseText;
 		breakUpMemesIntoButtons();
 	});
+	}
+	if(userSetting =="O2N")
+	{
+		var bigdiv = document.getElementById("feed");
+		sendRequest("/getMemeOldestToNewest", null, (xhr)=>{
+		bigdiv = document.getElementById("feed");
+		bigdiv.innerHTML = xhr.responseText;
+		breakUpMemesIntoButtons();
+	});
+	}
 }
 
 function breakUpMemesIntoButtons()

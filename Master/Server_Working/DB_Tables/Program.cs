@@ -176,7 +176,7 @@ namespace Main
 
         // Gets top ten most recent posts based on submission times
         [BlueberryPie.Expose]
-        public string topTen()
+        public string getMemeNewestToOldest()
         {
             List<string> L = new List<string>();
             var p = db.getMostRecentPosts();
@@ -190,6 +190,27 @@ namespace Main
                     }
                 }
                 
+                L.Add("<img src='/doGetMeme?pid=" + pid + "'>");
+            }
+            return string.Join("<br>", L);
+        }
+
+        // Gets top ten most recent posts based on submission times
+        [BlueberryPie.Expose]
+        public string getMemeOldestToNewest()
+        {
+            List<string> L = new List<string>();
+            var p = db.getOldestPosts();
+            foreach (var pid in p)
+            {
+                if (Session.data.ContainsKey("uid"))
+                {
+                    if (Session.data["uid"] != -1)
+                    {
+                        Add_Rating_Button(L, pid);
+                    }
+                }
+
                 L.Add("<img src='/doGetMeme?pid=" + pid + "'>");
             }
             return string.Join("<br>", L);
