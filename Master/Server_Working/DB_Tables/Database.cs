@@ -141,6 +141,30 @@ namespace Main
                 return false;
             }
         }
+
+        // updates old account
+        public bool UpdateRecord(string email, string username, string password, string oldPassword, int uid)
+        {
+            //update Email
+            var cmd = new SQLiteCommand("UPDATE accounts SET username = @nu, password = @np, email = @ne Where uid = @u", conn);
+            cmd.Parameters.AddWithValue("@nu", username);
+            cmd.Parameters.AddWithValue("@np", password);
+            cmd.Parameters.AddWithValue("@ne", email);
+            cmd.Parameters.AddWithValue("@u", uid.ToString());
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("SQL Made a BooBoo");
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+
         public List<int> getMostRecentPosts()
         {
             List<int> L = new List<int>();
@@ -185,6 +209,22 @@ namespace Main
                 while (R.Read())
                 {
                     string name = (string)R["username"]; // Only prints out the username (can change what is in the quotes)
+                    return name;
+                }
+            }
+            return "not logged in";
+        }
+
+        public string getEmail(string email, string password)
+        {
+            var cmd = new SQLiteCommand("select Email from accounts where email=$e and password=$p", conn);
+            cmd.Parameters.AddWithValue("$e", email);
+            cmd.Parameters.AddWithValue("$p", password);
+            using (var R = cmd.ExecuteReader())
+            {
+                while (R.Read())
+                {
+                    string name = (string)R["Email"]; // Only prints out the username (can change what is in the quotes)
                     return name;
                 }
             }

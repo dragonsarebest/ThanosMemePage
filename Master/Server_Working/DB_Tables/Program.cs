@@ -71,7 +71,6 @@ namespace Main
             return Session.data["uid"].ToString();
 		}
 
-        // For in-session fetches
         [BlueberryPie.Expose]
         public string getSessionUsername()
         {
@@ -80,15 +79,40 @@ namespace Main
             return Session.data["username"].ToString();
         }
 
+        // For in-session fetches
+        [BlueberryPie.Expose]
+        public string getSessionEmail()
+        {
+            if (!Session.data.ContainsKey("Email"))
+                return "not logged in";
+            return Session.data["Email"].ToString();
+        }
+
         //uses canned username/password
         [BlueberryPie.Expose]
         public string doLogin(string email, string password)
         {
             Session.data["uid"] = db.getUid(email, password);
             Session.data["username"] = db.getUsername(email, password);
+            Session.data["Email"] = db.getEmail(email, password);
             Console.WriteLine("Uid: " + db.getUid(email, password));
             return "OK";
         }
+
+        //Updates record of an account
+        [BlueberryPie.Expose]
+        public string UpdateRecord(string email, string username, string password, string oldPassword, int uid)
+        {
+            if (db.UpdateRecord(email, username, password, oldPassword, uid))
+            {
+                Session.data["uid"] = db.getUid(email, password);
+                Session.data["username"] = db.getUsername(email, password);
+                Session.data["Email"] = db.getEmail(email, password);
+                return "CREATED";
+            }
+            return "FAILED";
+        }
+
 
         // Sets the session data to not contain a session ID
         [BlueberryPie.Expose]
