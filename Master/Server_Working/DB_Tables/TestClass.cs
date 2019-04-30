@@ -81,6 +81,7 @@ namespace tddtest
             Assert.IsTrue(db.addTag(tag3));
 
             string allTags = db.getAllTags();
+            Console.WriteLine(allTags);
         }
 
         [Test]
