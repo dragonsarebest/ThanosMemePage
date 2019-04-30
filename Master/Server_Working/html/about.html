@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<!-- References = https://www.w3schools.com -->
+<title>Snappers About Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+</style>
+<body>
+ <head>
 		<meta charset="utf-8">
 		<meta name="viewport" 
 			content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,66 +32,135 @@
 		
 		<script src="menu.js"></script>
 		
-		<style>
-			p {
-				text-align: center;
-				font-size: 60px;
-				margin-top: 200px;
-			}
-		</style>
-		
 		<title>Thanos Meme Pages</title>
     </head>
-	
-    <body onload="MenuUpload();">
-		<div class="header">
-			<a href="https://youtu.be/s9q61m7S9yA" class="logo" style="position: fixed; top: 0;">Snappers!</a>
 
-			<div class="header-center">
-				<a href="index.html" width="100%"><img style="" src="./images/red.png" alt="HOME" height="15%"><br />HOME</a>
-				<a class="active" href="about.html" width="100%" style=""><img src="./images/purple.png" alt="ABOUT" height="45%"><br />ABOUT</a>
-				<a href="User.html" id="RegisterB"><img src="./images/yellow.png" alt="USER" height="45%"><br />USER</a>
-				<a href="account.html"  id="AccountB"><img src="./images/yellow.png" alt="CONTACT" height="10%" onload="display()"><br /></a>
-				<a href="Contact.html"><img src="./images/blue.png" alt="CONTACT" height="10%"><br />CONTACT</a>
-				<a href="uploadMemePage.html"  id="UploadB"><img src="./images/orange.png" alt="CONTACT" height="10%"><br />UPLOAD</a>
-			</div>
-
-		</div>
 		
-<!-- <header1> About </header1> -->
+		
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card" onload="MenuUpload();">
+    <a href="index.html" class="w3-bar-item w3-button w3-padding-large">MEMES</a>
+    <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ABOUT</a>
+    <a href="#endgame" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ENDGAME</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More">MORE <i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="User.html" class="w3-bar-item w3-button">SIGN-IN</a>
+        <a href="https://youtu.be/s9q61m7S9yA" class="w3-bar-item w3-button">EASTER-EGG</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:42px">  
+  <!-- Automatic Slideshow Images -->	
+  <div class="mySlides w3-display-container w3-center">
+    <img src="/images/Thanos.jpg" style="width:100%">
+    <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
+      <h3>Thanos</h3>
+      <p><b>The Mystical Man Himself!</b></p>   
+    </div>
+  </div>
+  <div class="mySlides w3-display-container w3-center">
+    <img src="/images/Fortnite.jpg" style="width:100%">
+    <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
+      <h3>Vengance</h3>
+      <p><b>He Will Track The Avengers Down In Any Universe.</b></p>    
+    </div>
+  </div>
+  <div class="mySlides w3-display-container w3-center">
+    <img src="/images/Titan.jpg" style="width:100%">
+    <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
+      <h3>Titan</h3>
+      <p><b>The Location That Tought Us Dispair.</b></p>    
+    </div>
+  </div>
+  <div class="mySlides w3-display-container w3-center">
+    <img src="/images/Endgame.png" style="width:100%">
+    <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small"> 
+    </div>
+  </div>
+
+  <!-- The About Section -->
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="about">
+    <h2 class="w3-wide">The Project</h2>
+    <p class="w3-opacity"><i>Thanos & Memes</i></p>
+    <p class="w3-justify">We are Team Thanos. We were tasked with creating a website that would allow people to post, and view beautiful memes. This is was assigned for Object-Oriented Programming taught by James Hudson. After Team Thanos meet for the first time, we can up with our project mission. It was short, sweet, and too the point. We only had one mission, we must create a meme website to destroy team Shaggy once and for all. Did we do it? You Decide.</p>
+    <p class="w3-opacity"><i>Created With</i></p>
+	<div class="w3-row w3-padding-32">
+      <div class="w3-third">
+        <p>HTML</p>
+        <img src="/images/HTML.png" class="w3-round w3-margin-bottom" style="width:60%">
+      </div>
+      <div class="w3-third">
+        <p>JAVASCRIPT</p>
+        <img src="/images/Javascript.png" class="w3-round w3-margin-bottom" style="width:60%">
+      </div>
+      <div class="w3-third">
+        <p>C#</p>
+        <img src="/images/c.png" class="w3-round"style="width:60%">
+      </div>
+    </div>
+  </div>
+
+  <!-- The endgame tickets goof Section -->
+  <div class="w3-black" id="endgame">
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+      <h2 class="w3-wide w3-center">ENDGAME TICKETS</h2>
+      <p class="w3-opacity w3-center"><i>Remember to book your tickets! OH NO! Looks like they are all booked!</i></p><br>
+
+      <ul class="w3-ul w3-border w3-white w3-text-grey">
+        <li class="w3-padding">April 26th - May 2nd <span class="w3-tag w3-red w3-margin-left">Sold out</span></li>
+        <li class="w3-padding">May 3rd - May 9th <span class="w3-tag w3-red w3-margin-left">Sold out</span></li>
+        <li class="w3-padding">May 10th - May 16th <span class="w3-tag w3-red w3-margin-left">Sold out</span></li>
+      </ul>
+    </div>
+  </div>
 
 
-		<p id="EndGame"></p>
-		<script>
-			// Set the date we're counting down to
-			var countDownDate = new Date("April 26, 2019 00:00:00").getTime();
+  <!-- The Contact Section -->
+  <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="contact">
+    <h2 class="w3-wide w3-center">CONTACT</h2>
+    <p class="w3-opacity w3-center"><i>Use the stone to contact the creators!</i></p>
+    <div class="w3-row w3-padding-32">
+      <div class="w3-col m6 w3-large w3-margin-bottom">
+        <i class="fa fa-map-marker" style="width:30px"></i> Portsmouth, OHIO<br>
+        <i class="fa fa-envelope" style="width:30px"> </i> SCHOOL: Shawnee State University<br>
+      </div>
+      <div class="w3-col m6">
+        <form action="/action_page.php" target="_blank">
+          <div class="w3-row-padding" style="margin:0 -16px 8px -16px"></div>
+          <a class="active" href="Contact.html"><img src="./images/blue.png" alt="CONTACT" height="10%"><br />CONTACT</a>
+        </form>
+      </div>
+    </div>
+  </div>
+ 
 
-			// Update the count down every 1 second
-			var x = setInterval(function() {
+<!-- Image of Shawnee -->
+<img src="/images/Shawnee.jpg" class="w3-image w3-greyscale-min" style="width:100%">
 
-			  // Get todays date and time
-			  var now = new Date().getTime();
-				
-			  // Find the distance between now and the count down date
-			  var distance = countDownDate - now;
-				
-			  // Time calculations for days, hours, minutes and seconds
-			  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-			  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-			  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-			  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-				
-			  // Output the result in an element with id="demo"
-			  document.getElementById("EndGame").innerHTML = days + "d " + hours + "h "
-			  + minutes + "m " + seconds + "s ";
-				
-			  // If the count down is over, write some text 
-			  if (distance < 0) {
-				clearInterval(x);
-				document.getElementById("EndGame").innerHTML = "EXPIRED";
-			  }
-			}, 1000);
-		</script>
-        
-    </body>
+
+<script>
+// Automatic Slideshow - change image every 4 seconds
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 4000);    
+}
+</script>
+
+</body>
 </html>
