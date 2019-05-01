@@ -207,10 +207,11 @@ namespace Main
                 {
                     if (Session.data["uid"] != -1)
                     {
+                        
                         Add_Rating_Button(L, pid);
                     }
                 }
-
+                Console.WriteLine(pid);
                 L.Add("<img src='/doGetMeme?pid=" + pid + "'>");
             }
             return string.Join("<br>", L);
@@ -219,18 +220,18 @@ namespace Main
         public void Add_Rating_Button(List<string> L,int pid)
         {
             L.Add("<div class='rating'>");
-            L.Add("<input type='radio' onclick=doRating(1); name = "+pid+"   id='Rating_1' value = '1' > ");
-            L.Add("<input type='radio' onclick=doRating(2); name = "+pid+"  id='Rating_2' value = '2' > ");
-            L.Add("<input type='radio' onclick=doRating(3); name = "+pid+"  id='Rating_3' value = '3' > ");
-            L.Add("<input type='radio' onclick=doRating(4); name = "+pid+"  id='Rating_4' value = '4' > ");
-            L.Add("<input type='radio' onclick=doRating(5); name = " + pid + "  id='Rating_5' value = '5' > ");
+            L.Add("<input type='radio' onclick=doRating(1,"+pid+"); name = "+pid+"   id='Rating_1' value = '1' > ");
+            L.Add("<input type='radio' onclick=doRating(2," + pid + "); name = " + pid+"  id='Rating_2' value = '2' > ");
+            L.Add("<input type='radio' onclick=doRating(3," + pid + "); name = " + pid+"  id='Rating_3' value = '3' > ");
+            L.Add("<input type='radio' onclick=doRating(4," + pid + "); name = " + pid+"  id='Rating_4' value = '4' > ");
+            L.Add("<input type='radio' onclick=doRating(5," + pid + "); name = " + pid + "  id='Rating_5' value = '5' > ");
             L.Add("</div>");
         }
 
         [BlueberryPie.Expose]
         public string doRating(string Post_Id, string Rating)
         {
-
+            Console.WriteLine(Post_Id);
             if (db.doRating(Int32.Parse(Post_Id), Int32.Parse(Rating), Session.data["uid"]))
             {
                 return "Added";

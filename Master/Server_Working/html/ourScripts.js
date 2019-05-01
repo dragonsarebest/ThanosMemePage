@@ -230,14 +230,14 @@ function removeComment()
 	}		
 }
 
-function doRating(val)
+function doRating(val,pid)
 {
 	var req = new XMLHttpRequest();
 	var uid = req.open("GET", "getSessionUid", true);
 	if(uid != -1){
 		var inp = document.getElementById("Rating_"+val);
 		var fd = new FormData();
-		fd.append( "Post_Id", inp.name );
+		fd.append( "Post_Id", pid );
 		fd.append( "Rating", val );
 		sendRequest("doRating", fd, undefined, "POST");
 		}

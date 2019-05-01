@@ -65,7 +65,7 @@ namespace Main
             cmd.ExecuteNonQuery();
             cmd = new SQLiteCommand("create table tags (tagid integer primary key, content string unique)", conn);
             cmd.ExecuteNonQuery();
-            cmd = new SQLiteCommand("create table rating (userid integer, postid integer, rating integer)", conn);
+            cmd = new SQLiteCommand("create table rating (userid integer, postid integer, Rating integer)", conn);
             cmd.ExecuteNonQuery();
             cmd = new SQLiteCommand("create table views (ip text, userid integer, postid integer, date integer)", conn);
             cmd.ExecuteNonQuery();
@@ -138,15 +138,39 @@ namespace Main
         }
         public bool doRating(int Post_Id, int Rating, int Uid)
         {
-            var cmd = new SQLiteCommand("insert into rating (userid, postid, rating) values ($userid, $postid, $rating)", conn);
-            cmd.Parameters.AddWithValue("$userid", Uid);
-            cmd.Parameters.AddWithValue("$postid", Post_Id);
-            cmd.Parameters.AddWithValue("$rating", Rating);
+            var cmd = new SQLiteCommand("select Rating from rating where userid=$U and postid=$P", conn);
+            cmd.Parameters.AddWithValue("$U", Uid);
+            cmd.Parameters.AddWithValue("$P", Post_Id);
             try
             {
-                cmd.ExecuteNonQuery();
+                using (var R = cmd.ExecuteReader())
+                {
+                    while(R.Read())
+                    {
+                        var rate = R["Rating"];
+                        
+                        
+                        var command = new SQLiteCommand("UPDATE rating SET Rating=$r Where userid = $u and postid=$p", conn);
+                        command.Parameters.AddWithValue("$u", Uid);
+                        command.Parameters.AddWithValue("$p", Post_Id);
+                        command.Parameters.AddWithValue("$r", Rating);
+                        command.ExecuteNonQuery();
+                        return true;
+                        
+                    }
+                    
+                var newcommand = new SQLiteCommand("insert into rating (userid, postid, Rating) values ($userid, $postid, $rating)", conn);
+                newcommand.Parameters.AddWithValue("$userid", Uid);
+                newcommand.Parameters.AddWithValue("$postid", Post_Id);
+                newcommand.Parameters.AddWithValue("$rating", Rating);
+                newcommand.ExecuteNonQuery();
                 return true;
+                    
+                }
+                
             }
+
+
             catch (Exception e)
             {
                 Console.WriteLine("SQL made a booboo");
