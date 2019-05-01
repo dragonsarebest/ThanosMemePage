@@ -242,6 +242,20 @@ function doRating(val,pid)
 		sendRequest("doRating", fd, undefined, "POST");
 		}
 }
+
+function doRatingBash(val,pid)
+{
+	var req = new XMLHttpRequest();
+	var uid = req.open("GET", "getSessionUid", true);
+	if(uid != -1){
+		var inp = document.getElementById("Rating_"+val);
+		var fd = new FormData();
+		fd.append( "Post_Id", pid );
+		fd.append( "Rating", val );
+		sendRequest("doRatingBash", fd, undefined, "POST");
+		}
+}
+
 function encodeHTML(s) {
     return s.replace('/&/g', '&amp;').replace('/</g', '&lt;').replace('/"/g', '&quot;').replace('/>/g', '&gt;');
 }
@@ -331,6 +345,21 @@ function clickedBoy(inputBoy)
 		}
 	}	
 }
+
+//rating system
+$(function() {
+	if($('body'),is('.home')){
+		$(document).ready(function(){
+			$('.rating-star').click(function() {
+					$(this).parents('.rating').find('.rating-star').removeClass('checked');
+					$(this).addClass('checked');
+					
+					var submitStars = $(this).attr('value');
+					alert(submitStars);
+			});
+		});
+	}
+});
 
  $(function() {
 	 if($('body').is('.MemeUploadPage')){

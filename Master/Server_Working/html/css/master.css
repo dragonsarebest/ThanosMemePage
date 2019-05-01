@@ -87,13 +87,71 @@ body {
     display: none;
 }
 
-/*Align rating with its image*/
+/* Align rating with its image
 .rating{
-    width: 50%;
-    margin: auto;
+     width: 50%;
+    margin: auto; 
+    display: inline-block;
+	font-size: 3rem;
+	border: none;
 }
 
-/*Show ratings on one line*/
-.rating br {
+.rating:after {
+	content: "";
+	display: table;
+	clear: both;
+} */
+
+/* Hide radio button for ratings
+.rd {
     display: none;
+}
+
+.star {
+	float: right;
+	padding-left: 15px;
+	cursor: pointer;
+	color: #FFB300;
+}
+
+.star:last-child {
+	padding-left: 0;
+}
+
+.star:hover:before, .star:hover~.star:before, .rd:checked~.star:before {
+	content: "\f005";
+} */
+
+.rating {
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    font-size:20px;
+    color: #FFCA00;
+}
+.rating-star {
+    padding: 0 5px;
+    margin: 0;
+    cursor: pointer;
+    display: block;
+    float: right;
+}
+.rating-star:after {
+    position: relative;
+    font-family: FontAwesome;
+    content:'\f006';
+}
+
+.rating-star.checked ~ .rating-star:after,
+.rating-star.checked:after {
+    content:'\f005';
+}
+
+.rating:hover .rating-star:after {
+    content:'\f006'; 
+}
+
+.rating-star:hover ~ .rating-star:after, 
+.rating-star:hover:after {
+    content:'\f005' !important;
 }

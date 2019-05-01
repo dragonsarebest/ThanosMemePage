@@ -148,32 +148,97 @@ namespace Main
                     while(R.Read())
                     {
                         var rate = R["Rating"];
-                        
-                        
+
+
                         var command = new SQLiteCommand("UPDATE rating SET Rating=$r Where userid = $u and postid=$p", conn);
                         command.Parameters.AddWithValue("$u", Uid);
                         command.Parameters.AddWithValue("$p", Post_Id);
                         command.Parameters.AddWithValue("$r", Rating);
                         command.ExecuteNonQuery();
                         return true;
-                        
+
                     }
-                    
+
                 var newcommand = new SQLiteCommand("insert into rating (userid, postid, Rating) values ($userid, $postid, $rating)", conn);
                 newcommand.Parameters.AddWithValue("$userid", Uid);
                 newcommand.Parameters.AddWithValue("$postid", Post_Id);
                 newcommand.Parameters.AddWithValue("$rating", Rating);
                 newcommand.ExecuteNonQuery();
                 return true;
-                    
+
                 }
-                
+
             }
 
 
             catch (Exception e)
             {
                 Console.WriteLine("SQL made a booboo");
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        public bool doRatingBash(int Post_Id, int Rating, int Uid)
+        {
+            var cmd = new SQLiteCommand("select Rating from rating where userid=$U and postid=$P", conn);
+            cmd.Parameters.AddWithValue("$U", Uid);
+            cmd.Parameters.AddWithValue("$P", Post_Id);
+            try
+            {
+                using (var R = cmd.ExecuteReader())
+                {
+                    while (R.Read())
+                    {
+                        var rate = R["Rating"];
+                        var command = new SQLiteCommand("UPDATE rating SET Rating=$r Where userid = $u and postid=$p", conn);
+                        command.Parameters.AddWithValue("$u", Uid);
+                        command.Parameters.AddWithValue("$p", Post_Id);
+                        command.Parameters.AddWithValue("$r", Rating);
+                        command.ExecuteNonQuery();
+                        return true;
+
+                    }
+                    var newcommand = new SQLiteCommand("insert into rating (userid, postid, Rating) values ($userid, $postid, $rating)", conn);
+                    newcommand.Parameters.AddWithValue("$userid", Uid);
+                    newcommand.Parameters.AddWithValue("$postid", Post_Id);
+                    newcommand.Parameters.AddWithValue("$rating", Rating);
+                    newcommand.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("SQL made a booboo");
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        public bool CalculateRating(int pid)
+        {
+            List<int> L = new List<int>();
+            var cmd = new SQLiteCommand("select Rating from rating where postid=$pid", conn);
+            using (var R = cmd.ExecuteReader())
+            {
+                while (R.Read())
+                {
+                    int r = Convert.ToInt32(R["Rating"]);
+                    L.Add(r);
+                }
+            }
+            double average = L.Count > 0 ? L.Average() : 0.0;
+
+            var cmd2 = new SQLiteCommand("insert into rating (average) values ($avg)", conn);
+            cmd2.Parameters.AddWithValue("$avg", average);
+            try
+            {
+                cmd2.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("SQL Made a BooBoo");
                 Console.WriteLine(e);
                 return false;
             }
