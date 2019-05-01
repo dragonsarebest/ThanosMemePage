@@ -96,13 +96,16 @@
 		<!-- Register Stuff -->
         <form class = "registerPos" id="signup-form" action="#" onsubmit="return false;" style="position:absolute;">
 			<div class="form-size">
-				<input id="name" type="username" style="margin-left:20%;width:75%" class="form-control" placeholder="Thanos_underling" required autofocus>
+				<input oninput="removeUserLength()" id="name" type="username" style="margin-left:20%;width:75%" class="form-control" placeholder="Thanos_underling" required autofocus>
+				<span id="nameMessage" style="margin-left:20%; width:75%; color:red;"> </span><br></br>
 			</div>
 			<div class="form-size">
 				<input id="registerEmail" type="email" style="margin-left:20%;width:75%" class="form-control" placeholder="Loki@dead4real.edu" required>
 			</div>
 			<div class="form-size">
-				<input oninput="unHighlight()" id="registerPassword" type="password" style="margin-left:20%;width:75%" class="form-control" placeholder="password" required> 
+				<input oninput="unHighlight(); checkPassword();" id="registerPassword" type="password" style="margin-left:20%;width:75%" class="form-control" placeholder="password" required> 
+				<span id="messages" style="margin-left:20%; width:75%; color:red;"> </span><br></br>
+				<progress max="100" value="0" id="strength" style="margin-left:20%; width: 75%;"></progress>
 			</div>
 			<div class="form-size">
 				<input oninput="unHighlight()"  id="confirmedPassword" type="password" class="form-control" style="margin-left:20%;width:75%" placeholder="confirm password">
