@@ -186,13 +186,15 @@ namespace Main
                 {
                     if (Session.data["uid"] != -1)
                     {
-                        Add_Rating_Button(L, pid);
+                        //Add_Rating_Button(L, pid);
+                        AddRatingBash(L, pid);
+
                     }
                 }
 
                 L.Add("<img src='/doGetMeme?pid=" + pid + "'>");
             }
-            return string.Join("<br>", L);
+            return string.Join("", L);
         }
 
         // Gets top ten most recent posts based on submission times
@@ -208,13 +210,14 @@ namespace Main
                     if (Session.data["uid"] != -1)
                     {
 
-                        Add_Rating_Button(L, pid);
+                        //Add_Rating_Button(L, pid);
+                        AddRatingBash(L, pid);
                     }
                 }
                 Console.WriteLine(pid);
                 L.Add("<img src='/doGetMeme?pid=" + pid + "'>");
             }
-            return string.Join("<br>", L);
+            return string.Join("", L);
         }
 
         public void Add_Rating_Button(List<string> L,int pid)
@@ -241,32 +244,34 @@ namespace Main
                 return "Failed";
             }
         }
+
+
+        public void AddRatingBash(List<string> L, int pid)
+        {
+            L.Add("<div class='rating'>");
+            L.Add("<span class='rating-star' onclick=doRatingBash(1," + pid + "); name = " + pid + " id='Rating_1' value = '1' ></span>");
+            L.Add("<span class='rating-star' onclick=doRatingBash(2," + pid + "); name = " + pid + " id='Rating_2' value = '2' ></span>");
+            L.Add("<span class='rating-star' onclick=doRatingBash(3," + pid + "); name = " + pid + " id='Rating_3' value = '3' ></span>");
+            L.Add("<span class='rating-star' onclick=doRatingBash(4," + pid + "); name = " + pid + " id='Rating_4' value = '4' ></span>");
+            L.Add("<span class='rating-star' onclick=doRatingBash(5," + pid + "); name = " + pid + " id='Rating_5' value = '5' ></span>");
+            L.Add("</div>");
+        }
+
+        [BlueberryPie.Expose]
+        public string doRatingBash(string Post_Id, string Rating)
+        {
+            Console.WriteLine(Post_Id);
+            if (db.doRatingBash(Int32.Parse(Post_Id), Int32.Parse(Rating), Session.data["uid"]))
+            {
+                return "Added";
+            }
+            else
+            {
+                return "Failed";
+            }
+        }
     }
 
-    public void AddRatingBash(List<string> L, int pid)
-    {
-        L.Add("<div class='rating'>");
-        L.Add("<span class='rating-star' onclick=doRatingBash(1," + pid + "); name = " + pid + " id='Rating_1' value = '1' ></span>");
-        L.Add("<span class='rating-star' onclick=doRatingBash(2," + pid + "); name = " + pid + " id='Rating_2' value = '2' ></span>");
-        L.Add("<span class='rating-star' onclick=doRatingBash(3," + pid + "); name = " + pid + " id='Rating_3' value = '3' ></span>");
-        L.Add("<span class='rating-star' onclick=doRatingBash(4," + pid + "); name = " + pid + " id='Rating_4' value = '4' ></span>");
-        L.Add("<span class='rating-star' onclick=doRatingBash(5," + pid + "); name = " + pid + " id='Rating_5' value = '5' ></span>");
-        L.Add("</div>");
-    }
-
-    [BlueberryPie.Expose]
-    public string doRatingBash(string Post_Id, string Rating)
-    {
-        Console.WriteLine(Post_Id);
-        if (db.doRatingBash(Int32.Parse(Post_Id), Int32.Parse(Rating), Session.data["uid"]))
-        {
-            return "Added";
-        }
-        else
-        {
-            return "Failed";
-        }
-    }
 
     class MainClass
     {
